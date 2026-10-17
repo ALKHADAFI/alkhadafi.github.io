@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Lembar kerja interaktif tentang struktur data abstrak dan struct dalam C++."
+    />
+    <title>Lembar Kerja Siswa · Struktur Data Abstrak C++</title>
+    <style>
+      :root {
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          sans-serif;
+        color: #233a32;
+        background: #f4f1e7;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        line-height: 1.6;
+      }
+      .topbar {
+        background: #21473b;
+        color: #fff9e9;
+        padding: 16px 24px;
+      }
+      .topbar-inner,
+      main {
+        width: min(960px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+      .topbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .brand {
+        color: inherit;
+        font-weight: 750;
+        text-decoration: none;
+      }
+      .topbar a:not(.brand) {
+        color: #e9dcae;
+        font-size: 14px;
+      }
+      main {
+        padding: 36px 0 64px;
+      }
+      .intro {
+        padding: 28px 0 20px;
+      }
+      .eyebrow {
+        color: #8b7141;
+        font: 700 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+      h1 {
+        max-width: 760px;
+        margin: 10px 0 12px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(34px, 6vw, 54px);
+        letter-spacing: -0.045em;
+        line-height: 1.08;
+      }
+      .intro > p {
+        max-width: 720px;
+        color: #64716a;
+      }
+      .notice {
+        margin: 20px 0 24px;
+        padding: 15px 18px;
+        border-left: 3px solid #b3975b;
+        background: #eee8d8;
+        color: #47574d;
+        font-size: 14px;
+      }
+      .student-card,
+      .reminder,
+      .worksheet-section,
+      .submit-card {
+        margin: 18px 0;
+        padding: 22px;
+        border: 1px solid #dedbcf;
+        border-radius: 14px;
+        background: #fffdf7;
+      }
+      .student-card h2,
+      .reminder h2,
+      .worksheet-section h2,
+      .submit-card h2 {
+        margin-bottom: 14px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+        letter-spacing: -0.025em;
+      }
+      .student-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 12px;
+      }
+      .form-field label {
+        display: block;
+        margin-bottom: 6px;
+        color: #526650;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      input,
+      textarea {
+        width: 100%;
+        min-width: 0;
+        padding: 11px 12px;
+        border: 1px solid #c8cec3;
+        border-radius: 8px;
+        background: #fff;
+        color: #233a32;
+        font: inherit;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: #34725c;
+        outline: 3px solid #34725c2b;
+      }
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      textarea.code {
+        min-height: 115px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 13px;
+      }
+      .reminder {
+        border-color: #d7e1d4;
+        background: #ebf1e7;
+      }
+      .reminder h2 {
+        font-family: inherit;
+        font-size: 17px;
+      }
+      .reminder p:last-child {
+        margin-bottom: 0;
+      }
+      .worksheet-section {
+        padding: 0;
+        overflow: hidden;
+      }
+      .section-head {
+        padding: 21px 24px 17px;
+        border-bottom: 1px solid #e8e4d9;
+      }
+      .section-head small {
+        display: block;
+        margin-bottom: 5px;
+        color: #8b7141;
+        font: 700 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .section-head h2 {
+        margin: 0;
+      }
+      .section-body {
+        padding: 20px 24px 24px;
+      }
+      .question {
+        padding: 18px 0 20px;
+        border-bottom: 1px solid #e9e6dc;
+      }
+      .question:last-child {
+        border-bottom: 0;
+      }
+      .question-title {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .question-id {
+        flex: 0 0 auto;
+        padding: 2px 7px;
+        border-radius: 6px;
+        background: #e8eee5;
+        color: #315546;
+        font: 700 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .question p {
+        margin-bottom: 10px;
+      }
+      pre {
+        overflow-x: auto;
+        margin: 12px 0;
+        padding: 15px;
+        border: 1px solid #e4e5dc;
+        border-radius: 9px;
+        background: #f5f6f1;
+        color: #273c33;
+        font: 13px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .response {
+        margin-top: 12px;
+      }
+      .response label {
+        display: block;
+        margin-bottom: 6px;
+        color: #526650;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .answer-table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        min-width: 660px;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        border: 1px solid #dedbcf;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background: #f1f0e9;
+        font-size: 13px;
+      }
+      td input {
+        min-width: 130px;
+      }
+      .submit-card {
+        border-color: #cbd9ca;
+        background: #eaf1e8;
+      }
+      .progress-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        color: #526650;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .progress-track {
+        height: 9px;
+        margin: 8px 0 16px;
+        overflow: hidden;
+        border-radius: 99px;
+        background: #d8e2d7;
+      }
+      .progress-value {
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: #287255;
+        transition: width 0.2s ease;
+      }
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      button {
+        min-height: 44px;
+        padding: 10px 16px;
+        border: 0;
+        border-radius: 8px;
+        background: #21473b;
+        color: white;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #16382e;
+      }
+      button.secondary {
+        border: 1px solid #bcc9bb;
+        background: #fffdf7;
+        color: #315546;
+      }
+      button.secondary:hover {
+        background: #f5f4ed;
+      }
+      .status {
+        min-height: 25px;
+        margin: 12px 0 0;
+        color: #315546;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .privacy-note {
+        margin: 12px 0 0;
+        color: #526650;
+        font-size: 13px;
+      }
+      @media (max-width: 700px) {
+        .topbar {
+          padding: 14px 0;
+        }
+        .topbar-inner,
+        main {
+          width: min(100% - 24px, 960px);
+        }
+        main {
+          padding-top: 20px;
+        }
+        .student-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .student-grid .form-field:first-child {
+          grid-column: 1 / -1;
+        }
+        .student-card,
+        .reminder {
+          padding: 17px;
+        }
+        .section-head,
+        .section-body {
+          padding-right: 17px;
+          padding-left: 17px;
+        }
+      }
+      @media (max-width: 420px) {
+        .student-grid {
+          grid-template-columns: 1fr;
+        }
+        .student-grid .form-field:first-child {
+          grid-column: auto;
+        }
+        .button-row button {
+          width: 100%;
+        }
+        .topbar-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./index.html">Ruang Praktik · C++</a>
+        <a href="./index.html">Kembali ke materi ADT dan struct</a>
+      </div>
+    </header>
+    <main>
+      <section class="intro">
+        <div class="eyebrow">Lembar aktivitas · Struktur data</div>
+        <h1>Lembar Kerja Siswa: Struktur Data Abstrak Menggunakan <code>struct</code></h1>
+        <p>
+          Pelajari cara menggabungkan data dan operasi dalam ADT C++. Isi setiap
+          jawaban, lalu unduh hasilnya sebagai berkas HTML untuk diserahkan kepada guru.
+        </p>
+        <div class="notice">
+          Halaman GitHub Pages ini tidak mengirim jawaban ke GitHub secara otomatis.
+          Draf hanya tersimpan sementara di tab ini agar tetap ada jika halaman dimuat
+          ulang. Berkas jawaban dibuat di perangkat siswa; serahkan kepada guru melalui
+          saluran pribadi yang ditentukan. Kosongkan isian atau tutup tab di perangkat
+          bersama setelah selesai.
+        </div>
+      </section>
+
+      <section class="student-card" aria-labelledby="identity-heading">
+        <h2 id="identity-heading">Identitas Siswa</h2>
+        <div class="student-grid">
+          <div class="form-field">
+            <label for="student-name">Nama</label>
+            <input id="student-name" type="text" placeholder="Nama lengkap" autocomplete="name" />
+          </div>
+          <div class="form-field">
+            <label for="student-class">Kelas</label>
+            <input id="student-class" type="text" placeholder="Contoh: XI RPL 1" />
+          </div>
+          <div class="form-field">
+            <label for="student-attendance">No. absen</label>
+            <input id="student-attendance" type="text" inputmode="numeric" placeholder="Nomor absen" />
+          </div>
+          <div class="form-field">
+            <label for="student-date">Tanggal</label>
+            <input id="student-date" type="date" />
+          </div>
+        </div>
+      </section>
+
+      <section class="reminder">
+        <h2>Ingat Kembali: Apa itu ADT?</h2>
+        <p>
+          Struktur data abstrak (ADT) terdiri dari <strong>data</strong> yang
+          disimpan dan <strong>operasi</strong> yang dapat dilakukan pada data.
+          Dalam C++, <code>struct</code> dapat digunakan untuk mengelompokkan data,
+          sedangkan fungsi atau prosedur menyediakan operasinya.
+        </p>
+        <pre><code>struct Siswa {
+    string nama;
+    int nilai;
+};
+
+void tampilkan(Siswa s) {
+    cout &lt;&lt; s.nama &lt;&lt; " : " &lt;&lt; s.nilai &lt;&lt; endl;
+}</code></pre>
+        <p>
+          Anggota <code>struct</code> diakses dengan operator titik, misalnya
+          <code>s.nama</code>. Anggota <code>struct</code> bersifat
+          <code>public</code> secara default.
+        </p>
+      </section>
+
+      <section class="worksheet-section" aria-labelledby="part-a">
+        <div class="section-head">
+          <small>Bagian A · Isian singkat · Skor 30</small>
+          <h2 id="part-a">Kenali konsep ADT</h2>
+        </div>
+        <div class="section-body">
+          <article class="question">
+            <div class="question-title"><span class="question-id">A1</span><p><code>struct</code> digunakan untuk apa?</p></div>
+            <div class="response"><label for="A1">Jawaban A1</label><input id="A1" data-answer data-label="A1 · Kegunaan struct" /></div>
+          </article>
+          <article class="question">
+            <div class="question-title"><span class="question-id">A2</span><p>Data yang berada di dalam sebuah <code>struct</code> disebut apa?</p></div>
+            <div class="response"><label for="A2">Jawaban A2</label><input id="A2" data-answer data-label="A2 · Nama data di dalam struct" /></div>
+          </article>
+          <article class="question">
+            <div class="question-title"><span class="question-id">A3</span><p>Operator yang dipakai untuk mengakses anggota sebuah <code>struct</code> adalah apa?</p></div>
+            <div class="response"><label for="A3">Jawaban A3</label><input id="A3" data-answer data-label="A3 · Operator akses anggota" /></div>
+          </article>
+          <article class="question">
+            <div class="question-title"><span class="question-id">A4</span><p>Sebuah ADT terdiri dari dua bagian, yaitu apa dan apa?</p></div>
+            <div class="response"><label for="A4">Jawaban A4</label><input id="A4" data-answer data-label="A4 · Dua bagian ADT" /></div>
+          </article>
+          <article class="question">
+            <div class="question-title"><span class="question-id">A5</span><p>Diketahui deklarasi <code>struct Titik { int x; int y; };</code>. Tuliskan dua baris kode untuk mendeklarasikan variabel <code>p</code> bertipe <code>Titik</code>, lalu isi <code>x</code> dengan 3 dan <code>y</code> dengan 4.</p></div>
+            <div class="response"><label for="A5">Jawaban A5</label><textarea id="A5" class="code" data-answer data-label="A5 · Deklarasi dan pengisian Titik"></textarea></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="worksheet-section" aria-labelledby="part-b">
+        <div class="section-head">
+          <small>Bagian B · Tebak keluaran · Skor 30</small>
+          <h2 id="part-b">Telusuri isi <code>struct</code></h2>
+        </div>
+        <div class="section-body">
+          <article class="question">
+            <div class="question-title"><span class="question-id">B1</span><p>Tuliskan keluaran program berikut.</p></div>
+            <pre><code>struct Titik {
+    int x;
+    int y;
+};
+
+Titik a;
+a.x = 2;
+a.y = 5;
+
+Titik b = a;
+b.x = 10;
+
+cout &lt;&lt; a.x &lt;&lt; " " &lt;&lt; b.x &lt;&lt; " " &lt;&lt; b.y;</code></pre>
+            <div class="response"><label for="B1">Keluaran B1</label><input id="B1" data-answer data-label="B1 · Keluaran program Titik" /></div>
+          </article>
+          <article class="question">
+            <div class="question-title"><span class="question-id">B2</span><p>Tuliskan keluaran program berikut.</p></div>
+            <pre><code>struct Pecahan {
+    int pembilang;
+    int penyebut;
+};
+
+Pecahan kali(Pecahan p, Pecahan q) {
+    Pecahan hasil;
+    hasil.pembilang = p.pembilang * q.pembilang;
+    hasil.penyebut = p.penyebut * q.penyebut;
+    return hasil;
+}
+
+Pecahan a = {1, 2};
+Pecahan b = {3, 4};
+Pecahan c = kali(a, b);
+cout &lt;&lt; c.pembilang &lt;&lt; "/" &lt;&lt; c.penyebut;</code></pre>
+            <div class="response"><label for="B2">Keluaran B2</label><input id="B2" data-answer data-label="B2 · Keluaran program Pecahan" /></div>
+            <div class="response"><label for="B2-explain">Jelaskan apa yang dilakukan fungsi <code>kali</code></label><textarea id="B2-explain" data-answer data-label="B2 · Penjelasan fungsi kali"></textarea></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="worksheet-section" aria-labelledby="part-c">
+        <div class="section-head">
+          <small>Bagian C · Melengkapi kode · Skor 25</small>
+          <h2 id="part-c">Lengkapi program</h2>
+        </div>
+        <div class="section-body">
+          <article class="question">
+            <div class="question-title"><span class="question-id">C1</span><p>Lengkapi program berikut agar mencetak <code>Algoritma : 45000</code>.</p></div>
+            <pre><code>________ Buku {
+    string judul;
+    ________ harga;
+};
+
+int main() {
+    Buku b;
+    b.judul = "Algoritma";
+    ________________ = 45000;
+    cout &lt;&lt; b.judul &lt;&lt; " : " &lt;&lt; b.harga;
+}</code></pre>
+            <div class="response"><label for="C1">Jawaban C1 · Lengkapi semua bagian kosong</label><textarea id="C1" class="code" data-answer data-label="C1 · Kode Buku yang dilengkapi"></textarea></div>
+          </article>
+          <article class="question">
+            <div class="question-title"><span class="question-id">C2</span><p>Lengkapi fungsi <code>geser</code> agar menggeser titik sejauh <code>dx</code> pada sumbu x dan <code>dy</code> pada sumbu y, lalu mengembalikan titik hasilnya.</p></div>
+            <pre><code>struct Titik {
+    int x;
+    int y;
+};
+
+Titik geser(Titik p, int dx, int dy) {
+    Titik hasil;
+    hasil.x = p.x + ________________;
+    hasil.y = ________________________;
+    return ________________;
+}</code></pre>
+            <div class="response"><label for="C2-code">Jawaban C2 · Lengkapi kode</label><textarea id="C2-code" class="code" data-answer data-label="C2 · Kode fungsi geser"></textarea></div>
+            <div class="response"><label for="C2-output">Jika <code>p</code> berisi <code>(1, 2)</code>, hasil <code>geser(p, 3, -1)</code> adalah titik</label><input id="C2-output" data-answer data-label="C2 · Koordinat hasil geser" placeholder="Contoh: (4, 1)" /></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="worksheet-section" aria-labelledby="part-d">
+        <div class="section-head">
+          <small>Bagian D · Merancang ADT · Skor 15</small>
+          <h2 id="part-d">Rancang <code>PersegiPanjang</code></h2>
+        </div>
+        <div class="section-body">
+          <article class="question">
+            <div class="question-title"><span class="question-id">D1</span><p>Tuliskan deklarasi <code>struct PersegiPanjang</code> yang menyimpan panjang dan lebar.</p></div>
+            <pre><code>struct PersegiPanjang {
+
+};</code></pre>
+            <div class="response"><label for="D1">Jawaban D1</label><textarea id="D1" class="code" data-answer data-label="D1 · Deklarasi struct PersegiPanjang"></textarea></div>
+          </article>
+          <article class="question">
+            <div class="question-title"><span class="question-id">D2</span><p>Tentukan dua operasi yang dapat dilakukan pada ADT tersebut.</p></div>
+            <div class="answer-table-wrap">
+              <table>
+                <thead><tr><th>Nama operasi</th><th>Parameter</th><th>Tipe kembalian</th><th>Tugas operasi</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><input aria-label="Nama operasi 1" data-answer data-label="D2 · Operasi 1 · Nama" /></td>
+                    <td><input aria-label="Parameter operasi 1" data-answer data-label="D2 · Operasi 1 · Parameter" /></td>
+                    <td><input aria-label="Tipe kembalian operasi 1" data-answer data-label="D2 · Operasi 1 · Tipe kembali" /></td>
+                    <td><input aria-label="Tugas operasi 1" data-answer data-label="D2 · Operasi 1 · Tugas" /></td>
+                  </tr>
+                  <tr>
+                    <td><input aria-label="Nama operasi 2" data-answer data-label="D2 · Operasi 2 · Nama" /></td>
+                    <td><input aria-label="Parameter operasi 2" data-answer data-label="D2 · Operasi 2 · Parameter" /></td>
+                    <td><input aria-label="Tipe kembalian operasi 2" data-answer data-label="D2 · Operasi 2 · Tipe kembali" /></td>
+                    <td><input aria-label="Tugas operasi 2" data-answer data-label="D2 · Operasi 2 · Tugas" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="submit-card" aria-labelledby="submit-heading">
+        <h2 id="submit-heading">Kumpulkan Jawaban</h2>
+        <div class="progress-line">
+          <span>Progres isian</span>
+          <span id="progress-count">0 / 0</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Progres isian">
+          <div id="progress-value" class="progress-value"></div>
+        </div>
+        <p>Pilih tombol di bawah untuk membuat berkas HTML berisi identitas dan jawaban yang sudah kamu isi.</p>
+        <div class="button-row">
+          <button type="button" id="download-answers">Unduh jawaban sebagai HTML</button>
+          <button type="button" class="secondary" id="clear-answers">Kosongkan jawaban</button>
+        </div>
+        <p id="submission-status" class="status" role="status" aria-live="polite"></p>
+        <p class="privacy-note">
+          Berkas hanya diunduh ke perangkat ini dan tidak dikirim otomatis.
+          Serahkan atau kirimkan kepada guru melalui saluran pribadi yang ditentukan.
+          Jangan unggah jawaban berisi identitas siswa ke repositori publik.
+        </p>
+      </section>
+    </main>
+    <script>
+      (() => {
+        const answerFields = [...document.querySelectorAll("[data-answer]")];
+        const draftKey = "lks-adt-struct-cpp-session";
+        const progressCount = document.getElementById("progress-count");
+        const progressValue = document.getElementById("progress-value");
+        const status = document.getElementById("submission-status");
+        const identityFields = {
+          name: document.getElementById("student-name"),
+          className: document.getElementById("student-class"),
+          attendance: document.getElementById("student-attendance"),
+          date: document.getElementById("student-date"),
+        };
+
+        function saveDraft() {
+          try {
+            const draft = {
+              identity: Object.fromEntries(
+                Object.entries(identityFields).map(([key, field]) => [key, field.value]),
+              ),
+              answers: Object.fromEntries(
+                answerFields.map((field) => [field.id || field.dataset.label, field.value]),
+              ),
+            };
+            sessionStorage.setItem(draftKey, JSON.stringify(draft));
+          } catch {
+            // Keep the worksheet usable when browser storage is unavailable.
+          }
+        }
+
+        function restoreDraft() {
+          try {
+            const draft = JSON.parse(sessionStorage.getItem(draftKey) || "{}");
+            Object.entries(identityFields).forEach(([key, field]) => {
+              if (typeof draft.identity?.[key] === "string") field.value = draft.identity[key];
+            });
+            answerFields.forEach((field) => {
+              const saved = draft.answers?.[field.id || field.dataset.label];
+              if (typeof saved === "string") field.value = saved;
+            });
+          } catch {
+            // Ignore malformed or unavailable session drafts.
+          }
+        }
+
+        function updateProgress() {
+          const filled = answerFields.filter((field) => field.value.trim()).length;
+          progressCount.textContent = `${filled} / ${answerFields.length}`;
+          progressValue.style.width = `${answerFields.length ? Math.round((filled / answerFields.length) * 100) : 0}%`;
+          saveDraft();
+        }
+
+        function escapeHtml(value) {
+          return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        }
+
+        function slug(value, fallback) {
+          const clean = String(value)
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+          return clean || fallback;
+        }
+
+        function createSubmissionHtml() {
+          const answers = answerFields.map((field) => {
+            const label = field.dataset.label || field.getAttribute("aria-label") || "Jawaban";
+            const value = field.value.trim() || "Belum diisi";
+            return `<article class="answer"><h3>${escapeHtml(label)}</h3><div class="value">${escapeHtml(value).replace(/\r?\n/g, "<br>")}</div></article>`;
+          }).join("");
+          const name = identityFields.name.value.trim() || "Belum diisi";
+          const className = identityFields.className.value.trim() || "Belum diisi";
+          const attendance = identityFields.attendance.value.trim() || "Belum diisi";
+          const date = identityFields.date.value || "Belum diisi";
+          const submittedAt = new Intl.DateTimeFormat("id-ID", {
+            dateStyle: "long",
+            timeStyle: "short",
+          }).format(new Date());
+
+          return `<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jawaban LKS Struktur Data Abstrak C++</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#233a32;background:#f4f1e7}
+    *{box-sizing:border-box}
+    body{max-width:900px;margin:0 auto;padding:30px 18px;line-height:1.6}
+    header,section{background:#fffdf7;border:1px solid #dedbcf;border-radius:12px;padding:20px;margin-bottom:16px}
+    header{background:#21473b;color:#fff9e9}
+    h1{margin:0 0 8px;font-size:clamp(25px,5vw,38px)}
+    h2{margin:0 0 14px;font-size:20px}
+    h3{margin:0 0 8px;font-size:14px;color:#526650}
+    .muted{color:#e2e7dc;font-size:13px}
+    .meta{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px}
+    .answer{padding:12px 0;border-top:1px solid #e9e6dc}
+    .answer:first-child{border-top:0}
+    .value{padding:10px 12px;background:#f5f4ed;border-radius:7px;white-space:pre-wrap;overflow-wrap:anywhere}
+    footer{padding:8px 2px;color:#67746d;font-size:12px;text-align:center}
+    @media(max-width:600px){body{padding:16px 10px}header,section{padding:15px}.meta{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header><h1>Lembar Kerja Siswa: Struktur Data Abstrak Menggunakan struct (C++)</h1><div class="muted">Berkas jawaban siswa untuk ditinjau guru.</div></header>
+  <section><h2>Identitas Siswa</h2><div class="meta">
+    <div><strong>Nama</strong><br>${escapeHtml(name)}</div>
+    <div><strong>Kelas</strong><br>${escapeHtml(className)}</div>
+    <div><strong>No. absen</strong><br>${escapeHtml(attendance)}</div>
+    <div><strong>Tanggal</strong><br>${escapeHtml(date)}</div>
+  </div></section>
+  <section><h2>Jawaban</h2>${answers}</section>
+  <footer>Dibuat ${escapeHtml(submittedAt)} · Berkas ini dibuat di perangkat siswa.</footer>
+</body>
+</html>`;
+        }
+
+        restoreDraft();
+        answerFields.forEach((field) => field.addEventListener("input", updateProgress));
+        Object.values(identityFields).forEach((field) => field.addEventListener("input", saveDraft));
+        updateProgress();
+
+        document.getElementById("download-answers").addEventListener("click", () => {
+          const file = new Blob([createSubmissionHtml()], { type: "text/html;charset=utf-8" });
+          const url = URL.createObjectURL(file);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = `jawaban-adt-${slug(identityFields.name.value, "siswa")}-${slug(identityFields.className.value, "kelas")}-${slug(identityFields.attendance.value, "absen")}.html`;
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+          status.textContent = "Berkas HTML berhasil diunduh. Serahkan atau kirimkan kepada guru.";
+        });
+
+        document.getElementById("clear-answers").addEventListener("click", () => {
+          if (!window.confirm("Kosongkan identitas dan semua jawaban pada halaman ini?")) return;
+          [...document.querySelectorAll("input, textarea")].forEach((field) => {
+            field.value = "";
+          });
+          sessionStorage.removeItem(draftKey);
+          updateProgress();
+          status.textContent = "Semua isian telah dikosongkan.";
+        });
+      })();
+    </script>
+  </body>
+</html>
