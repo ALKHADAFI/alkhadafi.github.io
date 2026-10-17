@@ -311,6 +311,82 @@
         color: #526650;
         font-size: 13px;
       }
+      .score-card {
+        margin: 18px 0;
+        padding: 22px;
+        border: 1px solid #cbd9ca;
+        border-radius: 14px;
+        background: #eaf1e8;
+      }
+      .score-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .score-head .eyebrow {
+        display: block;
+        margin-bottom: 4px;
+      }
+      .score-head h2 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+      }
+      .score-total {
+        color: #21473b;
+        font-size: clamp(25px, 5vw, 36px);
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .score-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .score-part {
+        padding: 11px 12px;
+        border: 1px solid #d9e2d7;
+        border-radius: 9px;
+        background: #fffdf7;
+      }
+      .score-part span {
+        display: block;
+        color: #657269;
+        font-size: 12px;
+      }
+      .score-part strong {
+        display: block;
+        margin-top: 2px;
+        color: #315546;
+        font-size: 17px;
+      }
+      .score-note {
+        margin: 13px 0 0;
+        color: #526650;
+        font-size: 13px;
+      }
+      .answer-feedback {
+        display: block;
+        min-height: 18px;
+        margin-top: 5px;
+        color: #68736c;
+        font-size: 12px;
+        font-weight: 650;
+      }
+      .answer-feedback.is-correct {
+        color: #17613d;
+      }
+      .answer-feedback.is-partial {
+        color: #8a5a00;
+      }
+      .answer-feedback.is-wrong {
+        color: #a33e32;
+      }
+      .answer-feedback.is-manual {
+        color: #6652a2;
+      }
       @media (max-width: 700px) {
         .topbar {
           padding: 14px 0;
@@ -329,8 +405,12 @@
           grid-column: 1 / -1;
         }
         .student-card,
-        .reminder {
+        .reminder,
+        .score-card {
           padding: 17px;
+        }
+        .score-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
         .section-head,
         .section-body {
@@ -399,6 +479,25 @@
             <input id="student-date" type="date" />
           </div>
         </div>
+      </section>
+
+      <section class="score-card" aria-labelledby="score-heading">
+        <div class="score-head">
+          <div>
+            <span class="eyebrow">Pemeriksaan langsung</span>
+            <h2 id="score-heading">Nilai sementara</h2>
+          </div>
+          <strong class="score-total" id="score-total">0 / 100</strong>
+        </div>
+        <div class="score-grid" aria-label="Nilai per bagian">
+          <div class="score-part"><span>Bagian A</span><strong id="score-A">0 / 30</strong></div>
+          <div class="score-part"><span>Bagian B</span><strong id="score-B">0 / 30</strong></div>
+          <div class="score-part"><span>Bagian C</span><strong id="score-C">0 / 25</strong></div>
+          <div class="score-part"><span>Bagian D</span><strong id="score-D">0 / 15</strong></div>
+        </div>
+        <p class="score-note" id="score-note" role="status" aria-live="polite">
+          Isi jawaban untuk melihat pemeriksaan dan skor otomatis. Jawaban bebas dan operasi lain di D2 mungkin perlu ditinjau guru.
+        </p>
       </section>
 
       <section class="reminder">
@@ -560,16 +659,16 @@ Titik geser(Titik p, int dx, int dy) {
                 <thead><tr><th>Nama operasi</th><th>Parameter</th><th>Tipe kembalian</th><th>Tugas operasi</th></tr></thead>
                 <tbody>
                   <tr>
-                    <td><input aria-label="Nama operasi 1" data-answer data-label="D2 · Operasi 1 · Nama" /></td>
-                    <td><input aria-label="Parameter operasi 1" data-answer data-label="D2 · Operasi 1 · Parameter" /></td>
-                    <td><input aria-label="Tipe kembalian operasi 1" data-answer data-label="D2 · Operasi 1 · Tipe kembali" /></td>
-                    <td><input aria-label="Tugas operasi 1" data-answer data-label="D2 · Operasi 1 · Tugas" /></td>
+                    <td><input aria-label="Nama operasi 1" data-answer data-grade-key="D2-1-name" data-label="D2 · Operasi 1 · Nama" /></td>
+                    <td><input aria-label="Parameter operasi 1" data-answer data-grade-key="D2-1-parameter" data-label="D2 · Operasi 1 · Parameter" /></td>
+                    <td><input aria-label="Tipe kembalian operasi 1" data-answer data-grade-key="D2-1-return" data-label="D2 · Operasi 1 · Tipe kembali" /></td>
+                    <td><input aria-label="Tugas operasi 1" data-answer data-grade-key="D2-1-task" data-label="D2 · Operasi 1 · Tugas" /></td>
                   </tr>
                   <tr>
-                    <td><input aria-label="Nama operasi 2" data-answer data-label="D2 · Operasi 2 · Nama" /></td>
-                    <td><input aria-label="Parameter operasi 2" data-answer data-label="D2 · Operasi 2 · Parameter" /></td>
-                    <td><input aria-label="Tipe kembalian operasi 2" data-answer data-label="D2 · Operasi 2 · Tipe kembali" /></td>
-                    <td><input aria-label="Tugas operasi 2" data-answer data-label="D2 · Operasi 2 · Tugas" /></td>
+                    <td><input aria-label="Nama operasi 2" data-answer data-grade-key="D2-2-name" data-label="D2 · Operasi 2 · Nama" /></td>
+                    <td><input aria-label="Parameter operasi 2" data-answer data-grade-key="D2-2-parameter" data-label="D2 · Operasi 2 · Parameter" /></td>
+                    <td><input aria-label="Tipe kembalian operasi 2" data-answer data-grade-key="D2-2-return" data-label="D2 · Operasi 2 · Tipe kembali" /></td>
+                    <td><input aria-label="Tugas operasi 2" data-answer data-grade-key="D2-2-task" data-label="D2 · Operasi 2 · Tugas" /></td>
                   </tr>
                 </tbody>
               </table>
@@ -587,9 +686,9 @@ Titik geser(Titik p, int dx, int dy) {
         <div class="progress-track" role="progressbar" aria-label="Progres isian">
           <div id="progress-value" class="progress-value"></div>
         </div>
-        <p>Pilih tombol di bawah untuk membuat berkas HTML berisi identitas dan jawaban yang sudah kamu isi.</p>
+        <p>Skor diperbarui saat kamu mengetik. Unduh berkas HTML untuk menyimpan identitas, jawaban, pemeriksaan, dan nilai sementara.</p>
         <div class="button-row">
-          <button type="button" id="download-answers">Unduh jawaban sebagai HTML</button>
+          <button type="button" id="download-answers">Unduh jawaban dan nilai sebagai HTML</button>
           <button type="button" class="secondary" id="clear-answers">Kosongkan jawaban</button>
         </div>
         <p id="submission-status" class="status" role="status" aria-live="polite"></p>
@@ -613,6 +712,38 @@ Titik geser(Titik p, int dx, int dy) {
           attendance: document.getElementById("student-attendance"),
           date: document.getElementById("student-date"),
         };
+        const maxPoints = {
+          A1: 6,
+          A2: 6,
+          A3: 6,
+          A4: 6,
+          A5: 6,
+          B1: 15,
+          B2: 9,
+          "B2-explain": 6,
+          C1: 10,
+          "C2-code": 12,
+          "C2-output": 3,
+          D1: 5,
+          "D2-1-name": 1,
+          "D2-1-parameter": 1,
+          "D2-1-return": 1,
+          "D2-1-task": 2,
+          "D2-2-name": 1,
+          "D2-2-parameter": 1,
+          "D2-2-return": 1,
+          "D2-2-task": 2,
+        };
+        const sectionMax = { A: 30, B: 30, C: 25, D: 15 };
+        const scoreTotal = document.getElementById("score-total");
+        const scoreNote = document.getElementById("score-note");
+        const sectionScoreElements = {
+          A: document.getElementById("score-A"),
+          B: document.getElementById("score-B"),
+          C: document.getElementById("score-C"),
+          D: document.getElementById("score-D"),
+        };
+        const feedbackByField = new Map();
 
         function saveDraft() {
           try {
@@ -652,6 +783,283 @@ Titik geser(Titik p, int dx, int dy) {
           saveDraft();
         }
 
+        function normalizeWords(value) {
+          return String(value)
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase();
+        }
+
+        function compact(value) {
+          return normalizeWords(value).replace(/[^a-z0-9]/g, "");
+        }
+
+        function makeGrade(field, score, manual = false) {
+          const key = field.dataset.gradeKey || field.id;
+          const max = maxPoints[key] || 0;
+          return {
+            score: Math.min(max, Math.max(0, score)),
+            max,
+            answered: Boolean(field.value.trim()) || manual,
+            manual,
+          };
+        }
+
+        function gradeA1(value) {
+          const text = normalizeWords(value);
+          const groupsData = /\b(mengelompok\w*|menggabung\w*|menghimpun\w*|mengumpul\w*|menyatukan|menyusun)\b/.test(text);
+          const hasData = /\b(data|informasi|variabel|atribut)\w*\b/.test(text);
+          const hasType = /\b(tipe|jenis|type|struct)\b/.test(text);
+          if (groupsData && hasData && hasType) return 6;
+          if ((groupsData && hasData) || (hasData && hasType)) return 3;
+          return 0;
+        }
+
+        function gradeA2(value) {
+          return /\b(anggota|field|member)\b/.test(normalizeWords(value)) ? 6 : 0;
+        }
+
+        function gradeA3(value) {
+          const text = normalizeWords(value);
+          return text.includes(".") || /\b(titik|dot)\b/.test(text) ? 6 : 0;
+        }
+
+        function gradeA4(value) {
+          const text = normalizeWords(value);
+          const hasData = /\b(data|representasi)\b/.test(text);
+          const hasOperation = /\b(operasi|operations?)\b/.test(text);
+          return (hasData ? 3 : 0) + (hasOperation ? 3 : 0);
+        }
+
+        function gradeA5(value) {
+          const declared = /\bTitik\s+p\b/i.test(value);
+          const aggregate = /\bTitik\s+p\s*(?:=\s*)?\{\s*3\s*,\s*4\s*\}/i.test(value);
+          if (aggregate) return 6;
+          return (declared ? 2 : 0)
+            + (/\bp\s*\.\s*x\s*=\s*3\b/i.test(value) ? 2 : 0)
+            + (/\bp\s*\.\s*y\s*=\s*4\b/i.test(value) ? 2 : 0);
+        }
+
+        function gradeB1(value) {
+          const values = value.match(/-?\d+/g) || [];
+          const expected = ["2", "10", "5"];
+          return expected.reduce((score, answer, index) => (
+            score + (values[index] === answer ? 5 : 0)
+          ), 0);
+        }
+
+        function gradeB2(value) {
+          return value.replace(/\s/g, "") === "3/8" ? 9 : 0;
+        }
+
+        function gradeB2Explanation(value) {
+          const text = normalizeWords(value);
+          const numeratorCount = (text.match(/\bpembilang\b/g) || []).length;
+          const denominatorCount = (text.match(/\bpenyebut\b/g) || []).length;
+          const numeratorScore = numeratorCount >= 2 || /\bpembilang\b.*\batas\b/.test(text)
+            ? 2 : numeratorCount ? 1 : 0;
+          const denominatorScore = denominatorCount >= 2 || /\bpenyebut\b.*\bbawah\b/.test(text)
+            ? 2 : denominatorCount ? 1 : 0;
+          const explainsReturn = /\b(return|mengembalikan|menghasilkan)\b/.test(text)
+            && /\b(pecahan|hasil)\b/.test(text);
+          return numeratorScore
+            + denominatorScore
+            + (explainsReturn ? 2 : 0);
+        }
+
+        function gradeC1(value) {
+          const hasStruct = /\bstruct\s+Buku\b/i.test(value);
+          const hasPriceType = /\b(?:int|double|float|long(?:\s+long)?|long\s+double)\s+harga\b/i.test(value);
+          const assignsPrice = /\bb\s*\.\s*harga\s*=\s*45000\b/i.test(value);
+          return (hasStruct ? 3 : 0) + (hasPriceType ? 3 : 0) + (assignsPrice ? 4 : 0);
+        }
+
+        function gradeC2Code(value) {
+          const updatesX = /hasil\s*\.\s*x\s*=\s*p\s*\.\s*x\s*\+\s*dx/i.test(value);
+          const updatesY = /hasil\s*\.\s*y\s*=\s*p\s*\.\s*y\s*\+\s*dy/i.test(value);
+          const returnsResult = /\breturn\s+hasil\b/i.test(value);
+          return (updatesX ? 4 : 0) + (updatesY ? 4 : 0) + (returnsResult ? 4 : 0);
+        }
+
+        function gradeC2Output(value) {
+          const values = value.match(/-?\d+/g) || [];
+          return values[0] === "4" && values[1] === "1" ? 3 : 0;
+        }
+
+        function gradeD1(value) {
+          const hasStruct = /\bstruct\s+PersegiPanjang\b/i.test(value);
+          const numericType = "(?:int|double|float|long(?:\\s+long)?|long\\s+double)";
+          const hasLength = new RegExp(`\\b${numericType}\\s+(?:panjang|length)\\b`, "i").test(value);
+          const hasWidth = new RegExp(`\\b${numericType}\\s+(?:lebar|width)\\b`, "i").test(value);
+          return (hasStruct ? 1 : 0) + (hasLength ? 2 : 0) + (hasWidth ? 2 : 0);
+        }
+
+        function resolveOperation(value) {
+          const name = compact(value);
+          if (name.includes("apakahpersegi") || name.includes("cekpersegi") || name.includes("issquare")) return "square";
+          if (name.includes("ubahukuran") || name.includes("ubahdimensi") || name.includes("resize")) return "resize";
+          if (name.includes("tampil") || name.includes("cetak") || name.includes("print") || name.includes("show")) return "display";
+          if (name.includes("keliling") || name.includes("perimeter")) return "perimeter";
+          if (name.includes("luas") || name.includes("area")) return "area";
+          return null;
+        }
+
+        function d2ParameterIsCorrect(operation, value) {
+          const text = normalizeWords(value);
+          const hasRectangle = /persegipanjang|rectangle/.test(compact(value));
+          if (!hasRectangle) return false;
+          if (operation !== "resize") return true;
+          const hasDimensions = /\b(panjang|length)\b/.test(text) && /\b(lebar|width)\b/.test(text);
+          const numericArguments = (text.match(/\b(int|double|float|long)\b/g) || []).length >= 2;
+          return hasDimensions || numericArguments;
+        }
+
+        function d2ReturnIsCorrect(operation, value) {
+          const text = normalizeWords(value);
+          if (operation === "display" || operation === "resize") return /\bvoid\b/.test(text);
+          if (operation === "square") return /\bbool\b/.test(text);
+          return /\b(int|double|float|long)\b/.test(text);
+        }
+
+        function d2TaskIsCorrect(operation, value) {
+          const text = normalizeWords(value);
+          const hasLength = /\b(panjang|length)\b/.test(text);
+          const hasWidth = /\b(lebar|width)\b/.test(text);
+          const hasBothDimensions = hasLength && hasWidth;
+          const hasMultiply = /[*×]/.test(text) || /\b(kali|perkalian|mengalikan|dikalikan)\b/.test(text);
+          const hasAddition = text.includes("+") || /\b(tambah|jumlah|penjumlahan)\b/.test(text);
+
+          if (operation === "area") return hasBothDimensions && hasMultiply;
+          if (operation === "perimeter") {
+            const doublesSum = /\b2\b/.test(text) || /\bdua\s+kali\b/.test(text);
+            return hasBothDimensions && hasAddition && doublesSum;
+          }
+          if (operation === "display") {
+            return hasBothDimensions && /(tampil|cetak|print|cout|show|keluarkan)/.test(text);
+          }
+          if (operation === "resize") {
+            return hasBothDimensions && /(ubah|atur|set|resize|perbarui)/.test(text);
+          }
+          if (operation === "square") {
+            return hasBothDimensions && (text.includes("==") || /\b(sama|setara|equal)\b/.test(text));
+          }
+          return false;
+        }
+
+        function gradeD2Field(field, key) {
+          const match = key.match(/^D2-(\d+)-(name|parameter|return|task)$/);
+          const rowNumber = match?.[1];
+          const column = match?.[2];
+          const rowPrefix = `D2-${rowNumber}-`;
+          const rowValues = Object.fromEntries(
+            answerFields
+              .filter((item) => (item.dataset.gradeKey || "").startsWith(rowPrefix))
+              .map((item) => [(item.dataset.gradeKey || "").slice(rowPrefix.length), item.value.trim()]),
+          );
+          const rowHasAnswer = Object.values(rowValues).some(Boolean);
+          const operation = resolveOperation(rowValues.name || "");
+          if (!rowHasAnswer) return makeGrade(field, 0);
+          if (!operation) return makeGrade(field, 0, true);
+
+          let score = 0;
+          if (column === "name") score = 1;
+          if (column === "parameter" && d2ParameterIsCorrect(operation, rowValues.parameter || "")) score = 1;
+          if (column === "return" && d2ReturnIsCorrect(operation, rowValues.return || "")) score = 1;
+          if (column === "task" && d2TaskIsCorrect(operation, rowValues.task || "")) score = 2;
+          return makeGrade(field, score);
+        }
+
+        function evaluateField(field) {
+          const key = field.dataset.gradeKey || field.id;
+          const value = field.value.trim();
+          if (key.startsWith("D2-")) return gradeD2Field(field, key);
+          if (!value) return makeGrade(field, 0);
+
+          let score = 0;
+          if (key === "A1") score = gradeA1(value);
+          if (key === "A2") score = gradeA2(value);
+          if (key === "A3") score = gradeA3(value);
+          if (key === "A4") score = gradeA4(value);
+          if (key === "A5") score = gradeA5(value);
+          if (key === "B1") score = gradeB1(value);
+          if (key === "B2") score = gradeB2(value);
+          if (key === "B2-explain") score = gradeB2Explanation(value);
+          if (key === "C1") score = gradeC1(value);
+          if (key === "C2-code") score = gradeC2Code(value);
+          if (key === "C2-output") score = gradeC2Output(value);
+          if (key === "D1") score = gradeD1(value);
+          return makeGrade(field, score);
+        }
+
+        function gradeLabel(grade) {
+          if (grade.manual) return `Perlu ditinjau guru · hingga ${grade.max} poin`;
+          if (!grade.answered) return "Belum dijawab";
+          if (grade.score === grade.max) return `Benar · ${grade.score}/${grade.max} poin`;
+          if (grade.score > 0) return `Sebagian benar · ${grade.score}/${grade.max} poin`;
+          return `Belum tepat · 0/${grade.max} poin`;
+        }
+
+        function getScoreSummary() {
+          const sections = { A: 0, B: 0, C: 0, D: 0 };
+          const grades = answerFields.map((field) => ({ field, grade: evaluateField(field) }));
+          let total = 0;
+          let pendingPoints = 0;
+          grades.forEach(({ field, grade }) => {
+            const key = field.dataset.gradeKey || field.id;
+            const section = key.charAt(0);
+            if (grade.manual) {
+              pendingPoints += grade.max;
+            } else {
+              sections[section] += grade.score;
+              total += grade.score;
+            }
+          });
+          return { sections, grades, total, pendingPoints };
+        }
+
+        function registerFeedback() {
+          answerFields.forEach((field) => {
+            const feedback = document.createElement("small");
+            feedback.className = "answer-feedback";
+            feedback.setAttribute("aria-live", "polite");
+            field.insertAdjacentElement("afterend", feedback);
+            feedbackByField.set(field, feedback);
+          });
+        }
+
+        function updateScoring() {
+          const summary = getScoreSummary();
+          summary.grades.forEach(({ field, grade }) => {
+            const feedback = feedbackByField.get(field);
+            if (!feedback) return;
+            feedback.textContent = gradeLabel(grade);
+            feedback.className = "answer-feedback";
+            if (grade.manual) feedback.classList.add("is-manual");
+            else if (grade.answered && grade.score === grade.max) feedback.classList.add("is-correct");
+            else if (grade.score > 0) feedback.classList.add("is-partial");
+            else if (grade.answered) feedback.classList.add("is-wrong");
+          });
+
+          scoreTotal.textContent = `${summary.total} / 100`;
+          Object.entries(sectionScoreElements).forEach(([section, element]) => {
+            element.textContent = `${summary.sections[section]} / ${sectionMax[section]}`;
+          });
+
+          const filled = answerFields.filter((field) => field.value.trim()).length;
+          if (!filled) {
+            scoreNote.textContent = "Isi jawaban untuk melihat pemeriksaan dan skor otomatis. Jawaban bebas dan operasi lain di D2 mungkin perlu ditinjau guru.";
+          } else if (summary.pendingPoints) {
+            scoreNote.textContent = `${filled} isian sudah diperiksa otomatis. ${summary.pendingPoints} poin pada operasi D2 yang belum dikenali menunggu peninjauan guru.`;
+          } else {
+            scoreNote.textContent = `${filled} isian sudah diperiksa otomatis. Nilai ini sementara; variasi jawaban bebas mungkin tetap perlu ditinjau guru.`;
+          }
+        }
+
+        function updatePage() {
+          updateProgress();
+          updateScoring();
+        }
+
         function escapeHtml(value) {
           return String(value)
             .replace(/&/g, "&amp;")
@@ -672,11 +1080,19 @@ Titik geser(Titik p, int dx, int dy) {
         }
 
         function createSubmissionHtml() {
+          const summary = getScoreSummary();
           const answers = answerFields.map((field) => {
             const label = field.dataset.label || field.getAttribute("aria-label") || "Jawaban";
             const value = field.value.trim() || "Belum diisi";
-            return `<article class="answer"><h3>${escapeHtml(label)}</h3><div class="value">${escapeHtml(value).replace(/\r?\n/g, "<br>")}</div></article>`;
+            const grade = evaluateField(field);
+            return `<article class="answer"><h3>${escapeHtml(label)}</h3><div class="value">${escapeHtml(value).replace(/\r?\n/g, "<br>")}</div><div class="answer-grade">${escapeHtml(gradeLabel(grade))}</div></article>`;
           }).join("");
+          const sectionScores = Object.entries(summary.sections)
+            .map(([section, score]) => `<div class="part"><strong>Bagian ${section}</strong><br>${score}/${sectionMax[section]}</div>`)
+            .join("");
+          const pendingMessage = summary.pendingPoints
+            ? `${summary.pendingPoints} poin perlu ditinjau guru.`
+            : "Tidak ada poin yang menunggu peninjauan operasi.";
           const name = identityFields.name.value.trim() || "Belum diisi";
           const className = identityFields.className.value.trim() || "Belum diisi";
           const attendance = identityFields.attendance.value.trim() || "Belum diisi";
@@ -706,8 +1122,11 @@ Titik geser(Titik p, int dx, int dy) {
     .answer{padding:12px 0;border-top:1px solid #e9e6dc}
     .answer:first-child{border-top:0}
     .value{padding:10px 12px;background:#f5f4ed;border-radius:7px;white-space:pre-wrap;overflow-wrap:anywhere}
+    .answer-grade{margin-top:6px;color:#53645a;font-size:12px;font-weight:700}
+    .part-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+    .part{padding:10px;background:#f5f4ed;border-radius:7px}
     footer{padding:8px 2px;color:#67746d;font-size:12px;text-align:center}
-    @media(max-width:600px){body{padding:16px 10px}header,section{padding:15px}.meta{grid-template-columns:1fr}}
+    @media(max-width:600px){body{padding:16px 10px}header,section{padding:15px}.meta{grid-template-columns:1fr}.part-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   </style>
 </head>
 <body>
@@ -718,16 +1137,18 @@ Titik geser(Titik p, int dx, int dy) {
     <div><strong>No. absen</strong><br>${escapeHtml(attendance)}</div>
     <div><strong>Tanggal</strong><br>${escapeHtml(date)}</div>
   </div></section>
-  <section><h2>Jawaban</h2>${answers}</section>
+  <section><h2>Nilai otomatis sementara</h2><p><strong>${summary.total} / 100</strong></p><div class="part-grid">${sectionScores}</div><p>${pendingMessage}</p></section>
+  <section><h2>Jawaban dan pemeriksaan</h2>${answers}</section>
   <footer>Dibuat ${escapeHtml(submittedAt)} · Berkas ini dibuat di perangkat siswa.</footer>
 </body>
 </html>`;
         }
 
         restoreDraft();
-        answerFields.forEach((field) => field.addEventListener("input", updateProgress));
+        registerFeedback();
+        answerFields.forEach((field) => field.addEventListener("input", updatePage));
         Object.values(identityFields).forEach((field) => field.addEventListener("input", saveDraft));
-        updateProgress();
+        updatePage();
 
         document.getElementById("download-answers").addEventListener("click", () => {
           const file = new Blob([createSubmissionHtml()], { type: "text/html;charset=utf-8" });
@@ -739,7 +1160,7 @@ Titik geser(Titik p, int dx, int dy) {
           link.click();
           link.remove();
           window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-          status.textContent = "Berkas HTML berhasil diunduh. Serahkan atau kirimkan kepada guru.";
+          status.textContent = `Berkas HTML dengan nilai sementara ${getScoreSummary().total}/100 berhasil diunduh. Serahkan kepada guru.`;
         });
 
         document.getElementById("clear-answers").addEventListener("click", () => {
