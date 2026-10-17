@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ruang Tulis by Alhazen Export</title>
+<title>Materi Struktur Data Abstrak (ADT) dengan struct di C++</title>
+<meta name="description" content="Materi belajar struktur data abstrak dan struct di C++ untuk siswa." />
 <style>
 * { box-sizing: border-box; }
 body {
@@ -62,412 +63,449 @@ body {
 <body>
 <div class="markdown-preview">
 <nav class="site-pages" aria-label="Navigasi halaman"><a href="./aktivitas-siswa.html">Buka Lembar Aktivitas Siswa</a></nav>
-<h1 id="struct-untuk-struktur-data-abstrak-adt-dalam-c-penjelasan-untuk-siswa-sma">Struct untuk Struktur Data Abstrak (ADT) dalam C++ — Penjelasan untuk Siswa SMA</h1>
-<h2 id="apa-itu-struct">🤔 Apa Itu <code>struct</code>?</h2>
-<p>Bayangkan kamu punya <strong>kartu pelajar</strong>. Kartu itu punya banyak informasi:</p>
-<ul>
-<li>Nama</li>
-<li>Kelas</li>
-<li>NIS</li>
-<li>Alamat</li>
-</ul>
-<p>Daripada menyimpan 4 variabel terpisah, kamu bisa <strong>menggabungkannya</strong> menjadi satu "wadah" bernama <strong>kartu pelajar</strong>. Nah, <code>struct</code> di C++ itu <strong>persis seperti itu</strong> — wadah untuk menggabungkan beberapa data menjadi satu kesatuan.</p>
-<blockquote>
-<p><strong><code>struct</code> = cara membuat "tipe data baru" yang berisi beberapa data lain di dalamnya.</strong></p>
-</blockquote>
-<hr>
-<h2 id="analogi-sederhana">📦 Analogi Sederhana</h2>
-<h3 id="tanpa-struct-berantakan">Tanpa <code>struct</code> (Berantakan)</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes">string namaSiswa1 = <span class="hljs-string">"Budi"</span>;
-<span class="hljs-type">int</span>    kelasSiswa1 = <span class="hljs-number">10</span>;
-string nisSiswa1  = <span class="hljs-string">"12345"</span>;
-
-string namaSiswa2 = <span class="hljs-string">"Ani"</span>;
-<span class="hljs-type">int</span>    kelasSiswa2 = <span class="hljs-number">11</span>;
-string nisSiswa2  = <span class="hljs-string">"67890"</span>;
-</code></pre>
-<p>Bayangkan kalau ada 100 siswa — <strong>100 variabel nama, 100 kelas, 100 NIS</strong>! 😵</p>
-<h3 id="dengan-struct-rapi">Dengan <code>struct</code> (Rapi)</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Siswa</span> {
-    string nama;
-    <span class="hljs-type">int</span>    kelas;
-    string nis;
-};
-</code></pre>
-<p>Sekarang satu siswa = satu <code>Siswa</code>. Jauh lebih rapi! ✨</p>
-<hr>
-<h2 id="cara-membuat-struct">🧱 Cara Membuat <code>struct</code></h2>
-<h3 id="bentuk-dasar">Bentuk Dasar</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">NamaStruct</span> {
-    tipe_data1 nama_field1;
-    tipe_data2 nama_field2;
-    <span class="hljs-comment">// ...</span>
-};
-</code></pre>
-<h3 id="contoh-sederhana">Contoh Sederhana</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Titik</span> {
-    <span class="hljs-type">int</span> x;
-    <span class="hljs-type">int</span> y;
-};
-</code></pre>
-<p>Ini membuat <strong>tipe data baru</strong> bernama <code>Titik</code> yang punya dua bagian: <code>x</code> dan <code>y</code>.</p>
-<h3 id="cara-menggunakannya">Cara Menggunakannya</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Titik t1;        <span class="hljs-comment">// buat variabel bertipe Titik</span>
-    t1.x = <span class="hljs-number">5</span>;        <span class="hljs-comment">// isi bagian x</span>
-    t1.y = <span class="hljs-number">10</span>;       <span class="hljs-comment">// isi bagian y</span>
-
-    cout &lt;&lt; <span class="hljs-string">"Titik: ("</span> &lt;&lt; t1.x &lt;&lt; <span class="hljs-string">", "</span> &lt;&lt; t1.y &lt;&lt; <span class="hljs-string">")\n"</span>;
-    <span class="hljs-comment">// Output: Titik: (5, 10)</span>
-}
-</code></pre>
-<p><strong>Perhatikan:</strong> kita pakai <strong>titik (<code>.</code>)</strong> untuk mengakses bagian dalamnya — disebut <strong>member access operator</strong>.</p>
-<hr>
-<h2 id="hubungan-struct-dengan-adt">🔗 Hubungan <code>struct</code> dengan ADT</h2>
-<h3 id="ingat-adt">Ingat ADT?</h3>
-<p>ADT = <strong>data</strong> + <strong>operasi</strong>, dengan detail implementasi <strong>disembunyikan</strong>.</p>
-<p><code>struct</code> adalah salah satu <strong>cara membuat ADT</strong> di C++. Karena <code>struct</code> bisa berisi:</p>
-<ol>
-<li><strong>Data</strong> (variabel)</li>
-<li><strong>Operasi</strong> (fungsi/method)</li>
-</ol>
-<p>Maka <code>struct</code> bisa menjadi <strong>wadah lengkap</strong> untuk sebuah ADT!</p>
-<pre><code data-highlighted="yes" class="hljs language-scss">┌─────────────────────────────────┐
-│         struct sebagai ADT      │
-│                                 │
-│  ┌───────────────────────────┐  │
-│  │  DATA (variabel)          │  │
-│  │  - arr, <span class="hljs-attribute">top</span>, capacity     │  │
-│  └───────────────────────────┘  │
-│  ┌───────────────────────────┐  │
-│  │  OPERASI (fungsi)         │  │
-│  │  - <span class="hljs-built_in">push</span>(), <span class="hljs-built_in">pop</span>(), <span class="hljs-built_in">peek</span>()  │  │
-│  └───────────────────────────┘  │
-└─────────────────────────────────┘
-</code></pre>
-<hr>
-<h2 id="struct-vs-class-di-c">🆚 <code>struct</code> vs <code>class</code> di C++</h2>
-<p>Ini <strong>penting banget</strong> untuk dipahami!</p>
+<h1 id="materi-struktur-data-abstrak-menggunakan-struct-di-c">Materi: Struktur Data Abstrak Menggunakan <code>struct</code> di C++</h1>
+<p>Materi ini membantu kamu mengerjakan <strong>Lembar Kerja Siswa: Struktur Data Abstrak Menggunakan <code>struct</code></strong>. Bacalah dari awal sampai akhir, lalu kerjakan lembar kerjanya. Contoh program di sini sengaja dibuat berbeda dari soal, supaya kamu belajar caranya, bukan menghafal jawabannya.</p>
 <table>
 <thead>
 <tr>
-<th>Aspek</th>
-<th><code>struct</code></th>
-<th><code>class</code></th>
+<th>Bagian lembar kerja</th>
+<th>Dibahas pada materi</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Akses default</strong></td>
-<td><code>public</code> (terbuka)</td>
-<td><code>private</code> (tertutup)</td>
+<td>A. Isian singkat</td>
+<td>Bagian 1 sampai 4</td>
 </tr>
 <tr>
-<td><strong>Bisa berisi fungsi?</strong></td>
-<td>✅ Bisa</td>
-<td>✅ Bisa</td>
+<td>B1. Menyalin <code>struct</code></td>
+<td>Bagian 6</td>
 </tr>
 <tr>
-<td><strong>Bisa punya constructor?</strong></td>
-<td>✅ Bisa</td>
-<td>✅ Bisa</td>
+<td>B2 dan C2. <code>struct</code> pada fungsi</td>
+<td>Bagian 7 dan 8</td>
 </tr>
 <tr>
-<td><strong>Bisa inheritance?</strong></td>
-<td>✅ Bisa</td>
-<td>✅ Bisa</td>
+<td>C1. Membuat <code>struct</code></td>
+<td>Bagian 3 dan 4</td>
 </tr>
 <tr>
-<td><strong>Biasanya dipakai untuk</strong></td>
-<td>Data sederhana</td>
-<td>ADT kompleks</td>
+<td>D. Merancang ADT</td>
+<td>Bagian 9</td>
 </tr>
 </tbody></table>
+<hr>
+<h2 id="1-mengapa-kita-butuh-struct">1. Mengapa Kita Butuh <code>struct</code>?</h2>
+<p>Bayangkan kita ingin menyimpan data satu siswa: nama dan nilai. Dengan variabel biasa, kodenya seperti ini:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes">string nama1 = <span class="hljs-string">"Ani"</span>;
+<span class="hljs-type">int</span> nilai1 = <span class="hljs-number">80</span>;
+
+string nama2 = <span class="hljs-string">"Budi"</span>;
+<span class="hljs-type">int</span> nilai2 = <span class="hljs-number">75</span>;
+</code></pre>
+<p>Untuk 2 siswa saja sudah ada 4 variabel yang terpisah. Bagaimana kalau ada 30 siswa? Akan ada 60 variabel, dan kita mudah salah mencocokkan <code>nama7</code> dengan <code>nilai7</code>.</p>
+<p>Masalahnya: <strong>nama dan nilai milik satu siswa seharusnya disimpan bersama</strong>, seperti satu kartu data siswa yang berisi beberapa kolom.</p>
+<p>C++ menyediakan <code>struct</code> untuk keperluan ini.</p>
 <blockquote>
-<p>⚠️ <strong>Mitos yang salah:</strong> "<code>struct</code> tidak bisa punya fungsi." <strong>SALAH!</strong> Di C++ modern, <code>struct</code> <strong>bisa</strong> punya fungsi, constructor, bahkan inheritance — sama seperti <code>class</code>.</p>
+<p><strong><code>struct</code> adalah cara membuat tipe data baru dengan menggabungkan beberapa data (yang boleh berbeda tipe) ke dalam satu kesatuan.</strong></p>
 </blockquote>
-<h3 id="perbedaan-satu-satunya">Perbedaan Satu-satunya</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">A</span> {
-    <span class="hljs-type">int</span> x;   <span class="hljs-comment">// ← default PUBLIC</span>
-};
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> {
-    <span class="hljs-type">int</span> x;   <span class="hljs-comment">// ← default PRIVATE</span>
-};
-</code></pre>
-<p>Itu <strong>satu-satunya</strong> perbedaan mendasar!</p>
 <hr>
-<h2 id="contoh-adt-stack-dengan-struct">💻 Contoh ADT Stack dengan <code>struct</code></h2>
-<h3 id="versi-1-struct-dengan-data-saja-sederhana">Versi 1: <code>struct</code> dengan Data Saja (Sederhana)</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stack</span> {
-    <span class="hljs-type">int</span> arr[<span class="hljs-number">100</span>];
-    <span class="hljs-type">int</span> top = <span class="hljs-number">-1</span>;
-};
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Stack s;
-    s.arr[++s.top] = <span class="hljs-number">10</span>;   <span class="hljs-comment">// push manual</span>
-    s.arr[++s.top] = <span class="hljs-number">20</span>;
-
-    cout &lt;&lt; s.arr[s.top--];  <span class="hljs-comment">// pop manual → 20</span>
-}
-</code></pre>
-<p>⚠️ <strong>Masalah:</strong> Karena semua <code>public</code>, pengguna bisa mengubah <code>top</code> atau <code>arr</code> sesuka hati → <strong>tidak aman!</strong></p>
-<h3 id="versi-2-struct-dengan-fungsi-lebih-baik">Versi 2: <code>struct</code> dengan Fungsi (Lebih Baik)</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stack</span> {
-    <span class="hljs-type">int</span> arr[<span class="hljs-number">100</span>];
-    <span class="hljs-type">int</span> top = <span class="hljs-number">-1</span>;
-
-    <span class="hljs-comment">// Operasi ADT</span>
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{
-        arr[++top] = x;
-    }
-
-    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> arr[top--];
-    }
-
-    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> arr[top];
-    }
-
-    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> top == <span class="hljs-number">-1</span>;
-    }
-};
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Stack s;
-    s.<span class="hljs-built_in">push</span>(<span class="hljs-number">10</span>);
-    s.<span class="hljs-built_in">push</span>(<span class="hljs-number">20</span>);
-    s.<span class="hljs-built_in">push</span>(<span class="hljs-number">30</span>);
-
-    cout &lt;&lt; s.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">// 30</span>
-    cout &lt;&lt; s.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">// 20</span>
-}
-</code></pre>
-<p>Lebih rapi! Tapi <strong>masih ada masalah</strong> — karena <code>struct</code> default <code>public</code>, pengguna masih bisa langsung mengakses <code>s.arr</code> atau <code>s.top</code>.</p>
-<h3 id="versi-3-struct-dengan-private-adt-sejati">Versi 3: <code>struct</code> dengan <code>private</code> (ADT Sejati)</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stack</span> {
-<span class="hljs-keyword">private</span>:                      <span class="hljs-comment">// ← sembunyikan data</span>
-    <span class="hljs-type">int</span> arr[<span class="hljs-number">100</span>];
-    <span class="hljs-type">int</span> top = <span class="hljs-number">-1</span>;
-
-<span class="hljs-keyword">public</span>:                       <span class="hljs-comment">// ← buka operasi</span>
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{
-        arr[++top] = x;
-    }
-
-    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> arr[top--];
-    }
-
-    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> arr[top];
-    }
-
-    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> top == <span class="hljs-number">-1</span>;
-    }
-};
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Stack s;
-    s.<span class="hljs-built_in">push</span>(<span class="hljs-number">10</span>);
-    s.<span class="hljs-built_in">push</span>(<span class="hljs-number">20</span>);
-
-    <span class="hljs-comment">// s.arr[0] = 999;   ❌ ERROR! Tidak bisa akses</span>
-    <span class="hljs-comment">// s.top = 50;       ❌ ERROR! Tidak bisa akses</span>
-
-    cout &lt;&lt; s.<span class="hljs-built_in">pop</span>();     <span class="hljs-comment">// ✅ Bisa, lewat operasi resmi</span>
-}
-</code></pre>
-<p>Sekarang <code>struct</code> ini menjadi <strong>ADT sejati</strong> — data tersembunyi, operasi terbuka! 🎉</p>
-<hr>
-<h2 id="contoh-adt-queue-dengan-struct">🍔 Contoh ADT Queue dengan <code>struct</code></h2>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Queue</span> {
-<span class="hljs-keyword">private</span>:
-    <span class="hljs-type">int</span> arr[<span class="hljs-number">100</span>];
-    <span class="hljs-type">int</span> depan = <span class="hljs-number">-1</span>;
-    <span class="hljs-type">int</span> belakang = <span class="hljs-number">-1</span>;
-
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{
-        <span class="hljs-keyword">if</span> (depan == <span class="hljs-number">-1</span>) depan = <span class="hljs-number">0</span>;
-        arr[++belakang] = x;
-    }
-
-    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dequeue</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">if</span> (depan == <span class="hljs-number">-1</span> || depan &gt; belakang) {
-            cout &lt;&lt; <span class="hljs-string">"Queue kosong!\n"</span>;
-            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
-        }
-        <span class="hljs-keyword">return</span> arr[depan++];
-    }
-
-    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> depan == <span class="hljs-number">-1</span> || depan &gt; belakang;
-    }
-};
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Queue q;
-    q.<span class="hljs-built_in">enqueue</span>(<span class="hljs-number">10</span>);
-    q.<span class="hljs-built_in">enqueue</span>(<span class="hljs-number">20</span>);
-    q.<span class="hljs-built_in">enqueue</span>(<span class="hljs-number">30</span>);
-
-    cout &lt;&lt; q.<span class="hljs-built_in">dequeue</span>();   <span class="hljs-comment">// 10 (FIFO)</span>
-    cout &lt;&lt; q.<span class="hljs-built_in">dequeue</span>();   <span class="hljs-comment">// 20</span>
-}
-</code></pre>
-<hr>
-<h2 id="contoh-lain-struct-untuk-data-siswa">📚 Contoh Lain: <code>struct</code> untuk Data Siswa</h2>
-<p>Untuk data yang <strong>sederhana</strong> (tanpa logika rumit), <code>struct</code> paling cocok dipakai.</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Siswa</span> {
-    string nama;
-    <span class="hljs-type">int</span>    kelas;
-    string nis;
-
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tampilkan</span><span class="hljs-params">()</span> </span>{
-        cout &lt;&lt; <span class="hljs-string">"Nama  : "</span> &lt;&lt; nama  &lt;&lt; endl;
-        cout &lt;&lt; <span class="hljs-string">"Kelas : "</span> &lt;&lt; kelas &lt;&lt; endl;
-        cout &lt;&lt; <span class="hljs-string">"NIS   : "</span> &lt;&lt; nis   &lt;&lt; endl;
-    }
-};
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Siswa s1;
-    s1.nama  = <span class="hljs-string">"Budi"</span>;
-    s1.kelas = <span class="hljs-number">10</span>;
-    s1.nis   = <span class="hljs-string">"12345"</span>;
-
-    s1.<span class="hljs-built_in">tampilkan</span>();
-}
-</code></pre>
-<p><strong>Output:</strong></p>
-<pre><code data-highlighted="yes" class="hljs language-yaml"><span class="hljs-attr">Nama  :</span> <span class="hljs-string">Budi</span>
-<span class="hljs-attr">Kelas :</span> <span class="hljs-number">10</span>
-<span class="hljs-attr">NIS   :</span> <span class="hljs-number">12345</span>
-</code></pre>
-<hr>
-<h2 id="kapan-pakai-struct-vs-class">🏗️ Kapan Pakai <code>struct</code> vs <code>class</code>?</h2>
-<h3 id="gunakan-struct-ketika">Gunakan <code>struct</code> ketika:</h3>
+<h2 id="2-apa-itu-struktur-data-abstrak-adt">2. Apa Itu Struktur Data Abstrak (ADT)?</h2>
+<p><strong>ADT</strong> adalah singkatan dari <em>Abstract Data Type</em>, atau <strong>Tipe Data Abstrak</strong>.</p>
+<p>Kata "abstrak" artinya kita fokus pada <strong>apa</strong> yang disimpan dan <strong>apa</strong> yang bisa dilakukan, bukan pada bagaimana komputer menyimpannya di memori.</p>
+<p>Contoh dari kehidupan sehari-hari: <strong>remote TV</strong>.</p>
 <ul>
-<li>Datanya <strong>sederhana</strong> (tanpa logika rumit)</li>
-<li>Ingin semua <strong>terbuka</strong> (public)</li>
-<li>Membuat <strong>"kumpulan data"</strong> seperti koordinat, tanggal, data siswa</li>
-<li>Ingin <strong>kode singkat</strong></li>
+<li>Remote punya tombol (volume, ganti saluran, nyala/mati). Itu adalah <strong>operasi</strong> yang bisa kita lakukan.</li>
+<li>Kita tidak perlu tahu rangkaian elektronik di dalamnya. Kita cukup tahu cara memakainya.</li>
 </ul>
-<h3 id="gunakan-class-ketika">Gunakan <code>class</code> ketika:</h3>
-<ul>
-<li>Membuat <strong>ADT kompleks</strong> (Stack, Queue, Tree)</li>
-<li>Ingin <strong>data tersembunyi</strong> (private)</li>
-<li>Butuh <strong>enkapsulasi</strong> yang kuat</li>
-<li>Ada <strong>logika rumit</strong> di dalamnya</li>
-</ul>
-<h3 id="panduan-sederhana">Panduan Sederhana</h3>
-<pre><code data-highlighted="yes" class="hljs language-java">Data <span class="hljs-title function_">sederhana</span> <span class="hljs-params">(koordinat, data siswa)</span>?  → struct
-ADT <span class="hljs-title function_">kompleks</span> <span class="hljs-params">(Stack, Queue, Tree)</span>?       → <span class="hljs-keyword">class</span>
-<span class="hljs-title class_">Tidak</span> yakin?                              → class (lebih aman)
-</code></pre>
-<hr>
-<h2 id="perbandingan-visual">🎨 Perbandingan Visual</h2>
-<h3 id="struct-data-sederhana"><code>struct</code> (data sederhana)</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Titik</span> {
-    <span class="hljs-type">int</span> x;
-    <span class="hljs-type">int</span> y;
-};
-<span class="hljs-comment">// Cukup! Semua publik, tidak perlu sembunyikan apa-apa</span>
-</code></pre>
-<h3 id="class-adt-kompleks"><code>class</code> (ADT kompleks)</h3>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Stack</span> {
-<span class="hljs-keyword">private</span>:
-    <span class="hljs-type">int</span> arr[<span class="hljs-number">100</span>];     <span class="hljs-comment">// sembunyikan implementasi</span>
-    <span class="hljs-type">int</span> top;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span>; <span class="hljs-comment">// buka operasi</span>
-    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span></span>;
-};
-</code></pre>
-<hr>
-<h2 id="bisakah-struct-menjadi-adt">🔄 Bisakah <code>struct</code> Menjadi ADT?</h2>
-<p><strong>BISA!</strong> Seperti contoh Versi 3 tadi:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Stack</span> {
-<span class="hljs-keyword">private</span>:           <span class="hljs-comment">// ← trik: pakai private juga di struct</span>
-    <span class="hljs-type">int</span> arr[<span class="hljs-number">100</span>];
-    <span class="hljs-type">int</span> top = <span class="hljs-number">-1</span>;
-
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{ arr[++top] = x; }
-    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span>        </span>{ <span class="hljs-keyword">return</span> arr[top--]; }
-};
-</code></pre>
-<p>Secara teknis, <code>struct</code> dan <code>class</code> <strong>hampir identik</strong>. Bedanya cuma default akses (public vs private).</p>
-<p>Namun, <strong>konvensi komunitas C++</strong> menyarankan:</p>
+<p>Sebuah ADT selalu terdiri dari <strong>dua bagian</strong>:</p>
 <table>
 <thead>
 <tr>
-<th>Kebutuhan</th>
-<th>Rekomendasi</th>
+<th>Bagian</th>
+<th>Artinya</th>
+<th>Di C++ ditulis dengan</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Data sederhana</td>
+<td><strong>Data</strong> (representasi)</td>
+<td>Apa saja yang disimpan</td>
 <td><code>struct</code></td>
 </tr>
 <tr>
-<td>ADT kompleks</td>
-<td><code>class</code></td>
+<td><strong>Operasi</strong></td>
+<td>Apa saja yang dapat dilakukan pada data itu</td>
+<td>fungsi atau prosedur</td>
 </tr>
 </tbody></table>
+<p>Contoh ADT <strong>Waktu</strong>:</p>
+<ul>
+<li>Data: <code>jam</code> dan <code>menit</code></li>
+<li>Operasi: menambah menit, menampilkan waktu, membandingkan dua waktu</li>
+</ul>
 <hr>
-<h2 id="ringkasan">🧠 Ringkasan</h2>
+<h2 id="3-cara-membuat-struct">3. Cara Membuat <code>struct</code></h2>
+<p>Bentuk umumnya:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">NamaTipe</span> {
+    tipe1 anggota1;
+    tipe2 anggota2;
+    <span class="hljs-comment">// ... dan seterusnya</span>
+};
+</code></pre>
+<p>Contoh: ADT untuk waktu.</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Waktu</span> {
+    <span class="hljs-type">int</span> jam;
+    <span class="hljs-type">int</span> menit;
+};
+</code></pre>
+<p>Mari bedah satu per satu:</p>
 <table>
 <thead>
 <tr>
-<th>Poin</th>
+<th>Bagian</th>
 <th>Penjelasan</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Apa itu <code>struct</code>?</strong></td>
-<td>Wadah untuk menggabungkan beberapa data jadi satu</td>
+<td><code>struct</code></td>
+<td>Kata kunci untuk membuat tipe data baru</td>
 </tr>
 <tr>
-<td><strong>Bisa berisi fungsi?</strong></td>
-<td>✅ Bisa (jangan salah paham!)</td>
+<td><code>Waktu</code></td>
+<td>Nama tipe baru yang kita buat (bebas, awali dengan huruf besar agar mudah dibedakan)</td>
 </tr>
 <tr>
-<td><strong>Bedanya dengan <code>class</code>?</strong></td>
-<td>Default akses: <code>struct</code> = public, <code>class</code> = private</td>
+<td><code>jam</code>, <code>menit</code></td>
+<td><strong>Anggota</strong> (<em>field</em>): data yang dimiliki oleh <code>Waktu</code></td>
 </tr>
 <tr>
-<td><strong>Bisa jadi ADT?</strong></td>
-<td>✅ Bisa, dengan menambah <code>private:</code></td>
+<td><code>;</code> setelah <code>}</code></td>
+<td><strong>Wajib ada.</strong> Lupa titik koma ini adalah kesalahan yang sangat sering terjadi</td>
+</tr>
+</tbody></table>
+<p>Penting dipahami: menulis <code>struct Waktu { ... };</code> <strong>belum membuat variabel apa pun</strong>. Kita baru membuat "cetakan" atau rancangan tipe data. Ibarat denah rumah: denah sudah ada, tetapi rumahnya belum dibangun.</p>
+<hr>
+<h2 id="4-membuat-variabel-dan-mengakses-anggotanya">4. Membuat Variabel dan Mengakses Anggotanya</h2>
+<p>Setelah tipe dibuat, kita bisa membuat variabel dari tipe itu, sama seperti membuat variabel <code>int</code>.</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes">Waktu w1;        <span class="hljs-comment">// membuat variabel w1 bertipe Waktu</span>
+</code></pre>
+<p>Untuk mengisi atau membaca anggota, gunakan <strong>operator titik</strong> (<code>.</code>):</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes">w1.jam = <span class="hljs-number">7</span>;
+w1.menit = <span class="hljs-number">30</span>;
+
+cout &lt;&lt; w1.jam &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; w1.menit;   <span class="hljs-comment">// mencetak 7:30</span>
+</code></pre>
+<p>Cara membacanya: <code>w1.jam</code> artinya "anggota <code>jam</code> milik variabel <code>w1</code>".</p>
+<p>Satu <code>struct</code> dapat dipakai untuk membuat banyak variabel, dan masing-masing punya data sendiri:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes">Waktu berangkat, pulang;
+
+berangkat.jam = <span class="hljs-number">6</span>;
+berangkat.menit = <span class="hljs-number">45</span>;
+
+pulang.jam = <span class="hljs-number">14</span>;
+pulang.menit = <span class="hljs-number">10</span>;
+</code></pre>
+<p>Variabel <code>berangkat</code> dan <code>pulang</code> adalah dua "kartu" yang berbeda. Mengubah isi yang satu tidak memengaruhi yang lain.</p>
+<h3 id="kesalahan-yang-sering-terjadi">Kesalahan yang sering terjadi</h3>
+<table>
+<thead>
+<tr>
+<th>Salah</th>
+<th>Benar</th>
+<th>Alasan</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Waktu.jam = 7;</code></td>
+<td><code>w1.jam = 7;</code></td>
+<td>Titik dipakai pada <strong>variabel</strong>, bukan pada nama tipe</td>
 </tr>
 <tr>
-<td><strong>Kapan dipakai?</strong></td>
-<td>Data sederhana (koordinat, siswa, dll)</td>
+<td><code>w1 = 7;</code></td>
+<td><code>w1.jam = 7;</code></td>
+<td>Variabel <code>struct</code> berisi beberapa data, jadi harus menyebut anggota yang diisi</td>
 </tr>
 <tr>
-<td><strong>Kapan pakai <code>class</code>?</strong></td>
-<td>ADT kompleks (Stack, Queue, Tree)</td>
+<td><code>struct Waktu { int jam; int menit; }</code></td>
+<td><code>struct Waktu { int jam; int menit; };</code></td>
+<td>Titik koma setelah <code>}</code> tidak boleh lupa</td>
 </tr>
 </tbody></table>
 <hr>
-<h2 id="kesimpulan">🎯 Kesimpulan</h2>
-<blockquote>
-<p>💡 <strong><code>struct</code> di C++ adalah "wadah serbaguna" untuk menggabungkan data (dan fungsi) menjadi satu kesatuan.</strong> Bisa dipakai untuk <strong>data sederhana</strong> (seperti koordinat titik atau data siswa) maupun untuk <strong>membuat ADT</strong> (dengan menambahkan <code>private:</code>). Perbedaan utamanya dengan <code>class</code> hanya pada <strong>default akses</strong> — <code>struct</code> = public, <code>class</code> = private. Tapi secara konvensi, <code>struct</code> lebih cocok untuk <strong>data sederhana</strong>, sedangkan <code>class</code> untuk <strong>ADT kompleks</strong> seperti Stack, Queue, dan Tree. 🚀</p>
-</blockquote>
-<pre><code data-highlighted="yes" class="hljs language-kotlin">┌────────────────────────────────────────┐
-│              STRUCT                    │
-│                                        │
-│  Data sederhana  → Struct (<span class="hljs-keyword">public</span>)     │
-│  ADT kompleks    → Class (<span class="hljs-keyword">private</span>)     │
-│                                        │
-│  Keduanya bisa berisi <span class="hljs-keyword">data</span> + fungsi!   │
-└────────────────────────────────────────┘
+<h2 id="5-memberi-nilai-awal-inisialisasi">5. Memberi Nilai Awal (Inisialisasi)</h2>
+<p>Selain mengisi anggota satu per satu, kita bisa mengisi semuanya sekaligus saat variabel dibuat, memakai tanda kurung kurawal:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes">Waktu w2 = {<span class="hljs-number">9</span>, <span class="hljs-number">15</span>};    <span class="hljs-comment">// jam = 9, menit = 15</span>
 </code></pre>
+<p>Nilai di dalam <code>{ }</code> diisikan <strong>sesuai urutan anggota</strong> pada <code>struct</code>. Karena <code>jam</code> ditulis lebih dulu daripada <code>menit</code>, maka <code>9</code> masuk ke <code>jam</code> dan <code>15</code> masuk ke <code>menit</code>.</p>
+<p>Contoh dengan beberapa tipe data berbeda:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Siswa</span> {
+    string nama;
+    <span class="hljs-type">int</span> nilai;
+};
 
+Siswa s1 = {<span class="hljs-string">"Ani"</span>, <span class="hljs-number">80</span>};
+</code></pre>
+<hr>
+<h2 id="6-menyalin-variabel-struct">6. Menyalin Variabel <code>struct</code></h2>
+<p>Perhatikan program berikut:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Siswa</span> {
+    string nama;
+    <span class="hljs-type">int</span> nilai;
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Siswa p;
+    p.nama = <span class="hljs-string">"Citra"</span>;
+    p.nilai = <span class="hljs-number">70</span>;
+
+    Siswa q = p;      <span class="hljs-comment">// menyalin isi p ke q</span>
+    q.nilai = <span class="hljs-number">95</span>;     <span class="hljs-comment">// mengubah q saja</span>
+
+    cout &lt;&lt; p.nilai &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; q.nilai;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Keluarannya adalah <code>70 95</code>.</p>
+<p>Penjelasan langkah demi langkah:</p>
+<ol>
+<li><code>p</code> berisi nama <code>"Citra"</code> dan nilai <code>70</code>.</li>
+<li><code>Siswa q = p;</code> membuat variabel baru <code>q</code> dan <strong>menyalin seluruh isi <code>p</code></strong> ke dalamnya. Sekarang <code>q</code> juga berisi <code>"Citra"</code> dan <code>70</code>.</li>
+<li><code>q.nilai = 95;</code> hanya mengubah nilai milik <code>q</code>.</li>
+<li>Variabel <code>p</code> tidak ikut berubah, karena <code>p</code> dan <code>q</code> adalah <strong>dua tempat penyimpanan yang terpisah</strong>. Yang terjadi pada langkah 2 adalah fotokopi, bukan "satu data dengan dua nama".</li>
+</ol>
+<p>Gambaran di memori setelah langkah 3:</p>
+<pre><code data-highlighted="yes" class="hljs language-yaml">  <span class="hljs-string">p</span>                   <span class="hljs-string">q</span>
+<span class="hljs-string">+---------------+</span>   <span class="hljs-string">+---------------+</span>
+<span class="hljs-string">|</span> <span class="hljs-attr">nama :</span> <span class="hljs-string">Citra</span>  <span class="hljs-string">|</span>   <span class="hljs-string">|</span> <span class="hljs-attr">nama :</span> <span class="hljs-string">Citra</span>  <span class="hljs-string">|</span>
+<span class="hljs-string">|</span> <span class="hljs-attr">nilai:</span> <span class="hljs-number">70</span>     <span class="hljs-string">|</span>   <span class="hljs-string">|</span> <span class="hljs-attr">nilai:</span> <span class="hljs-number">95</span>     <span class="hljs-string">|</span>
+<span class="hljs-string">+---------------+</span>   <span class="hljs-string">+---------------+</span>
+</code></pre>
+<p>Ingat prinsip ini: <strong>menyalin <code>struct</code> membuat salinan yang berdiri sendiri.</strong></p>
+<hr>
+<h2 id="7-struct-sebagai-parameter-fungsi">7. <code>struct</code> sebagai Parameter Fungsi</h2>
+<p>Sebuah <code>struct</code> dapat dikirim ke fungsi sama seperti <code>int</code> atau <code>string</code>. Ini membuat daftar parameter menjadi ringkas. Bandingkan:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-comment">// Tanpa struct: parameter banyak dan mudah tertukar</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(<span class="hljs-type">int</span> jam, <span class="hljs-type">int</span> menit)</span></span>;
+
+<span class="hljs-comment">// Dengan struct: cukup satu parameter</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(Waktu w)</span></span>;
+</code></pre>
+<p>Contoh lengkap:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Waktu</span> {
+    <span class="hljs-type">int</span> jam;
+    <span class="hljs-type">int</span> menit;
+};
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(Waktu w)</span> </span>{
+    cout &lt;&lt; w.jam &lt;&lt; <span class="hljs-string">" jam "</span> &lt;&lt; w.menit &lt;&lt; <span class="hljs-string">" menit"</span> &lt;&lt; endl;
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Waktu w1 = {<span class="hljs-number">2</span>, <span class="hljs-number">40</span>};
+    <span class="hljs-built_in">cetakWaktu</span>(w1);        <span class="hljs-comment">// mencetak: 2 jam 40 menit</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="parameter-menerima-salinan">Parameter menerima salinan</h3>
+<p>Cara pengiriman di atas disebut <em>pass by value</em>. Fungsi menerima <strong>salinan</strong> dari <code>struct</code>, sama seperti pada Bagian 6. Akibatnya, mengubah <code>struct</code> di dalam fungsi <strong>tidak</strong> mengubah variabel aslinya.</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tambahSatuJam</span><span class="hljs-params">(Waktu w)</span> </span>{
+    w.jam = w.jam + <span class="hljs-number">1</span>;      <span class="hljs-comment">// hanya mengubah salinan</span>
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Waktu w1 = {<span class="hljs-number">2</span>, <span class="hljs-number">40</span>};
+    <span class="hljs-built_in">tambahSatuJam</span>(w1);
+    cout &lt;&lt; w1.jam;         <span class="hljs-comment">// tetap 2, bukan 3</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Lalu bagaimana kalau kita ingin hasilnya sampai ke luar fungsi? Jawabannya ada di bagian berikut.</p>
+<hr>
+<h2 id="8-struct-sebagai-nilai-kembalian-fungsi">8. <code>struct</code> sebagai Nilai Kembalian Fungsi</h2>
+<p>Fungsi juga boleh <strong>mengembalikan</strong> sebuah <code>struct</code>. Dengan begitu, hasil perhitungan yang terdiri dari beberapa data bisa dikirim sekaligus.</p>
+<p>Contoh: fungsi yang menambah sejumlah menit pada sebuah waktu.</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-function">Waktu <span class="hljs-title">tambahMenit</span><span class="hljs-params">(Waktu w, <span class="hljs-type">int</span> m)</span> </span>{
+    Waktu hasil;
+    <span class="hljs-type">int</span> total = w.jam * <span class="hljs-number">60</span> + w.menit + m;   <span class="hljs-comment">// ubah semuanya ke menit</span>
+    hasil.jam   = total / <span class="hljs-number">60</span>;
+    hasil.menit = total % <span class="hljs-number">60</span>;
+    <span class="hljs-keyword">return</span> hasil;                            <span class="hljs-comment">// kembalikan satu Waktu utuh</span>
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Waktu a = {<span class="hljs-number">1</span>, <span class="hljs-number">50</span>};
+    Waktu b = <span class="hljs-built_in">tambahMenit</span>(a, <span class="hljs-number">25</span>);
+    cout &lt;&lt; b.jam &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; b.menit;         <span class="hljs-comment">// mencetak 2:15</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Penelusuran untuk <code>tambahMenit({1, 50}, 25)</code>:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord text"><span class="mord">total</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">60</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">50</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">25</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6679em;"></span><span class="mord">135</span><span class="mord text"><span class="mord">&nbsp;menit</span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">jam</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">135</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">60</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord text"><span class="mord">&nbsp;(hasil&nbsp;bagi)</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">menit</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">135</span><span class="mspace" style="margin-right:0.0556em;"></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin"><span class="mord"><span class="mord mathrm">mod</span></span></span><span class="mspace" style="margin-right:0.0556em;"></span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">60</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">15</span><span class="mord text"><span class="mord">&nbsp;(sisa&nbsp;bagi)</span></span></span></span></span></span></p>
+<p>Jadi hasilnya adalah <code>2:15</code>.</p>
+<p>Perhatikan pola penulisan fungsi yang mengembalikan <code>struct</code>. Pola ini akan kamu pakai pada lembar kerja:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-function">NamaTipe <span class="hljs-title">namaFungsi</span><span class="hljs-params">(NamaTipe parameter, ...)</span> </span>{
+    NamaTipe hasil;                 <span class="hljs-comment">// 1. siapkan wadah untuk hasil</span>
+    hasil.anggota1 = ...;           <span class="hljs-comment">// 2. isi setiap anggota</span>
+    hasil.anggota2 = ...;
+    <span class="hljs-keyword">return</span> hasil;                   <span class="hljs-comment">// 3. kembalikan wadahnya</span>
+}
+</code></pre>
+<p>Variabel <code>a</code> pada contoh di atas tidak berubah. Fungsi bekerja pada salinan, lalu mengirim hasil baru lewat <code>return</code>.</p>
+<hr>
+<h2 id="9-merancang-adt-data-operasi">9. Merancang ADT: Data + Operasi</h2>
+<p>Sekarang kita gabungkan semuanya. Merancang ADT berarti menjawab dua pertanyaan:</p>
+<ol>
+<li><strong>Data apa yang perlu disimpan?</strong> Jawabannya menjadi anggota <code>struct</code>.</li>
+<li><strong>Apa saja yang ingin kita lakukan pada data itu?</strong> Jawabannya menjadi fungsi atau prosedur.</li>
+</ol>
+<p>Contoh: ADT <strong>Waktu</strong>.</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-comment">// ===== DATA =====</span>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Waktu</span> {
+    <span class="hljs-type">int</span> jam;
+    <span class="hljs-type">int</span> menit;
+};
+
+<span class="hljs-comment">// ===== OPERASI =====</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(Waktu w)</span></span>;               <span class="hljs-comment">// menampilkan waktu</span>
+<span class="hljs-function">Waktu <span class="hljs-title">tambahMenit</span><span class="hljs-params">(Waktu w, <span class="hljs-type">int</span> m)</span></span>;      <span class="hljs-comment">// menambah menit, hasilnya Waktu baru</span>
+<span class="hljs-function"><span class="hljs-type">int</span>   <span class="hljs-title">totalMenit</span><span class="hljs-params">(Waktu w)</span></span>;              <span class="hljs-comment">// mengubah waktu menjadi menit</span>
+</code></pre>
+<p>Tabel operasinya:</p>
+<table>
+<thead>
+<tr>
+<th>Nama operasi</th>
+<th>Parameter</th>
+<th>Tipe kembalian</th>
+<th>Tugas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cetakWaktu</code></td>
+<td><code>Waktu w</code></td>
+<td><code>void</code></td>
+<td>Menampilkan waktu ke layar</td>
+</tr>
+<tr>
+<td><code>tambahMenit</code></td>
+<td><code>Waktu w</code>, <code>int m</code></td>
+<td><code>Waktu</code></td>
+<td>Mengembalikan waktu baru setelah ditambah <code>m</code> menit</td>
+</tr>
+<tr>
+<td><code>totalMenit</code></td>
+<td><code>Waktu w</code></td>
+<td><code>int</code></td>
+<td>Mengembalikan jumlah seluruh menit</td>
+</tr>
+</tbody></table>
+<p>Tips memilih tipe kembalian:</p>
+<ul>
+<li>Kalau operasi <strong>menghitung dan menghasilkan satu angka</strong>, pakai tipe angka (<code>int</code>, <code>double</code>).</li>
+<li>Kalau operasi <strong>menghasilkan data yang terdiri dari beberapa anggota</strong>, kembalikan <code>struct</code>-nya.</li>
+<li>Kalau operasi <strong>hanya menampilkan sesuatu</strong> dan tidak menghasilkan nilai, pakai <code>void</code>.</li>
+</ul>
+<p>Langkah merancang ADT baru, misalnya ADT <strong>Buku</strong> atau <strong>Lingkaran</strong>:</p>
+<ol>
+<li>Tentukan <strong>nama ADT</strong> (satu kata, diawali huruf besar).</li>
+<li>Tulis daftar <strong>data</strong> yang perlu disimpan, lalu tentukan tipe setiap data.</li>
+<li>Tulis daftar <strong>operasi</strong> yang diperlukan, dan untuk tiap operasi tentukan parameter dan tipe kembaliannya.</li>
+<li>Baru tulis kodenya.</li>
+</ol>
+<hr>
+<h2 id="10-rangkuman">10. Rangkuman</h2>
+<ul>
+<li><code>struct</code> menggabungkan beberapa data menjadi satu tipe baru. Jangan lupa <code>;</code> setelah <code>}</code>.</li>
+<li>Menulis <code>struct</code> hanya membuat rancangan tipe. Variabelnya dibuat terpisah, misalnya <code>Waktu w1;</code>.</li>
+<li>Anggota diakses dengan <strong>operator titik</strong>: <code>w1.jam</code>.</li>
+<li>Nilai awal dapat diberikan dengan <code>{ ... }</code> sesuai urutan anggota.</li>
+<li>Menyalin <code>struct</code> (<code>q = p</code>) membuat <strong>salinan terpisah</strong>.</li>
+<li><code>struct</code> dapat menjadi <strong>parameter</strong> (yang diterima adalah salinan) dan <strong>nilai kembalian</strong> fungsi.</li>
+<li><strong>ADT = data + operasi</strong>. Di C++, data ditulis dengan <code>struct</code> dan operasinya ditulis sebagai fungsi atau prosedur.</li>
+</ul>
+<hr>
+<h2 id="11-cek-pemahaman">11. Cek Pemahaman</h2>
+<p>Coba jawab dulu sebelum membuka jawabannya.</p>
+<p><strong>Soal 1.</strong> Perhatikan kode berikut. Apa yang dicetak?</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Kotak</span> {
+    <span class="hljs-type">int</span> sisi;
+    string warna;
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Kotak k1 = {<span class="hljs-number">4</span>, <span class="hljs-string">"merah"</span>};
+    Kotak k2 = k1;
+    k2.sisi = <span class="hljs-number">9</span>;
+    cout &lt;&lt; k1.sisi &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; k2.sisi &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; k2.warna;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<details>
+<summary>Lihat jawaban Soal 1</summary>
+
+<p>Keluarannya <code>4 9 merah</code>.</p>
+<p><code>k2</code> adalah salinan <code>k1</code>, sehingga <code>k2.warna</code> juga <code>"merah"</code>. Setelah itu hanya <code>k2.sisi</code> yang diubah menjadi 9, sedangkan <code>k1.sisi</code> tetap 4.</p>
+</details>
+
+<p><strong>Soal 2.</strong> Temukan satu kesalahan pada kode berikut dan perbaiki.</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Hewan</span> {
+    string nama;
+    <span class="hljs-type">int</span> umur;
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Hewan h;
+    h.nama = <span class="hljs-string">"Kucing"</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<details>
+<summary>Lihat jawaban Soal 2</summary>
+
+<p>Kesalahannya: tidak ada titik koma setelah <code>}</code> pada akhir <code>struct</code>. Perbaikannya: <code>};</code></p>
+</details>
+
+<p><strong>Soal 3.</strong> Tentukan data dan dua operasi yang cocok untuk ADT <strong>Lingkaran</strong>.</p>
+<details>
+<summary>Lihat contoh jawaban Soal 3</summary>
+
+<p>Data: <code>jariJari</code> bertipe <code>double</code>.</p>
+<p>Operasi yang cocok, misalnya:</p>
+<table>
+<thead>
+<tr>
+<th>Nama operasi</th>
+<th>Parameter</th>
+<th>Tipe kembalian</th>
+<th>Tugas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>luas</code></td>
+<td><code>Lingkaran c</code></td>
+<td><code>double</code></td>
+<td>Mengembalikan luas lingkaran</td>
+</tr>
+<tr>
+<td><code>keliling</code></td>
+<td><code>Lingkaran c</code></td>
+<td><code>double</code></td>
+<td>Mengembalikan keliling lingkaran</td>
+</tr>
+</tbody></table>
+<p>Dengan rumus:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0585em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span></span></span></span></p>
+</details>
+
+<hr>
+<p>Selamat belajar! Kalau ada bagian yang belum jelas, catat pertanyaanmu dan tanyakan kepada guru saat pembahasan di kelas.</p>
 </div>
 </body>
 </html>
