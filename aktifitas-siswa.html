@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruang Tulis by Alhazen Export</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<style>
+* { box-sizing: border-box; }
+body {
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background: #ffffff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem;
+}
+.markdown-preview { overflow-wrap: anywhere; word-break: break-word; }
+.markdown-preview h1 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; margin-top: 1.5rem; line-height: 1.25; color: #111827; }
+.markdown-preview h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; margin-top: 1.25rem; line-height: 1.3; color: #111827; }
+.markdown-preview h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; margin-top: 1rem; line-height: 1.35; color: #111827; }
+.markdown-preview h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 0.75rem; color: #111827; }
+.markdown-preview p { margin-bottom: 1rem; line-height: 1.6; }
+.markdown-preview a { color: #059669; text-decoration: underline; }
+.markdown-preview ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+.markdown-preview ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1rem; }
+.markdown-preview li { margin-bottom: 0.25rem; }
+.markdown-preview blockquote { border-left: 4px solid #059669; padding-left: 1rem; margin: 1rem 0; color: inherit; opacity: 0.85; font-style: italic; }
+.markdown-preview table { display: block; width: max-content; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin-bottom: 1rem; }
+.markdown-preview th, .markdown-preview td { border: 1px solid rgba(0, 0, 0, 0.1); padding: 0.4rem 0.6rem; text-align: left; white-space: nowrap; }
+.markdown-preview th { background-color: rgba(0, 0, 0, 0.05); font-weight: 600; }
+.markdown-preview img { max-width: 100%; height: auto; border-radius: 0.75rem; }
+.markdown-preview hr { border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0; }
+.markdown-preview code { font-family: ui-monospace, Menlo, Monaco, Consolas, monospace; background: rgba(0, 0, 0, 0.06); padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; color: #24292f; }
+.markdown-preview pre { background: #f6f8fa; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; border: 1px solid rgba(0, 0, 0, 0.08); margin-bottom: 1rem; max-width: 100%; }
+.markdown-preview pre code { background: transparent; padding: 0; color: #24292f; font-size: 0.9em; }
+.markdown-preview pre code.hljs { background: transparent; }
+.markdown-preview .md-alert { border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1rem; border: 1px solid; }
+.markdown-preview .md-alert-title { font-weight: bold; text-transform: capitalize; margin-bottom: 0.5rem; }
+.markdown-preview .md-alert-body p:last-child { margin-bottom: 0; }
+.markdown-preview .md-alert-success { background: #ecfdf5; border-color: #059669; color: #065f46; }
+.markdown-preview .md-alert-danger { background: #fef2f2; border-color: #ef4444; color: #991b1b; }
+.markdown-preview .md-alert-info { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
+.markdown-preview .md-alert-warning { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
+.markdown-preview .md-toc { padding: 1rem 1.25rem; background: #f9fafb; border-radius: 0.75rem; border: 1px solid #e5e7eb; margin-bottom: 1.5rem; }
+.markdown-preview .md-toc h4 { font-weight: bold; margin-bottom: 0.5rem; font-size: 1rem; margin-top: 0; }
+.markdown-preview .md-toc ul { list-style: none; padding-left: 0; margin-bottom: 0; }
+.markdown-preview .md-toc li { margin-bottom: 0.25rem; }
+.markdown-preview .md-toc a { color: #059669; text-decoration: none; font-weight: 500; }
+.markdown-preview .md-toc a:hover { text-decoration: underline; }
+.markdown-preview .mermaid { display: flex; justify-content: center; margin: 1.5rem 0; overflow-x: auto; background: transparent; }
+.markdown-preview .mermaid svg { max-width: 100%; height: auto; }
+.markdown-preview .footnotes { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0, 0, 0, 0.1); font-size: 0.9em; opacity: 0.9; }
+.markdown-preview .footnotes ol { padding-left: 1.25rem; }
+.markdown-preview .footnote-backref { margin-left: 0.25rem; text-decoration: none; color: #059669; font-weight: bold; }
+.markdown-preview sup a { color: #059669; text-decoration: none; font-weight: bold; padding: 0 0.15rem; }
+.markdown-preview sup a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="markdown-preview">
+<h1 id="lembar-kerja-siswa-struktur-data-abstrak-menggunakan-struct-c">Lembar Kerja Siswa: Struktur Data Abstrak Menggunakan <code>struct</code> (C++)</h1>
+<p><strong>Nama:</strong> ______________________  <strong>Kelas:</strong> ________  <strong>No. Absen:</strong> ______  <strong>Tanggal:</strong> ____________</p>
+<p><strong>Waktu:</strong> 45 menit  </p>
+<hr>
+<h2 id="tujuan-pembelajaran">Tujuan Pembelajaran</h2>
+<p>Setelah mengerjakan lembar kerja ini, siswa mampu:</p>
+<ol>
+<li>Menjelaskan pengertian struktur data abstrak (<em>Abstract Data Type</em>/ADT).</li>
+<li>Mendeklarasikan <code>struct</code> dan mengakses anggotanya.</li>
+<li>Menelusuri program yang memakai <code>struct</code> sebagai variabel dan parameter fungsi.</li>
+<li>Merancang ADT sederhana yang terdiri atas data dan operasinya.</li>
+</ol>
+<hr>
+<h2 id="ingat-kembali">Ingat Kembali</h2>
+<p><strong>Struktur data abstrak (ADT)</strong> adalah tipe data buatan sendiri yang terdiri dari:</p>
+<ul>
+<li><strong>data</strong> (representasi): apa saja yang disimpan, dan</li>
+<li><strong>operasi</strong>: apa saja yang dapat dilakukan terhadap data tersebut.</li>
+</ul>
+<p>Dalam C++, data ADT dituliskan dengan <code>struct</code>, dan operasinya dituliskan sebagai fungsi atau prosedur.</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Siswa</span> {          <span class="hljs-comment">// data ADT</span>
+    string nama;
+    <span class="hljs-type">int</span> nilai;
+};
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tampilkan</span><span class="hljs-params">(Siswa s)</span> </span>{   <span class="hljs-comment">// operasi ADT</span>
+    cout &lt;&lt; s.nama &lt;&lt; <span class="hljs-string">" : "</span> &lt;&lt; s.nilai &lt;&lt; endl;
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Siswa s1;
+    s1.nama = <span class="hljs-string">"Ani"</span>;        <span class="hljs-comment">// mengakses anggota dengan tanda titik</span>
+    s1.nilai = <span class="hljs-number">80</span>;
+    <span class="hljs-built_in">tampilkan</span>(s1);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<ul>
+<li><code>Siswa</code> = nama tipe baru yang dibuat dengan <code>struct</code></li>
+<li><code>nama</code> dan <code>nilai</code> = anggota (<em>field</em>) dari <code>struct</code></li>
+<li><code>s1.nama</code> = cara mengakses anggota <code>nama</code> milik variabel <code>s1</code></li>
+</ul>
+<hr>
+<h2 id="bagian-a-isian-singkat-skor-30">Bagian A. Isian Singkat (Skor 30)</h2>
+<p><strong>A1.</strong> <code>struct</code> digunakan untuk ______________________________________________. (6)</p>
+<p><strong>A2.</strong> Data yang berada di dalam sebuah <code>struct</code> disebut ______________. (6)</p>
+<p><strong>A3.</strong> Operator yang dipakai untuk mengakses anggota sebuah <code>struct</code> adalah ______________. (6)</p>
+<p><strong>A4.</strong> Sebuah struktur data abstrak terdiri dari dua bagian, yaitu ______________ dan ______________. (6)</p>
+<p><strong>A5.</strong> Diketahui:</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Titik</span> {
+    <span class="hljs-type">int</span> x;
+    <span class="hljs-type">int</span> y;
+};
+</code></pre>
+<p>Tuliskan dua baris kode untuk mendeklarasikan variabel <code>p</code> bertipe <code>Titik</code>, lalu isi <code>x</code> dengan 3 dan <code>y</code> dengan 4. (6)</p>
+<hr>
+<hr>
+<hr>
+<h2 id="bagian-b-tebak-keluaran-program-skor-30">Bagian B. Tebak Keluaran Program (Skor 30)</h2>
+<p>Tuliskan keluaran program berikut.</p>
+<p><strong>B1.</strong> (15)</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Titik</span> {
+    <span class="hljs-type">int</span> x;
+    <span class="hljs-type">int</span> y;
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Titik a;
+    a.x = <span class="hljs-number">2</span>;
+    a.y = <span class="hljs-number">5</span>;
+
+    Titik b = a;
+    b.x = <span class="hljs-number">10</span>;
+
+    cout &lt;&lt; a.x &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; b.x &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; b.y;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Keluaran: ______________________</p>
+<p><strong>B2.</strong> (15)</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Pecahan</span> {
+    <span class="hljs-type">int</span> pembilang;
+    <span class="hljs-type">int</span> penyebut;
+};
+
+<span class="hljs-function">Pecahan <span class="hljs-title">kali</span><span class="hljs-params">(Pecahan p, Pecahan q)</span> </span>{
+    Pecahan hasil;
+    hasil.pembilang = p.pembilang * q.pembilang;
+    hasil.penyebut  = p.penyebut * q.penyebut;
+    <span class="hljs-keyword">return</span> hasil;
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Pecahan a = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>};
+    Pecahan b = {<span class="hljs-number">3</span>, <span class="hljs-number">4</span>};
+    Pecahan c = <span class="hljs-built_in">kali</span>(a, b);
+    cout &lt;&lt; c.pembilang &lt;&lt; <span class="hljs-string">"/"</span> &lt;&lt; c.penyebut;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Keluaran: ______________________</p>
+<p>Jelaskan apa yang dilakukan fungsi <code>kali</code>: ______________________________________________</p>
+<hr>
+<h2 id="bagian-c-melengkapi-kode-skor-25">Bagian C. Melengkapi Kode (Skor 25)</h2>
+<p><strong>C1.</strong> Lengkapi program berikut agar mencetak <code>Algoritma : 45000</code>. (10)</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+________ Buku {
+    string judul;
+    ________ harga;
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Buku b;
+    b.judul = <span class="hljs-string">"Algoritma"</span>;
+    ________________ = <span class="hljs-number">45000</span>;
+    cout &lt;&lt; b.judul &lt;&lt; <span class="hljs-string">" : "</span> &lt;&lt; b.harga;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p><strong>C2.</strong> Lengkapi fungsi <code>geser</code> yang menggeser sebuah titik sejauh <code>dx</code> pada sumbu x dan <code>dy</code> pada sumbu y, lalu mengembalikan titik hasilnya. (15)</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Titik</span> {
+    <span class="hljs-type">int</span> x;
+    <span class="hljs-type">int</span> y;
+};
+
+<span class="hljs-function">Titik <span class="hljs-title">geser</span><span class="hljs-params">(Titik p, <span class="hljs-type">int</span> dx, <span class="hljs-type">int</span> dy)</span> </span>{
+    Titik hasil;
+    hasil.x = p.x + ________________;
+    hasil.y = ________________________;
+    <span class="hljs-keyword">return</span> ________________;
+}
+</code></pre>
+<p>Jika <code>p</code> berisi <code>(1, 2)</code>, maka <code>geser(p, 3, -1)</code> menghasilkan titik: ( ______ , ______ )</p>
+<hr>
+<h2 id="bagian-d-merancang-struktur-data-abstrak-skor-15">Bagian D. Merancang Struktur Data Abstrak (Skor 15)</h2>
+<p>Rancang ADT <strong>PersegiPanjang</strong> yang menyimpan panjang dan lebar.</p>
+<p><strong>D1.</strong> Tuliskan deklarasi <code>struct PersegiPanjang</code>. (5)</p>
+<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">PersegiPanjang</span> {
+
+
+
+};
+</code></pre>
+<p><strong>D2.</strong> Tentukan dua operasi yang dapat dilakukan pada ADT tersebut. (10)</p>
+<table>
+<thead>
+<tr>
+<th>Nama operasi</th>
+<th>Parameter</th>
+<th>Tipe kembalian</th>
+<th>Tugas operasi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+
+</div>
+</body>
+</html>
