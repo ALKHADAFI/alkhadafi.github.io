@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ringkasan materi pemrograman Python: tipe data, list, tuple, dictionary, operator, perulangan, percabangan, dan fungsi.">
+  <meta name="theme-color" content="#102a43">
+  <title>Ringkasan Materi Pemrograman Python</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #102a43;
+      --muted: #5d7184;
+      --blue: #2457d6;
+      --blue-dark: #173f9e;
+      --paper: #f5f8fc;
+      --line: #e1e9f1;
+      --white: #fff;
+      --shadow: 0 18px 50px rgba(16, 42, 67, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    a { color: inherit; }
+    .site-header { position: relative; z-index: 2; background: rgba(255,255,255,.94); border-bottom: 1px solid rgba(225,233,241,.9); }
+    .nav-wrap { width: min(1120px, calc(100% - 40px)); min-height: 76px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; font-weight: 800; letter-spacing: -.03em; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: white; background: var(--blue); font-size: 15px; letter-spacing: -.04em; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { color: #41586d; text-decoration: none; font-size: .9rem; font-weight: 700; transition: color .18s ease; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+    .nav-links .home-link { padding: 9px 14px; border-radius: 999px; color: white; background: var(--ink); }
+    .nav-links .home-link:hover { color: white; background: var(--blue); }
+    .hero { position: relative; overflow: hidden; color: white; background: linear-gradient(135deg, #102a43 0%, #153b62 56%, #2457d6 100%); }
+    .hero::after { content: ""; position: absolute; width: 520px; height: 520px; right: -145px; top: -355px; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; box-shadow: 0 0 0 85px rgba(255,255,255,.025), 0 0 0 170px rgba(255,255,255,.02); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; width: min(1120px, calc(100% - 40px)); margin: auto; padding: 54px 0 59px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 14px; color: #bfe8dc; font-size: .75rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 2px; background: #87dfc2; }
+    h1 { max-width: 850px; margin: 0; font-size: clamp(2rem, 4.4vw, 3.6rem); line-height: 1.08; letter-spacing: -.055em; }
+    .hero-copy { max-width: 680px; margin: 15px 0 22px; color: #d8e6f4; font-size: 1rem; }
+    .button { display: inline-flex; min-height: 43px; align-items: center; justify-content: center; gap: 9px; padding: 10px 16px; border: 1px solid rgba(255,255,255,.38); border-radius: 11px; color: white; background: rgba(255,255,255,.07); font-size: .88rem; font-weight: 750; text-decoration: none; transition: transform .18s ease, background .18s ease; }
+    .button:hover { transform: translateY(-2px); background: rgba(255,255,255,.16); }
+    .content-wrap { width: min(940px, calc(100% - 40px)); margin: 38px auto 68px; }
+    .article-meta { display: flex; align-items: center; gap: 9px; margin: 0 0 13px; color: var(--muted); font-size: .8rem; font-weight: 700; }
+    .article-meta span { padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: white; }
+    .markdown-preview { overflow-wrap: anywhere; word-break: break-word; padding: clamp(22px, 4vw, 42px); border: 1px solid var(--line); border-radius: 20px; background: var(--white); box-shadow: var(--shadow); }
+    .markdown-preview h2 { margin: 1.9rem 0 .8rem; color: var(--ink); font-size: clamp(1.35rem, 2.7vw, 1.7rem); line-height: 1.3; letter-spacing: -.035em; scroll-margin-top: 20px; }
+    .markdown-preview h2:first-child { margin-top: 0; }
+    .markdown-preview h3 { margin: 1.4rem 0 .6rem; color: var(--ink); font-size: 1.2rem; line-height: 1.35; letter-spacing: -.02em; }
+    .markdown-preview h4 { margin: 1rem 0 .5rem; color: var(--ink); font-size: 1.05rem; }
+    .markdown-preview p { margin: 0 0 1rem; color: #3f556a; }
+    .markdown-preview a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .markdown-preview ul, .markdown-preview ol { margin: 0 0 1.15rem; padding-left: 1.5rem; color: #3f556a; }
+    .markdown-preview li { margin: .28rem 0; padding-left: .12rem; }
+    .markdown-preview li::marker { color: var(--blue); font-weight: 800; }
+    .markdown-preview blockquote { margin: 1.1rem 0; padding: 13px 17px; border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0; color: #344f68; background: #edf3ff; }
+    .markdown-preview blockquote p:last-child { margin-bottom: 0; }
+    .markdown-preview table { display: block; width: max-content; max-width: 100%; overflow-x: auto; margin: 1rem 0 1.5rem; border-collapse: collapse; border-spacing: 0; border-radius: 10px; }
+    .markdown-preview th, .markdown-preview td { min-width: 90px; padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; white-space: normal; }
+    .markdown-preview th { color: var(--ink); background: #edf3ff; font-size: .9rem; }
+    .markdown-preview td { color: #3f556a; }
+    .markdown-preview tr:nth-child(even) td { background: #fbfcfe; }
+    .markdown-preview hr { height: 1px; margin: 1.7rem 0; border: 0; background: var(--line); }
+    .markdown-preview code { padding: .15rem .38rem; border: 1px solid #e2eaf7; border-radius: 6px; color: #173f9e; background: #f0f5ff; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+    .markdown-preview pre { max-width: 100%; overflow-x: auto; margin: 1rem 0 1.4rem; padding: 17px 19px; border: 1px solid var(--line); border-radius: 12px; background: #f6f8fc; line-height: 1.55; }
+    .markdown-preview pre code { padding: 0; border: 0; color: #253b52; background: transparent; font-size: .9rem; }
+    .markdown-preview img, .markdown-preview svg { max-width: 100%; height: auto; }
+    .markdown-preview sup a { padding: 0 .12rem; text-decoration: none; font-weight: 800; }
+    .site-footer { border-top: 1px solid var(--line); background: white; }
+    .footer-inner { display: flex; width: min(1120px, calc(100% - 40px)); min-height: 78px; align-items: center; justify-content: space-between; gap: 16px; margin: auto; color: var(--muted); font-size: .84rem; }
+    .footer-inner p { margin: 0; }
+    .footer-inner a { color: var(--blue); font-weight: 750; text-decoration: none; }
+    a:focus-visible { outline: 3px solid #f5b942; outline-offset: 4px; }
+    @media (max-width: 760px) {
+      .nav-wrap { min-height: 70px; gap: 14px; }
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: .82rem; }
+      .hero-inner { padding: 44px 0 48px; }
+    }
+    @media (max-width: 560px) {
+      .nav-wrap { width: min(100% - 28px, 1120px); flex-wrap: wrap; padding: 11px 0; }
+      .brand { font-size: .9rem; }
+      .brand-mark { width: 34px; height: 34px; }
+      .nav-links { width: 100%; justify-content: space-between; gap: 8px; padding-bottom: 4px; }
+      .nav-links a { font-size: .74rem; }
+      .nav-links .home-link { padding: 7px 9px; }
+      .hero-inner, .content-wrap, .footer-inner { width: min(100% - 28px, 1120px); }
+      .hero-inner { padding: 39px 0 43px; }
+      .content-wrap { margin: 24px auto 44px; }
+      .markdown-preview { padding: 21px 17px; border-radius: 15px; }
+      .markdown-preview table { width: 100%; }
+      .markdown-preview th, .markdown-preview td { min-width: 110px; padding: 8px 9px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding: 17px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="./index.html" aria-label="Kembali ke beranda Mamak Martani's Portofolio">
+        <span class="brand-mark" aria-hidden="true">MM</span>
+        <span>Mamak Martani</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigasi utama">
+        <a class="home-link" href="./index.html">Home</a>
+        <a href="./pemrograman-cpp.html">Pemrograman C++</a>
+        <a href="./python.html" aria-current="page">Pemrograman Python</a>
+        <a href="./aktivitas-siswa.html">Lembar Aktivitas</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="ringkasan-materi-pemrograman-python">
+    <div class="hero-inner">
+      <p class="eyebrow">Materi pemrograman · Python</p>
+      <h1 id="ringkasan-materi-pemrograman-python">Ringkasan Materi Pemrograman Python</h1>
+      <p class="hero-copy">Pelajari tipe data, list, tuple, dictionary, operator, perulangan, percabangan, dan fungsi melalui ringkasan materi berikut.</p>
+      <a class="button" href="./index.html"><span aria-hidden="true">←</span> Kembali ke halaman utama</a>
+    </div>
+  </section>
+
+  <main class="content-wrap">
+    <div class="article-meta"><span>Materi belajar</span><span>8 topik utama</span></div>
+    <article class="markdown-preview" aria-label="Materi Pemrograman Python">
+<h2 id="daftar-isi">Daftar Isi</h2>
+<ol>
+<li>Tipe Data</li>
+<li>List</li>
+<li>Tuple</li>
+<li>Dictionary</li>
+<li>Operator Aritmatika</li>
+<li>Perulangan (Looping)</li>
+<li>Percabangan (if–elif–else)</li>
+<li>Membuat Fungsi</li>
+</ol>
+<hr>
+<h2 id="1-tipe-data">1. Tipe Data</h2>
+<p>Setiap nilai di Python memiliki tipe. Tipe dapat dicek dengan <code>type()</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Tipe</th>
+<th>Nama</th>
+<th>Contoh</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int</code></td>
+<td>bilangan bulat</td>
+<td><code>25</code>, <code>-7</code></td>
+<td>tanpa pecahan</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>bilangan desimal</td>
+<td><code>3.14</code>, <code>-0.5</code></td>
+<td>memakai titik, bukan koma</td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td>teks (string)</td>
+<td><code>"Python"</code>, <code>'Halo'</code></td>
+<td>diapit tanda kutip</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td>logika</td>
+<td><code>True</code>, <code>False</code></td>
+<td>hanya dua nilai</td>
+</tr>
+<tr>
+<td><code>NoneType</code></td>
+<td>kosong</td>
+<td><code>None</code></td>
+<td>berarti "tidak ada nilai"</td>
+</tr>
+</tbody></table>
+<pre><code class="language-python hljs" data-highlighted="yes">umur = <span class="hljs-number">16</span>            <span class="hljs-comment"># int</span>
+tinggi = <span class="hljs-number">165.5</span>       <span class="hljs-comment"># float</span>
+nama = <span class="hljs-string">"Rani"</span>        <span class="hljs-comment"># str</span>
+lulus = <span class="hljs-literal">True</span>         <span class="hljs-comment"># bool</span>
+
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(umur))    <span class="hljs-comment"># &lt;class 'int'&gt;</span>
+</code></pre>
+<p><strong>Konversi tipe</strong></p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-built_in">int</span>(<span class="hljs-string">"25"</span>)      <span class="hljs-comment"># 25</span>
+<span class="hljs-built_in">float</span>(<span class="hljs-string">"3.14"</span>)  <span class="hljs-comment"># 3.14</span>
+<span class="hljs-built_in">str</span>(<span class="hljs-number">100</span>)       <span class="hljs-comment"># "100"</span>
+</code></pre>
+<p><strong>Catatan:</strong> fungsi <code>input()</code> selalu menghasilkan <code>str</code>, jadi ubah dulu dengan <code>int()</code> atau <code>float()</code> bila ingin menghitung.</p>
+<pre><code class="language-python hljs" data-highlighted="yes">umur = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">"Umur: "</span>))
+</code></pre>
+<hr>
+<h2 id="2-list">2. List</h2>
+<p>List adalah kumpulan data <strong>berurutan</strong> yang <strong>dapat diubah</strong> (<em>mutable</em>). Ditulis dengan tanda kurung siku <code>[ ]</code>.</p>
+<pre><code class="language-python hljs" data-highlighted="yes">buah = [<span class="hljs-string">"apel"</span>, <span class="hljs-string">"jeruk"</span>, <span class="hljs-string">"mangga"</span>]
+</code></pre>
+<p><strong>Indeks</strong> dimulai dari <code>0</code>; indeks negatif menghitung dari belakang.</p>
+<pre><code class="language-python hljs" data-highlighted="yes">buah[<span class="hljs-number">0</span>]     <span class="hljs-comment"># "apel"</span>
+buah[-<span class="hljs-number">1</span>]    <span class="hljs-comment"># "mangga"</span>
+buah[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>]   <span class="hljs-comment"># ["apel", "jeruk"]  (slicing: indeks 0 sampai 1)</span>
+</code></pre>
+<p><strong>Metode yang sering dipakai</strong></p>
+<table>
+<thead>
+<tr>
+<th>Perintah</th>
+<th>Fungsi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>buah.append("pisang")</code></td>
+<td>menambah di akhir</td>
+</tr>
+<tr>
+<td><code>buah.insert(1, "anggur")</code></td>
+<td>menyisipkan di indeks tertentu</td>
+</tr>
+<tr>
+<td><code>buah.remove("jeruk")</code></td>
+<td>menghapus berdasarkan nilai</td>
+</tr>
+<tr>
+<td><code>buah.pop()</code></td>
+<td>menghapus dan mengambil elemen terakhir</td>
+</tr>
+<tr>
+<td><code>buah.sort()</code></td>
+<td>mengurutkan</td>
+</tr>
+<tr>
+<td><code>len(buah)</code></td>
+<td>jumlah elemen</td>
+</tr>
+<tr>
+<td><code>"apel" in buah</code></td>
+<td>cek keanggotaan (<code>True</code>/<code>False</code>)</td>
+</tr>
+</tbody></table>
+<pre><code class="language-python hljs" data-highlighted="yes">buah[<span class="hljs-number">1</span>] = <span class="hljs-string">"melon"</span>   <span class="hljs-comment"># mengubah elemen (boleh, karena list mutable)</span>
+</code></pre>
+<hr>
+<h2 id="3-tuple">3. Tuple</h2>
+<p>Tuple mirip list, tetapi <strong>tidak dapat diubah</strong> (<em>immutable</em>). Ditulis dengan tanda kurung biasa <code>( )</code>.</p>
+<pre><code class="language-python hljs" data-highlighted="yes">titik = (<span class="hljs-number">3</span>, <span class="hljs-number">5</span>)
+hari = (<span class="hljs-string">"Senin"</span>, <span class="hljs-string">"Selasa"</span>, <span class="hljs-string">"Rabu"</span>)
+
+<span class="hljs-built_in">print</span>(titik[<span class="hljs-number">0</span>])      <span class="hljs-comment"># 3</span>
+<span class="hljs-comment"># titik[0] = 10      # ERROR: tuple tidak bisa diubah</span>
+</code></pre>
+<p><strong>Unpacking</strong> (memecah isi tuple ke beberapa variabel):</p>
+<pre><code class="language-python hljs" data-highlighted="yes">x, y = titik
+<span class="hljs-built_in">print</span>(x, y)          <span class="hljs-comment"># 3 5</span>
+</code></pre>
+<p>Gunakan tuple untuk data yang tidak boleh berubah, misalnya koordinat atau nama hari.</p>
+<hr>
+<h2 id="4-dictionary">4. Dictionary</h2>
+<p>Dictionary menyimpan data berpasangan <strong>kunci : nilai</strong> (<em>key : value</em>). Ditulis dengan kurung kurawal <code>{ }</code>. Kunci harus unik.</p>
+<pre><code class="language-python hljs" data-highlighted="yes">siswa = {<span class="hljs-string">"nama"</span>: <span class="hljs-string">"Rani"</span>, <span class="hljs-string">"kelas"</span>: <span class="hljs-string">"X"</span>, <span class="hljs-string">"nilai"</span>: <span class="hljs-number">88</span>}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Perintah</th>
+<th>Fungsi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>siswa["nama"]</code></td>
+<td>mengambil nilai berdasarkan kunci</td>
+</tr>
+<tr>
+<td><code>siswa.get("hobi", "-")</code></td>
+<td>mengambil nilai; jika kunci tidak ada, beri nilai cadangan</td>
+</tr>
+<tr>
+<td><code>siswa["nilai"] = 92</code></td>
+<td>mengubah nilai</td>
+</tr>
+<tr>
+<td><code>siswa["hobi"] = "membaca"</code></td>
+<td>menambah pasangan baru</td>
+</tr>
+<tr>
+<td><code>del siswa["kelas"]</code></td>
+<td>menghapus pasangan</td>
+</tr>
+<tr>
+<td><code>siswa.keys()</code></td>
+<td>semua kunci</td>
+</tr>
+<tr>
+<td><code>siswa.values()</code></td>
+<td>semua nilai</td>
+</tr>
+<tr>
+<td><code>siswa.items()</code></td>
+<td>semua pasangan (kunci, nilai)</td>
+</tr>
+<tr>
+<td><code>"nama" in siswa</code></td>
+<td>cek apakah kunci ada</td>
+</tr>
+</tbody></table>
+<p><strong>Menelusuri dictionary</strong></p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">for</span> kunci, nilai <span class="hljs-keyword">in</span> siswa.items():
+    <span class="hljs-built_in">print</span>(kunci, <span class="hljs-string">":"</span>, nilai)
+</code></pre>
+<hr>
+<h2 id="5-operator-aritmatika">5. Operator Aritmatika</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Nama</th>
+<th>Contoh</th>
+<th>Hasil</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+</code></td>
+<td>penjumlahan</td>
+<td><code>17 + 5</code></td>
+<td><code>22</code></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>pengurangan</td>
+<td><code>17 - 5</code></td>
+<td><code>12</code></td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>perkalian</td>
+<td><code>17 * 5</code></td>
+<td><code>85</code></td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>pembagian (hasil <code>float</code>)</td>
+<td><code>17 / 5</code></td>
+<td><code>3.4</code></td>
+</tr>
+<tr>
+<td><code>//</code></td>
+<td>pembagian bulat</td>
+<td><code>17 // 5</code></td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>sisa bagi (modulus)</td>
+<td><code>17 % 5</code></td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td><code>**</code></td>
+<td>pangkat</td>
+<td><code>2 ** 5</code></td>
+<td><code>32</code></td>
+</tr>
+</tbody></table>
+<p><strong>Urutan pengerjaan:</strong> tanda kurung <code>( )</code> → pangkat <code>**</code> → <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code> → <code>+</code>, <code>-</code>.</p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-built_in">print</span>(<span class="hljs-number">2</span> + <span class="hljs-number">3</span> * <span class="hljs-number">4</span>)     <span class="hljs-comment"># 14</span>
+<span class="hljs-built_in">print</span>((<span class="hljs-number">2</span> + <span class="hljs-number">3</span>) * <span class="hljs-number">4</span>)   <span class="hljs-comment"># 20</span>
+</code></pre>
+<p><strong>Operator penugasan:</strong> <code>x += 5</code> sama dengan <code>x = x + 5</code> (berlaku juga untuk <code>-=</code>, <code>*=</code>, <code>/=</code>).</p>
+<p><strong>Operator perbandingan</strong> (hasilnya <code>True</code>/<code>False</code>): <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>.</p>
+<p><strong>Operator logika:</strong> <code>and</code> (keduanya benar), <code>or</code> (salah satu benar), <code>not</code> (kebalikan).</p>
+<p><strong>Contoh penggunaan <code>%</code>:</strong> bilangan genap jika <code>n % 2 == 0</code>.</p>
+<hr>
+<h2 id="6-perulangan-looping">6. Perulangan (Looping)</h2>
+<h3 id="perulangan-while">Perulangan <code>while</code></h3>
+<p>Berulang <strong>selama kondisi bernilai <code>True</code></strong>. Jangan lupa mengubah variabel kondisi agar tidak berulang tanpa henti.</p>
+<pre><code class="language-python hljs" data-highlighted="yes">angka = <span class="hljs-number">1</span>
+<span class="hljs-keyword">while</span> angka &lt;= <span class="hljs-number">5</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Angka ke-"</span>, angka)
+    angka += <span class="hljs-number">1</span>
+</code></pre>
+<h3 id="perulangan-for">Perulangan <code>for</code></h3>
+<p>Berulang untuk setiap elemen dalam sebuah urutan (list, tuple, string, <code>range</code>).</p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> [<span class="hljs-string">"apel"</span>, <span class="hljs-string">"jeruk"</span>, <span class="hljs-string">"mangga"</span>]:
+    <span class="hljs-built_in">print</span>(b)
+</code></pre>
+<h3 id="fungsi-range">Fungsi <code>range()</code></h3>
+<table>
+<thead>
+<tr>
+<th>Bentuk</th>
+<th>Menghasilkan</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>range(5)</code></td>
+<td>0, 1, 2, 3, 4</td>
+</tr>
+<tr>
+<td><code>range(1, 6)</code></td>
+<td>1, 2, 3, 4, 5</td>
+</tr>
+<tr>
+<td><code>range(2, 11, 2)</code></td>
+<td>2, 4, 6, 8, 10 (loncat 2)</td>
+</tr>
+</tbody></table>
+<pre><code class="language-python hljs" data-highlighted="yes">total = <span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>):
+    total += i
+<span class="hljs-built_in">print</span>(total)         <span class="hljs-comment"># 15</span>
+</code></pre>
+<h3 id="break-dan-continue"><code>break</code> dan <code>continue</code></h3>
+<ul>
+<li><code>break</code> menghentikan perulangan sepenuhnya.</li>
+<li><code>continue</code> melewati sisa isi perulangan dan lanjut ke putaran berikutnya.</li>
+</ul>
+<h3 id="perulangan-bersarang-nested-loop">Perulangan bersarang (<em>nested loop</em>)</h3>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">for</span> baris <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>):
+    <span class="hljs-keyword">for</span> kolom <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>):
+        <span class="hljs-built_in">print</span>(baris * kolom, end=<span class="hljs-string">" "</span>)
+    <span class="hljs-built_in">print</span>()
+</code></pre>
+<hr>
+<h2 id="7-percabangan-ifelifelse">7. Percabangan (if–elif–else)</h2>
+<p>Program memilih blok kode berdasarkan kondisi. <strong>Indentasi</strong> (menjorok 4 spasi) wajib.</p>
+<pre><code class="language-python hljs" data-highlighted="yes">nilai = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">"Masukkan nilai: "</span>))
+
+<span class="hljs-keyword">if</span> nilai &gt;= <span class="hljs-number">85</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Predikat A"</span>)
+<span class="hljs-keyword">elif</span> nilai &gt;= <span class="hljs-number">70</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Predikat B"</span>)
+<span class="hljs-keyword">elif</span> nilai &gt;= <span class="hljs-number">55</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Predikat C"</span>)
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Predikat D"</span>)
+</code></pre>
+<p><strong>Aturan penting</strong></p>
+<ul>
+<li>Kondisi diperiksa dari atas ke bawah; blok pertama yang benar dijalankan, sisanya dilewati.</li>
+<li><code>elif</code> dan <code>else</code> bersifat opsional; <code>else</code> tidak memiliki kondisi.</li>
+<li>Setelah kondisi diakhiri tanda titik dua <code>:</code>.</li>
+<li>Kondisi dapat digabung: <code>if umur &gt;= 17 and punya_ktp:</code>.</li>
+</ul>
+<p><strong>Contoh genap atau ganjil</strong></p>
+<pre><code class="language-python hljs" data-highlighted="yes">n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">"Bilangan: "</span>))
+<span class="hljs-keyword">if</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Genap"</span>)
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Ganjil"</span>)
+</code></pre>
+<hr>
+<h2 id="8-membuat-fungsi">8. Membuat Fungsi</h2>
+<p>Fungsi adalah blok kode bernama yang dapat dipakai berulang kali. Dibuat dengan <code>def</code>.</p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">def</span> <span class="hljs-title function_">luas_persegi_panjang</span>(<span class="hljs-params">p, l</span>):
+    <span class="hljs-keyword">return</span> p * l
+
+hasil = luas_persegi_panjang(<span class="hljs-number">8</span>, <span class="hljs-number">5</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">"Luas ="</span>, hasil)     <span class="hljs-comment"># Luas = 40</span>
+</code></pre>
+<p><strong>Istilah penting</strong></p>
+<table>
+<thead>
+<tr>
+<th>Istilah</th>
+<th>Arti</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>parameter</td>
+<td>variabel di dalam kurung saat fungsi dibuat (<code>p</code>, <code>l</code>)</td>
+</tr>
+<tr>
+<td>argumen</td>
+<td>nilai yang dikirim saat fungsi dipanggil (<code>8</code>, <code>5</code>)</td>
+</tr>
+<tr>
+<td><code>return</code></td>
+<td>mengembalikan hasil dan mengakhiri fungsi</td>
+</tr>
+</tbody></table>
+<p><strong>Fungsi tanpa <code>return</code></strong> hanya menjalankan perintah (misalnya mencetak):</p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sapa</span>(<span class="hljs-params">nama</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Halo,"</span>, nama)
+
+sapa(<span class="hljs-string">"Rani"</span>)
+</code></pre>
+<p><strong>Parameter dengan nilai bawaan (<em>default</em>)</strong></p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">def</span> <span class="hljs-title function_">pangkat</span>(<span class="hljs-params">a, n=<span class="hljs-number">2</span></span>):
+    <span class="hljs-keyword">return</span> a ** n
+
+pangkat(<span class="hljs-number">5</span>)       <span class="hljs-comment"># 25</span>
+pangkat(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>)    <span class="hljs-comment"># 32</span>
+</code></pre>
+<p><strong>Mengembalikan beberapa nilai</strong> (dikembalikan sebagai tuple):</p>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">def</span> <span class="hljs-title function_">min_maks</span>(<span class="hljs-params">data</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(data), <span class="hljs-built_in">max</span>(data)
+
+kecil, besar = min_maks([<span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">2</span>, <span class="hljs-number">7</span>])
+</code></pre>
+<p><strong>Ruang lingkup variabel:</strong> variabel yang dibuat di dalam fungsi hanya berlaku di dalam fungsi itu (<em>lokal</em>).</p>
+<hr>
+<h2 id="perbandingan-list-tuple-dan-dictionary">Perbandingan List, Tuple, dan Dictionary</h2>
+<table>
+<thead>
+<tr>
+<th>Ciri</th>
+<th>List</th>
+<th>Tuple</th>
+<th>Dictionary</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tanda</td>
+<td><code>[ ]</code></td>
+<td><code>( )</code></td>
+<td><code>{ }</code></td>
+</tr>
+<tr>
+<td>Berurutan</td>
+<td>ya</td>
+<td>ya</td>
+<td>ya (berdasarkan urutan masuk)</td>
+</tr>
+<tr>
+<td>Dapat diubah</td>
+<td>ya</td>
+<td>tidak</td>
+<td>ya</td>
+</tr>
+<tr>
+<td>Akses data</td>
+<td>dengan indeks</td>
+<td>dengan indeks</td>
+<td>dengan kunci</td>
+</tr>
+<tr>
+<td>Cocok untuk</td>
+<td>daftar yang berubah</td>
+<td>data tetap</td>
+<td>data berpasangan</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="contoh-gabungan-pengelola-nilai-siswa">Contoh Gabungan: Pengelola Nilai Siswa</h2>
+<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">def</span> <span class="hljs-title function_">predikat</span>(<span class="hljs-params">nilai</span>):
+    <span class="hljs-keyword">if</span> nilai &gt;= <span class="hljs-number">85</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"A"</span>
+    <span class="hljs-keyword">elif</span> nilai &gt;= <span class="hljs-number">70</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"B"</span>
+    <span class="hljs-keyword">elif</span> nilai &gt;= <span class="hljs-number">55</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"C"</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"D"</span>
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">rata_rata</span>(<span class="hljs-params">data</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(data.values()) / <span class="hljs-built_in">len</span>(data)
+
+nilai_siswa = {}
+jumlah = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">"Jumlah siswa: "</span>))
+
+i = <span class="hljs-number">1</span>
+<span class="hljs-keyword">while</span> i &lt;= jumlah:
+    nama = <span class="hljs-built_in">input</span>(<span class="hljs-string">"Nama: "</span>)
+    nilai_siswa[nama] = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">"Nilai: "</span>))
+    i += <span class="hljs-number">1</span>
+
+<span class="hljs-keyword">for</span> nama, nilai <span class="hljs-keyword">in</span> nilai_siswa.items():
+    <span class="hljs-built_in">print</span>(nama, <span class="hljs-string">":"</span>, nilai, <span class="hljs-string">"("</span> + predikat(nilai) + <span class="hljs-string">")"</span>)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">"Rata-rata kelas ="</span>, rata_rata(nilai_siswa))
+</code></pre>
+<hr>
+<h2 id="kesalahan-umum">Kesalahan Umum</h2>
+<table>
+<thead>
+<tr>
+<th>Pesan error</th>
+<th>Penyebab umum</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IndentationError</code></td>
+<td>indentasi tidak konsisten atau lupa menjorok</td>
+</tr>
+<tr>
+<td><code>SyntaxError</code></td>
+<td>lupa tanda <code>:</code> atau tanda kutip/kurung tidak berpasangan</td>
+</tr>
+<tr>
+<td><code>NameError</code></td>
+<td>memakai variabel atau fungsi yang belum dibuat</td>
+</tr>
+<tr>
+<td><code>TypeError</code></td>
+<td>operasi antartipe tidak cocok, misalnya <code>"5" + 3</code></td>
+</tr>
+<tr>
+<td><code>IndexError</code></td>
+<td>indeks list melebihi jumlah elemen</td>
+</tr>
+<tr>
+<td><code>KeyError</code></td>
+<td>kunci tidak ada di dictionary (gunakan <code>.get()</code>)</td>
+</tr>
+<tr>
+<td><code>ZeroDivisionError</code></td>
+<td>membagi dengan nol</td>
+</tr>
+</tbody></table>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© Mamak Martani · Materi Pemrograman Python</p>
+      <p><a href="./index.html">Kembali ke beranda</a></p>
+    </div>
+  </footer>
+</body>
+</html>
