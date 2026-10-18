@@ -1,511 +1,203 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Materi Struktur Data Abstrak (ADT) dengan struct di C++</title>
-<meta name="description" content="Materi belajar struktur data abstrak dan struct di C++ untuk siswa." />
-<style>
-* { box-sizing: border-box; }
-body {
-    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    color: #1f2937;
-    background: #ffffff;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2.5rem 1.25rem;
-}
-.markdown-preview { overflow-wrap: anywhere; word-break: break-word; }
-.markdown-preview h1 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; margin-top: 1.5rem; line-height: 1.25; color: #111827; }
-.markdown-preview h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; margin-top: 1.25rem; line-height: 1.3; color: #111827; }
-.markdown-preview h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; margin-top: 1rem; line-height: 1.35; color: #111827; }
-.markdown-preview h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 0.75rem; color: #111827; }
-.markdown-preview p { margin-bottom: 1rem; line-height: 1.6; }
-.markdown-preview a { color: #059669; text-decoration: underline; }
-.markdown-preview ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
-.markdown-preview ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1rem; }
-.markdown-preview li { margin-bottom: 0.25rem; }
-.markdown-preview blockquote { border-left: 4px solid #059669; padding-left: 1rem; margin: 1rem 0; color: inherit; opacity: 0.85; font-style: italic; }
-.markdown-preview table { display: block; width: max-content; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin-bottom: 1rem; }
-.markdown-preview th, .markdown-preview td { border: 1px solid rgba(0, 0, 0, 0.1); padding: 0.4rem 0.6rem; text-align: left; white-space: nowrap; }
-.markdown-preview th { background-color: rgba(0, 0, 0, 0.05); font-weight: 600; }
-.markdown-preview img { max-width: 100%; height: auto; border-radius: 0.75rem; }
-.markdown-preview hr { border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); margin: 1.5rem 0; }
-.markdown-preview code { font-family: ui-monospace, Menlo, Monaco, Consolas, monospace; background: rgba(0, 0, 0, 0.06); padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; color: #24292f; }
-.markdown-preview pre { background: #f6f8fa; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; border: 1px solid rgba(0, 0, 0, 0.08); margin-bottom: 1rem; max-width: 100%; }
-.markdown-preview pre code { background: transparent; padding: 0; color: #24292f; font-size: 0.9em; }
-.markdown-preview pre code.hljs { background: transparent; }
-.markdown-preview .md-alert { border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1rem; border: 1px solid; }
-.markdown-preview .md-alert-title { font-weight: bold; text-transform: capitalize; margin-bottom: 0.5rem; }
-.markdown-preview .md-alert-body p:last-child { margin-bottom: 0; }
-.markdown-preview .md-alert-success { background: #ecfdf5; border-color: #059669; color: #065f46; }
-.markdown-preview .md-alert-danger { background: #fef2f2; border-color: #ef4444; color: #991b1b; }
-.markdown-preview .md-alert-info { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
-.markdown-preview .md-alert-warning { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
-.markdown-preview .md-toc { padding: 1rem 1.25rem; background: #f9fafb; border-radius: 0.75rem; border: 1px solid #e5e7eb; margin-bottom: 1.5rem; }
-.markdown-preview .md-toc h4 { font-weight: bold; margin-bottom: 0.5rem; font-size: 1rem; margin-top: 0; }
-.markdown-preview .md-toc ul { list-style: none; padding-left: 0; margin-bottom: 0; }
-.markdown-preview .md-toc li { margin-bottom: 0.25rem; }
-.markdown-preview .md-toc a { color: #059669; text-decoration: none; font-weight: 500; }
-.markdown-preview .md-toc a:hover { text-decoration: underline; }
-.markdown-preview .mermaid { display: flex; justify-content: center; margin: 1.5rem 0; overflow-x: auto; background: transparent; }
-.markdown-preview .mermaid svg { max-width: 100%; height: auto; }
-.markdown-preview .footnotes { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(0, 0, 0, 0.1); font-size: 0.9em; opacity: 0.9; }
-.markdown-preview .footnotes ol { padding-left: 1.25rem; }
-.markdown-preview .footnote-backref { margin-left: 0.25rem; text-decoration: none; color: #059669; font-weight: bold; }
-.markdown-preview sup a { color: #059669; text-decoration: none; font-weight: bold; padding: 0 0.15rem; }
-.markdown-preview sup a:hover { text-decoration: underline; }
-
-.site-pages{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}.site-pages a{display:inline-block;padding:10px 15px;border-radius:8px;background:#047857;color:#fff!important;text-decoration:none!important;font-weight:600}.site-pages a:hover{background:#065f46}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Beranda Mamak Martani's Portofolio — akses ke materi dan aktivitas pemrograman C++, Python, serta portofolio.">
+  <meta name="theme-color" content="#102a43">
+  <title>Mamak Martani's Portofolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #102a43;
+      --muted: #5d7184;
+      --blue: #2457d6;
+      --blue-dark: #173f9e;
+      --mint: #d9f4e9;
+      --paper: #f5f8fc;
+      --line: #e1e9f1;
+      --white: #fff;
+      --shadow: 0 18px 50px rgba(16, 42, 67, .09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .site-header { position: relative; z-index: 2; background: rgba(255,255,255,.9); border-bottom: 1px solid rgba(225,233,241,.9); }
+    .nav-wrap { width: min(1120px, calc(100% - 40px)); min-height: 76px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: white; background: var(--blue); font-size: 15px; letter-spacing: -.04em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: #41586d; text-decoration: none; font-size: .93rem; font-weight: 650; transition: color .18s ease; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links .nav-cta { color: white; background: var(--ink); padding: 10px 16px; border-radius: 999px; }
+    .nav-links .nav-cta:hover { color: white; background: var(--blue); }
+    .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #102a43 0%, #153b62 56%, #2457d6 100%); color: white; }
+    .hero::before, .hero::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; pointer-events: none; }
+    .hero::before { width: 430px; height: 430px; right: -70px; top: -245px; }
+    .hero::after { width: 620px; height: 620px; right: -165px; top: -330px; }
+    .hero-inner { position: relative; z-index: 1; width: min(1120px, calc(100% - 40px)); margin: auto; padding: 84px 0 92px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 22px; color: #bfe8dc; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 2px; background: #87dfc2; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2.7rem, 6.2vw, 5.3rem); line-height: 1.03; letter-spacing: -.065em; }
+    .hero-copy { max-width: 620px; margin: 24px 0 32px; color: #d8e6f4; font-size: clamp(1rem, 2vw, 1.15rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 12px 19px; border: 1px solid transparent; border-radius: 12px; font-size: .94rem; font-weight: 750; text-decoration: none; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-light { color: var(--ink); background: white; }
+    .button-light:hover { background: #e9f2ff; }
+    .button-outline { color: white; border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.06); }
+    .button-outline:hover { border-color: white; background: rgba(255,255,255,.13); }
+    .main { width: min(1120px, calc(100% - 40px)); margin: auto; padding: 64px 0 76px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 25px; }
+    .section-kicker { margin: 0 0 8px; color: var(--blue); font-size: .76rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(1.75rem, 3vw, 2.3rem); line-height: 1.15; letter-spacing: -.045em; }
+    .section-intro { max-width: 430px; margin: 0; color: var(--muted); font-size: .96rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .card { display: flex; min-height: 325px; flex-direction: column; padding: 25px; border: 1px solid var(--line); border-radius: 20px; background: var(--white); box-shadow: 0 7px 25px rgba(16,42,67,.035); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .card:hover { transform: translateY(-4px); border-color: #c8d7e8; box-shadow: var(--shadow); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .icon { display: grid; width: 50px; height: 50px; place-items: center; border-radius: 15px; color: var(--blue); background: #edf3ff; font-size: 1.35rem; font-weight: 850; }
+    .icon-python { color: #94640a; background: #fff4d5; }
+    .icon-work { color: #14805c; background: var(--mint); }
+    .status { display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 999px; color: #52677a; background: #f1f5f9; font-size: .7rem; font-weight: 800; white-space: nowrap; }
+    .card h3 { margin: 23px 0 9px; font-size: 1.3rem; letter-spacing: -.035em; }
+    .card p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .card-links { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: auto; padding-top: 25px; }
+    .text-link { display: inline-flex; align-items: center; gap: 7px; color: var(--blue); font-size: .88rem; font-weight: 800; text-decoration: none; }
+    .text-link::after { content: "↗"; font-size: 1rem; transition: transform .18s ease; }
+    .text-link:hover::after { transform: translate(2px, -2px); }
+    .activity-link { color: #14805c; }
+    .note { display: flex; align-items: flex-start; gap: 13px; margin-top: 24px; padding: 16px 18px; border: 1px solid #c8eadb; border-radius: 14px; color: #235944; background: #effaf5; font-size: .9rem; }
+    .note strong { white-space: nowrap; }
+    .site-footer { border-top: 1px solid var(--line); background: white; }
+    .footer-inner { display: flex; width: min(1120px, calc(100% - 40px)); min-height: 80px; align-items: center; justify-content: space-between; gap: 16px; margin: auto; color: var(--muted); font-size: .84rem; }
+    .footer-inner p { margin: 0; }
+    .footer-inner a { color: var(--blue); font-weight: 700; text-decoration: none; }
+    a:focus-visible { outline: 3px solid #f5b942; outline-offset: 4px; }
+    @media (max-width: 780px) {
+      .nav-wrap { min-height: 68px; }
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: .85rem; }
+      .nav-links .nav-cta { padding: 8px 12px; }
+      .hero-inner { padding: 68px 0 74px; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .card:last-child { grid-column: 1 / -1; min-height: 270px; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 540px) {
+      .nav-wrap { width: min(100% - 28px, 1120px); flex-wrap: wrap; padding: 12px 0; }
+      .brand { font-size: .92rem; }
+      .brand-mark { width: 34px; height: 34px; }
+      .nav-links { width: 100%; justify-content: space-between; gap: 8px; }
+      .nav-links a { font-size: .78rem; }
+      .nav-links .nav-cta { padding: 7px 10px; }
+      .hero-inner, .main, .footer-inner { width: min(100% - 28px, 1120px); }
+      .hero-inner { padding: 57px 0 64px; }
+      .main { padding: 48px 0 56px; }
+      .cards { grid-template-columns: 1fr; }
+      .card, .card:last-child { grid-column: auto; min-height: 275px; }
+      .note { flex-direction: column; gap: 3px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding: 17px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
-<div class="markdown-preview">
-<nav class="site-pages" aria-label="Navigasi halaman"><a href="./aktivitas-siswa.html">Buka Lembar Aktivitas Siswa</a></nav>
-<h1 id="materi-struktur-data-abstrak-menggunakan-struct-di-c">Materi: Struktur Data Abstrak Menggunakan <code>struct</code> di C++</h1>
-<p>Materi ini membantu kamu mengerjakan <strong>Lembar Kerja Siswa: Struktur Data Abstrak Menggunakan <code>struct</code></strong>. Bacalah dari awal sampai akhir, lalu kerjakan lembar kerjanya. Contoh program di sini sengaja dibuat berbeda dari soal, supaya kamu belajar caranya, bukan menghafal jawabannya.</p>
-<table>
-<thead>
-<tr>
-<th>Bagian lembar kerja</th>
-<th>Dibahas pada materi</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A. Isian singkat</td>
-<td>Bagian 1 sampai 4</td>
-</tr>
-<tr>
-<td>B1. Menyalin <code>struct</code></td>
-<td>Bagian 6</td>
-</tr>
-<tr>
-<td>B2 dan C2. <code>struct</code> pada fungsi</td>
-<td>Bagian 7 dan 8</td>
-</tr>
-<tr>
-<td>C1. Membuat <code>struct</code></td>
-<td>Bagian 3 dan 4</td>
-</tr>
-<tr>
-<td>D. Merancang ADT</td>
-<td>Bagian 9</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="1-mengapa-kita-butuh-struct">1. Mengapa Kita Butuh <code>struct</code>?</h2>
-<p>Bayangkan kita ingin menyimpan data satu siswa: nama dan nilai. Dengan variabel biasa, kodenya seperti ini:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes">string nama1 = <span class="hljs-string">"Ani"</span>;
-<span class="hljs-type">int</span> nilai1 = <span class="hljs-number">80</span>;
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="./index.html" aria-label="Beranda Mamak Martani's Portofolio">
+        <span class="brand-mark" aria-hidden="true">MM</span>
+        <span>Mamak Martani</span>
+      </a>
+      <nav class="nav-links" aria-label="Menu utama">
+        <a href="./pemrograman-cpp.html">Pemrograman C++</a>
+        <a href="./python.html">Pemrograman Python</a>
+        <a class="nav-cta" href="./portofolio.html">Portofolio</a>
+      </nav>
+    </div>
+  </header>
 
-string nama2 = <span class="hljs-string">"Budi"</span>;
-<span class="hljs-type">int</span> nilai2 = <span class="hljs-number">75</span>;
-</code></pre>
-<p>Untuk 2 siswa saja sudah ada 4 variabel yang terpisah. Bagaimana kalau ada 30 siswa? Akan ada 60 variabel, dan kita mudah salah mencocokkan <code>nama7</code> dengan <code>nilai7</code>.</p>
-<p>Masalahnya: <strong>nama dan nilai milik satu siswa seharusnya disimpan bersama</strong>, seperti satu kartu data siswa yang berisi beberapa kolom.</p>
-<p>C++ menyediakan <code>struct</code> untuk keperluan ini.</p>
-<blockquote>
-<p><strong><code>struct</code> adalah cara membuat tipe data baru dengan menggabungkan beberapa data (yang boleh berbeda tipe) ke dalam satu kesatuan.</strong></p>
-</blockquote>
-<hr>
-<h2 id="2-apa-itu-struktur-data-abstrak-adt">2. Apa Itu Struktur Data Abstrak (ADT)?</h2>
-<p><strong>ADT</strong> adalah singkatan dari <em>Abstract Data Type</em>, atau <strong>Tipe Data Abstrak</strong>.</p>
-<p>Kata "abstrak" artinya kita fokus pada <strong>apa</strong> yang disimpan dan <strong>apa</strong> yang bisa dilakukan, bukan pada bagaimana komputer menyimpannya di memori.</p>
-<p>Contoh dari kehidupan sehari-hari: <strong>remote TV</strong>.</p>
-<ul>
-<li>Remote punya tombol (volume, ganti saluran, nyala/mati). Itu adalah <strong>operasi</strong> yang bisa kita lakukan.</li>
-<li>Kita tidak perlu tahu rangkaian elektronik di dalamnya. Kita cukup tahu cara memakainya.</li>
-</ul>
-<p>Sebuah ADT selalu terdiri dari <strong>dua bagian</strong>:</p>
-<table>
-<thead>
-<tr>
-<th>Bagian</th>
-<th>Artinya</th>
-<th>Di C++ ditulis dengan</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Data</strong> (representasi)</td>
-<td>Apa saja yang disimpan</td>
-<td><code>struct</code></td>
-</tr>
-<tr>
-<td><strong>Operasi</strong></td>
-<td>Apa saja yang dapat dilakukan pada data itu</td>
-<td>fungsi atau prosedur</td>
-</tr>
-</tbody></table>
-<p>Contoh ADT <strong>Waktu</strong>:</p>
-<ul>
-<li>Data: <code>jam</code> dan <code>menit</code></li>
-<li>Operasi: menambah menit, menampilkan waktu, membandingkan dua waktu</li>
-</ul>
-<hr>
-<h2 id="3-cara-membuat-struct">3. Cara Membuat <code>struct</code></h2>
-<p>Bentuk umumnya:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">NamaTipe</span> {
-    tipe1 anggota1;
-    tipe2 anggota2;
-    <span class="hljs-comment">// ... dan seterusnya</span>
-};
-</code></pre>
-<p>Contoh: ADT untuk waktu.</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Waktu</span> {
-    <span class="hljs-type">int</span> jam;
-    <span class="hljs-type">int</span> menit;
-};
-</code></pre>
-<p>Mari bedah satu per satu:</p>
-<table>
-<thead>
-<tr>
-<th>Bagian</th>
-<th>Penjelasan</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>struct</code></td>
-<td>Kata kunci untuk membuat tipe data baru</td>
-</tr>
-<tr>
-<td><code>Waktu</code></td>
-<td>Nama tipe baru yang kita buat (bebas, awali dengan huruf besar agar mudah dibedakan)</td>
-</tr>
-<tr>
-<td><code>jam</code>, <code>menit</code></td>
-<td><strong>Anggota</strong> (<em>field</em>): data yang dimiliki oleh <code>Waktu</code></td>
-</tr>
-<tr>
-<td><code>;</code> setelah <code>}</code></td>
-<td><strong>Wajib ada.</strong> Lupa titik koma ini adalah kesalahan yang sangat sering terjadi</td>
-</tr>
-</tbody></table>
-<p>Penting dipahami: menulis <code>struct Waktu { ... };</code> <strong>belum membuat variabel apa pun</strong>. Kita baru membuat "cetakan" atau rancangan tipe data. Ibarat denah rumah: denah sudah ada, tetapi rumahnya belum dibangun.</p>
-<hr>
-<h2 id="4-membuat-variabel-dan-mengakses-anggotanya">4. Membuat Variabel dan Mengakses Anggotanya</h2>
-<p>Setelah tipe dibuat, kita bisa membuat variabel dari tipe itu, sama seperti membuat variabel <code>int</code>.</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes">Waktu w1;        <span class="hljs-comment">// membuat variabel w1 bertipe Waktu</span>
-</code></pre>
-<p>Untuk mengisi atau membaca anggota, gunakan <strong>operator titik</strong> (<code>.</code>):</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes">w1.jam = <span class="hljs-number">7</span>;
-w1.menit = <span class="hljs-number">30</span>;
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-inner">
+      <p class="eyebrow">Ruang belajar & berkarya</p>
+      <h1 id="page-title">Mamak Martani's Portofolio</h1>
+      <p class="hero-copy">Jelajahi materi pemrograman, aktivitas belajar, dan karya dalam satu tempat.</p>
+      <div class="hero-actions">
+        <a class="button button-light" href="#program">Jelajahi menu <span aria-hidden="true">↓</span></a>
+        <a class="button button-outline" href="./portofolio.html">Lihat portofolio <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
 
-cout &lt;&lt; w1.jam &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; w1.menit;   <span class="hljs-comment">// mencetak 7:30</span>
-</code></pre>
-<p>Cara membacanya: <code>w1.jam</code> artinya "anggota <code>jam</code> milik variabel <code>w1</code>".</p>
-<p>Satu <code>struct</code> dapat dipakai untuk membuat banyak variabel, dan masing-masing punya data sendiri:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes">Waktu berangkat, pulang;
+  <main class="main" id="program">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Pilih tujuan</p>
+        <h2>Belajar dan berkarya</h2>
+      </div>
+      <p class="section-intro">Gunakan menu berikut untuk membuka materi pemrograman, mengerjakan aktivitas siswa, atau melihat portofolio.</p>
+    </div>
 
-berangkat.jam = <span class="hljs-number">6</span>;
-berangkat.menit = <span class="hljs-number">45</span>;
+    <div class="cards">
+      <article class="card">
+        <div class="card-top">
+          <span class="icon" aria-hidden="true">C++</span>
+          <span class="status">Materi & aktivitas</span>
+        </div>
+        <h3>Pemrograman C++</h3>
+        <p>Pelajari materi C++ dan lanjutkan dengan lembar aktivitas siswa tentang struktur data abstrak menggunakan <code>struct</code>.</p>
+        <div class="card-links">
+          <a class="text-link" href="./pemrograman-cpp.html">Buka materi C++</a>
+          <a class="text-link activity-link" href="./aktivitas-siswa.html">Lembar aktivitas siswa</a>
+        </div>
+      </article>
 
-pulang.jam = <span class="hljs-number">14</span>;
-pulang.menit = <span class="hljs-number">10</span>;
-</code></pre>
-<p>Variabel <code>berangkat</code> dan <code>pulang</code> adalah dua "kartu" yang berbeda. Mengubah isi yang satu tidak memengaruhi yang lain.</p>
-<h3 id="kesalahan-yang-sering-terjadi">Kesalahan yang sering terjadi</h3>
-<table>
-<thead>
-<tr>
-<th>Salah</th>
-<th>Benar</th>
-<th>Alasan</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Waktu.jam = 7;</code></td>
-<td><code>w1.jam = 7;</code></td>
-<td>Titik dipakai pada <strong>variabel</strong>, bukan pada nama tipe</td>
-</tr>
-<tr>
-<td><code>w1 = 7;</code></td>
-<td><code>w1.jam = 7;</code></td>
-<td>Variabel <code>struct</code> berisi beberapa data, jadi harus menyebut anggota yang diisi</td>
-</tr>
-<tr>
-<td><code>struct Waktu { int jam; int menit; }</code></td>
-<td><code>struct Waktu { int jam; int menit; };</code></td>
-<td>Titik koma setelah <code>}</code> tidak boleh lupa</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="5-memberi-nilai-awal-inisialisasi">5. Memberi Nilai Awal (Inisialisasi)</h2>
-<p>Selain mengisi anggota satu per satu, kita bisa mengisi semuanya sekaligus saat variabel dibuat, memakai tanda kurung kurawal:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes">Waktu w2 = {<span class="hljs-number">9</span>, <span class="hljs-number">15</span>};    <span class="hljs-comment">// jam = 9, menit = 15</span>
-</code></pre>
-<p>Nilai di dalam <code>{ }</code> diisikan <strong>sesuai urutan anggota</strong> pada <code>struct</code>. Karena <code>jam</code> ditulis lebih dulu daripada <code>menit</code>, maka <code>9</code> masuk ke <code>jam</code> dan <code>15</code> masuk ke <code>menit</code>.</p>
-<p>Contoh dengan beberapa tipe data berbeda:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Siswa</span> {
-    string nama;
-    <span class="hljs-type">int</span> nilai;
-};
+      <article class="card">
+        <div class="card-top">
+          <span class="icon icon-python" aria-hidden="true">Py</span>
+          <span class="status">Materi & aktivitas</span>
+        </div>
+        <h3>Pemrograman Python</h3>
+        <p>Pelajari tipe data, list, tuple, dictionary, operator, perulangan, percabangan, dan fungsi di Python.</p>
+        <div class="card-links">
+          <a class="text-link" href="./python.html">Buka Pemrograman Python</a>
+          <a class="text-link activity-link" href="./aktivitas-siswa-python.html">Lembar aktivitas Python</a>
+        </div>
+      </article>
 
-Siswa s1 = {<span class="hljs-string">"Ani"</span>, <span class="hljs-number">80</span>};
-</code></pre>
-<hr>
-<h2 id="6-menyalin-variabel-struct">6. Menyalin Variabel <code>struct</code></h2>
-<p>Perhatikan program berikut:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+      <article class="card">
+        <div class="card-top">
+          <span class="icon icon-work" aria-hidden="true">✦</span>
+          <span class="status">Karya & proyek</span>
+        </div>
+        <h3>Portofolio</h3>
+        <p>Lihat kumpulan karya, proyek, dan hasil pembelajaran.</p>
+        <div class="card-links">
+          <a class="text-link activity-link" href="./portofolio.html">Buka halaman portofolio</a>
+        </div>
+      </article>
+    </div>
 
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Siswa</span> {
-    string nama;
-    <span class="hljs-type">int</span> nilai;
-};
+    <aside class="note">
+      <strong>Catatan:</strong>
+      <span>Halaman portofolio akan tersedia di <code>portofolio.html</code>. Letakkan file tersebut di folder yang sama dengan <code>index.html</code> saat kontennya sudah siap.</span>
+    </aside>
+  </main>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Siswa p;
-    p.nama = <span class="hljs-string">"Citra"</span>;
-    p.nilai = <span class="hljs-number">70</span>;
-
-    Siswa q = p;      <span class="hljs-comment">// menyalin isi p ke q</span>
-    q.nilai = <span class="hljs-number">95</span>;     <span class="hljs-comment">// mengubah q saja</span>
-
-    cout &lt;&lt; p.nilai &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; q.nilai;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<p>Keluarannya adalah <code>70 95</code>.</p>
-<p>Penjelasan langkah demi langkah:</p>
-<ol>
-<li><code>p</code> berisi nama <code>"Citra"</code> dan nilai <code>70</code>.</li>
-<li><code>Siswa q = p;</code> membuat variabel baru <code>q</code> dan <strong>menyalin seluruh isi <code>p</code></strong> ke dalamnya. Sekarang <code>q</code> juga berisi <code>"Citra"</code> dan <code>70</code>.</li>
-<li><code>q.nilai = 95;</code> hanya mengubah nilai milik <code>q</code>.</li>
-<li>Variabel <code>p</code> tidak ikut berubah, karena <code>p</code> dan <code>q</code> adalah <strong>dua tempat penyimpanan yang terpisah</strong>. Yang terjadi pada langkah 2 adalah fotokopi, bukan "satu data dengan dua nama".</li>
-</ol>
-<p>Gambaran di memori setelah langkah 3:</p>
-<pre><code data-highlighted="yes" class="hljs language-yaml">  <span class="hljs-string">p</span>                   <span class="hljs-string">q</span>
-<span class="hljs-string">+---------------+</span>   <span class="hljs-string">+---------------+</span>
-<span class="hljs-string">|</span> <span class="hljs-attr">nama :</span> <span class="hljs-string">Citra</span>  <span class="hljs-string">|</span>   <span class="hljs-string">|</span> <span class="hljs-attr">nama :</span> <span class="hljs-string">Citra</span>  <span class="hljs-string">|</span>
-<span class="hljs-string">|</span> <span class="hljs-attr">nilai:</span> <span class="hljs-number">70</span>     <span class="hljs-string">|</span>   <span class="hljs-string">|</span> <span class="hljs-attr">nilai:</span> <span class="hljs-number">95</span>     <span class="hljs-string">|</span>
-<span class="hljs-string">+---------------+</span>   <span class="hljs-string">+---------------+</span>
-</code></pre>
-<p>Ingat prinsip ini: <strong>menyalin <code>struct</code> membuat salinan yang berdiri sendiri.</strong></p>
-<hr>
-<h2 id="7-struct-sebagai-parameter-fungsi">7. <code>struct</code> sebagai Parameter Fungsi</h2>
-<p>Sebuah <code>struct</code> dapat dikirim ke fungsi sama seperti <code>int</code> atau <code>string</code>. Ini membuat daftar parameter menjadi ringkas. Bandingkan:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-comment">// Tanpa struct: parameter banyak dan mudah tertukar</span>
-<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(<span class="hljs-type">int</span> jam, <span class="hljs-type">int</span> menit)</span></span>;
-
-<span class="hljs-comment">// Dengan struct: cukup satu parameter</span>
-<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(Waktu w)</span></span>;
-</code></pre>
-<p>Contoh lengkap:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
-
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Waktu</span> {
-    <span class="hljs-type">int</span> jam;
-    <span class="hljs-type">int</span> menit;
-};
-
-<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(Waktu w)</span> </span>{
-    cout &lt;&lt; w.jam &lt;&lt; <span class="hljs-string">" jam "</span> &lt;&lt; w.menit &lt;&lt; <span class="hljs-string">" menit"</span> &lt;&lt; endl;
-}
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Waktu w1 = {<span class="hljs-number">2</span>, <span class="hljs-number">40</span>};
-    <span class="hljs-built_in">cetakWaktu</span>(w1);        <span class="hljs-comment">// mencetak: 2 jam 40 menit</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<h3 id="parameter-menerima-salinan">Parameter menerima salinan</h3>
-<p>Cara pengiriman di atas disebut <em>pass by value</em>. Fungsi menerima <strong>salinan</strong> dari <code>struct</code>, sama seperti pada Bagian 6. Akibatnya, mengubah <code>struct</code> di dalam fungsi <strong>tidak</strong> mengubah variabel aslinya.</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tambahSatuJam</span><span class="hljs-params">(Waktu w)</span> </span>{
-    w.jam = w.jam + <span class="hljs-number">1</span>;      <span class="hljs-comment">// hanya mengubah salinan</span>
-}
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Waktu w1 = {<span class="hljs-number">2</span>, <span class="hljs-number">40</span>};
-    <span class="hljs-built_in">tambahSatuJam</span>(w1);
-    cout &lt;&lt; w1.jam;         <span class="hljs-comment">// tetap 2, bukan 3</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<p>Lalu bagaimana kalau kita ingin hasilnya sampai ke luar fungsi? Jawabannya ada di bagian berikut.</p>
-<hr>
-<h2 id="8-struct-sebagai-nilai-kembalian-fungsi">8. <code>struct</code> sebagai Nilai Kembalian Fungsi</h2>
-<p>Fungsi juga boleh <strong>mengembalikan</strong> sebuah <code>struct</code>. Dengan begitu, hasil perhitungan yang terdiri dari beberapa data bisa dikirim sekaligus.</p>
-<p>Contoh: fungsi yang menambah sejumlah menit pada sebuah waktu.</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-function">Waktu <span class="hljs-title">tambahMenit</span><span class="hljs-params">(Waktu w, <span class="hljs-type">int</span> m)</span> </span>{
-    Waktu hasil;
-    <span class="hljs-type">int</span> total = w.jam * <span class="hljs-number">60</span> + w.menit + m;   <span class="hljs-comment">// ubah semuanya ke menit</span>
-    hasil.jam   = total / <span class="hljs-number">60</span>;
-    hasil.menit = total % <span class="hljs-number">60</span>;
-    <span class="hljs-keyword">return</span> hasil;                            <span class="hljs-comment">// kembalikan satu Waktu utuh</span>
-}
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Waktu a = {<span class="hljs-number">1</span>, <span class="hljs-number">50</span>};
-    Waktu b = <span class="hljs-built_in">tambahMenit</span>(a, <span class="hljs-number">25</span>);
-    cout &lt;&lt; b.jam &lt;&lt; <span class="hljs-string">":"</span> &lt;&lt; b.menit;         <span class="hljs-comment">// mencetak 2:15</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<p>Penelusuran untuk <code>tambahMenit({1, 50}, 25)</code>:</p>
-<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord text"><span class="mord">total</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">60</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">50</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">25</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6679em;"></span><span class="mord">135</span><span class="mord text"><span class="mord">&nbsp;menit</span></span></span></span></span></span></p>
-<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">jam</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">135</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">÷</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">60</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord text"><span class="mord">&nbsp;(hasil&nbsp;bagi)</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">menit</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">135</span><span class="mspace" style="margin-right:0.0556em;"></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin"><span class="mord"><span class="mord mathrm">mod</span></span></span><span class="mspace" style="margin-right:0.0556em;"></span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">60</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">15</span><span class="mord text"><span class="mord">&nbsp;(sisa&nbsp;bagi)</span></span></span></span></span></span></p>
-<p>Jadi hasilnya adalah <code>2:15</code>.</p>
-<p>Perhatikan pola penulisan fungsi yang mengembalikan <code>struct</code>. Pola ini akan kamu pakai pada lembar kerja:</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-function">NamaTipe <span class="hljs-title">namaFungsi</span><span class="hljs-params">(NamaTipe parameter, ...)</span> </span>{
-    NamaTipe hasil;                 <span class="hljs-comment">// 1. siapkan wadah untuk hasil</span>
-    hasil.anggota1 = ...;           <span class="hljs-comment">// 2. isi setiap anggota</span>
-    hasil.anggota2 = ...;
-    <span class="hljs-keyword">return</span> hasil;                   <span class="hljs-comment">// 3. kembalikan wadahnya</span>
-}
-</code></pre>
-<p>Variabel <code>a</code> pada contoh di atas tidak berubah. Fungsi bekerja pada salinan, lalu mengirim hasil baru lewat <code>return</code>.</p>
-<hr>
-<h2 id="9-merancang-adt-data-operasi">9. Merancang ADT: Data + Operasi</h2>
-<p>Sekarang kita gabungkan semuanya. Merancang ADT berarti menjawab dua pertanyaan:</p>
-<ol>
-<li><strong>Data apa yang perlu disimpan?</strong> Jawabannya menjadi anggota <code>struct</code>.</li>
-<li><strong>Apa saja yang ingin kita lakukan pada data itu?</strong> Jawabannya menjadi fungsi atau prosedur.</li>
-</ol>
-<p>Contoh: ADT <strong>Waktu</strong>.</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-comment">// ===== DATA =====</span>
-<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Waktu</span> {
-    <span class="hljs-type">int</span> jam;
-    <span class="hljs-type">int</span> menit;
-};
-
-<span class="hljs-comment">// ===== OPERASI =====</span>
-<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cetakWaktu</span><span class="hljs-params">(Waktu w)</span></span>;               <span class="hljs-comment">// menampilkan waktu</span>
-<span class="hljs-function">Waktu <span class="hljs-title">tambahMenit</span><span class="hljs-params">(Waktu w, <span class="hljs-type">int</span> m)</span></span>;      <span class="hljs-comment">// menambah menit, hasilnya Waktu baru</span>
-<span class="hljs-function"><span class="hljs-type">int</span>   <span class="hljs-title">totalMenit</span><span class="hljs-params">(Waktu w)</span></span>;              <span class="hljs-comment">// mengubah waktu menjadi menit</span>
-</code></pre>
-<p>Tabel operasinya:</p>
-<table>
-<thead>
-<tr>
-<th>Nama operasi</th>
-<th>Parameter</th>
-<th>Tipe kembalian</th>
-<th>Tugas</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>cetakWaktu</code></td>
-<td><code>Waktu w</code></td>
-<td><code>void</code></td>
-<td>Menampilkan waktu ke layar</td>
-</tr>
-<tr>
-<td><code>tambahMenit</code></td>
-<td><code>Waktu w</code>, <code>int m</code></td>
-<td><code>Waktu</code></td>
-<td>Mengembalikan waktu baru setelah ditambah <code>m</code> menit</td>
-</tr>
-<tr>
-<td><code>totalMenit</code></td>
-<td><code>Waktu w</code></td>
-<td><code>int</code></td>
-<td>Mengembalikan jumlah seluruh menit</td>
-</tr>
-</tbody></table>
-<p>Tips memilih tipe kembalian:</p>
-<ul>
-<li>Kalau operasi <strong>menghitung dan menghasilkan satu angka</strong>, pakai tipe angka (<code>int</code>, <code>double</code>).</li>
-<li>Kalau operasi <strong>menghasilkan data yang terdiri dari beberapa anggota</strong>, kembalikan <code>struct</code>-nya.</li>
-<li>Kalau operasi <strong>hanya menampilkan sesuatu</strong> dan tidak menghasilkan nilai, pakai <code>void</code>.</li>
-</ul>
-<p>Langkah merancang ADT baru, misalnya ADT <strong>Buku</strong> atau <strong>Lingkaran</strong>:</p>
-<ol>
-<li>Tentukan <strong>nama ADT</strong> (satu kata, diawali huruf besar).</li>
-<li>Tulis daftar <strong>data</strong> yang perlu disimpan, lalu tentukan tipe setiap data.</li>
-<li>Tulis daftar <strong>operasi</strong> yang diperlukan, dan untuk tiap operasi tentukan parameter dan tipe kembaliannya.</li>
-<li>Baru tulis kodenya.</li>
-</ol>
-<hr>
-<h2 id="10-rangkuman">10. Rangkuman</h2>
-<ul>
-<li><code>struct</code> menggabungkan beberapa data menjadi satu tipe baru. Jangan lupa <code>;</code> setelah <code>}</code>.</li>
-<li>Menulis <code>struct</code> hanya membuat rancangan tipe. Variabelnya dibuat terpisah, misalnya <code>Waktu w1;</code>.</li>
-<li>Anggota diakses dengan <strong>operator titik</strong>: <code>w1.jam</code>.</li>
-<li>Nilai awal dapat diberikan dengan <code>{ ... }</code> sesuai urutan anggota.</li>
-<li>Menyalin <code>struct</code> (<code>q = p</code>) membuat <strong>salinan terpisah</strong>.</li>
-<li><code>struct</code> dapat menjadi <strong>parameter</strong> (yang diterima adalah salinan) dan <strong>nilai kembalian</strong> fungsi.</li>
-<li><strong>ADT = data + operasi</strong>. Di C++, data ditulis dengan <code>struct</code> dan operasinya ditulis sebagai fungsi atau prosedur.</li>
-</ul>
-<hr>
-<h2 id="11-cek-pemahaman">11. Cek Pemahaman</h2>
-<p>Coba jawab dulu sebelum membuka jawabannya.</p>
-<p><strong>Soal 1.</strong> Perhatikan kode berikut. Apa yang dicetak?</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Kotak</span> {
-    <span class="hljs-type">int</span> sisi;
-    string warna;
-};
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Kotak k1 = {<span class="hljs-number">4</span>, <span class="hljs-string">"merah"</span>};
-    Kotak k2 = k1;
-    k2.sisi = <span class="hljs-number">9</span>;
-    cout &lt;&lt; k1.sisi &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; k2.sisi &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; k2.warna;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<details>
-<summary>Lihat jawaban Soal 1</summary>
-
-<p>Keluarannya <code>4 9 merah</code>.</p>
-<p><code>k2</code> adalah salinan <code>k1</code>, sehingga <code>k2.warna</code> juga <code>"merah"</code>. Setelah itu hanya <code>k2.sisi</code> yang diubah menjadi 9, sedangkan <code>k1.sisi</code> tetap 4.</p>
-</details>
-
-<p><strong>Soal 2.</strong> Temukan satu kesalahan pada kode berikut dan perbaiki.</p>
-<pre><code class="language-cpp hljs" data-highlighted="yes"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Hewan</span> {
-    string nama;
-    <span class="hljs-type">int</span> umur;
-}
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
-    Hewan h;
-    h.nama = <span class="hljs-string">"Kucing"</span>;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-</code></pre>
-<details>
-<summary>Lihat jawaban Soal 2</summary>
-
-<p>Kesalahannya: tidak ada titik koma setelah <code>}</code> pada akhir <code>struct</code>. Perbaikannya: <code>};</code></p>
-</details>
-
-<p><strong>Soal 3.</strong> Tentukan data dan dua operasi yang cocok untuk ADT <strong>Lingkaran</strong>.</p>
-<details>
-<summary>Lihat contoh jawaban Soal 3</summary>
-
-<p>Data: <code>jariJari</code> bertipe <code>double</code>.</p>
-<p>Operasi yang cocok, misalnya:</p>
-<table>
-<thead>
-<tr>
-<th>Nama operasi</th>
-<th>Parameter</th>
-<th>Tipe kembalian</th>
-<th>Tugas</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>luas</code></td>
-<td><code>Lingkaran c</code></td>
-<td><code>double</code></td>
-<td>Mengembalikan luas lingkaran</td>
-</tr>
-<tr>
-<td><code>keliling</code></td>
-<td><code>Lingkaran c</code></td>
-<td><code>double</code></td>
-<td>Mengembalikan keliling lingkaran</td>
-</tr>
-</tbody></table>
-<p>Dengan rumus:</p>
-<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0585em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span></span></span></span></p>
-</details>
-
-<hr>
-<p>Selamat belajar! Kalau ada bagian yang belum jelas, catat pertanyaanmu dan tanyakan kepada guru saat pembahasan di kelas.</p>
-</div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© Mamak Martani</p>
+      <p><a href="./index.html">Kembali ke beranda</a></p>
+    </div>
+  </footer>
 </body>
 </html>
