@@ -67,12 +67,21 @@
     .markdown-preview .hljs-comment { color:#7a8794; font-style:italic; }
     .inline-answer { display:inline-block; width:min(100%,17rem); min-width:8ch; min-height:2rem; margin:2px 1px; padding:4px 7px!important; border:1px solid #9fb4ca!important; border-radius:6px!important; color:var(--ink)!important; background:#fff!important; font-family:inherit!important; font-size:.88rem!important; vertical-align:middle; }
     pre .inline-answer { width:14ch; min-width:10ch; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important; background:#fff!important; }
+    .inline-answer.grade-correct { border-color:#14805c!important; background:#f0fbf6!important; }
+    .inline-answer.grade-incorrect { border-color:#c2413b!important; background:#fff7f6!important; }
+    .grade-status { display:inline-block; margin-left:5px; color:var(--muted); font-size:.72rem; font-weight:750; vertical-align:middle; }
+    .grade-status.grade-correct { color:#11734f; }
+    .grade-status.grade-incorrect { color:#b42318; }
+    .grade-summary { margin:14px 0 0; padding:15px 17px; border:1px solid #d6e3f2; border-radius:12px; background:#f5f8ff; }
+    .grade-summary strong { display:block; color:var(--ink); font-size:1.18rem; }
+    .grade-summary p { margin:3px 0 0; color:var(--muted); font-size:.84rem; }
+    .open-answer-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .open-answer-card { padding:17px; border:1px solid var(--line); border-radius:13px; background:#fbfcfe; }
+    .open-answer-card label { display:block; margin:0 0 5px; color:var(--ink); font-size:.95rem; font-weight:800; }
+    .open-answer-card textarea { min-height:128px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.87rem; }
+    .open-answer-card .form-hint { margin:6px 0 0; }
+    .rubric-note { margin:0 0 15px; padding:12px 14px; border-radius:10px; color:#344c63; background:#f1f6fd; font-size:.86rem; }
     .markdown-preview input[type="checkbox"] { width:17px; height:17px; margin-right:8px; accent-color:var(--blue); vertical-align:middle; }
-    .teacher-key { margin-top:2rem; border:1px solid #f1d38b; border-radius:12px; background:#fff9e9; overflow:hidden; }
-    .teacher-key summary { padding:14px 17px; color:#744b06; background:#fff4d5; font-weight:800; cursor:pointer; }
-    .teacher-key-body { padding:18px; }
-    .teacher-key-body p { color:#5a4a29; }
-    .teacher-key-body pre { background:#fffdf6; }
     .form-hint,.privacy-note { color:var(--muted); font-size:.85rem; }
     .button-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:15px; }
     .action-button { min-height:44px; padding:10px 16px; border:0; border-radius:10px; color:#fff; background:var(--blue); font:inherit; font-size:.9rem; font-weight:800; cursor:pointer; }
@@ -98,6 +107,7 @@
       .hero-inner { padding:39px 0 43px; } .content-wrap { margin:24px auto 44px; }
       .identity-card,.response-card,.submit-card { padding:18px 16px; }
       .student-grid { grid-template-columns:1fr; gap:10px; }
+      .open-answer-grid { grid-template-columns:1fr; }
       .markdown-preview { padding:21px 17px; border-radius:15px; }
       .markdown-preview table { width:100%; }
       .markdown-preview th,.markdown-preview td { min-width:110px; padding:8px 9px; }
@@ -151,7 +161,7 @@
 <li>Simpan setiap program dengan nama <code>aktivitas1.py</code>, <code>aktivitas2.py</code>, dan seterusnya.</li>
 <li>Ikuti pola <strong>Prediksi → Jalankan → Amati</strong>: tebak hasilnya dulu, jalankan programnya, lalu bandingkan.</li>
 <li>Bila muncul error, baca pesannya dengan teliti dan coba perbaiki sendiri sebelum bertanya.</li>
-<li>Isi titik-titik (<code>......</code>) dengan jawabanmu.</li>
+<li>Isi kolom jawaban pada bagian yang tersedia.</li>
 </ol>
 <hr>
 <h2 id="aktivitas-1-tipe-data">Aktivitas 1 – Tipe Data</h2>
@@ -464,36 +474,72 @@ Rata-rata kelas = 73.33
 <li><input type="checkbox"> Saya dapat membaca pesan error dan memperbaikinya.</li>
 </ul>
 <hr>
-<details class="teacher-key"><summary>Kunci Jawaban (untuk Guru)</summary><div class="teacher-key-body">
-<p><strong>Aktivitas 1:</strong> <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>. <code>input()</code> selalu menghasilkan <code>str</code>, sehingga harus diubah ke <code>int</code> atau <code>float</code> sebelum dipakai menghitung.</p>
-<p><strong>Aktivitas 2:</strong> <code>apel</code>; <code>mangga</code>; <code>['apel', 'jeruk']</code>; <code>['apel', 'mangga', 'pisang']</code>; <code>3</code>.</p>
-<p><strong>Aktivitas 3:</strong> <code>3 5</code>; <code>TypeError</code> (tuple tidak mendukung penugasan item); list dapat diubah, tuple tidak.</p>
-<p><strong>Aktivitas 5:</strong> <code>22</code>; <code>3.4</code>; <code>3</code>; <code>2</code>; <code>32</code>; <code>14</code>; <code>20</code>. Luas = <code>3.14 * r ** 2</code>; keliling = <code>2 * 3.14 * r</code>.</p>
-<p><strong>Aktivitas 6:</strong> Tanpa pembaruan <code>angka</code>, perulangan tidak pernah berhenti (<em>infinite loop</em>). Hasil 6b adalah <code>15</code>. Pola bintang:</p>
-<pre><code class="language-python hljs" data-highlighted="yes"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>):
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">"*"</span> * i)
-</code></pre>
-<p><strong>Aktivitas 7:</strong> Kondisi lanjutan <code>nilai &gt;= 70</code>, <code>nilai &gt;= 55</code>, lalu <code>else</code>. Genap jika <code>n % 2 == 0</code>. Lulus: <code>if nilai &gt;= 70 and kehadiran &gt;= 75:</code>.</p>
-<p><strong>Aktivitas 8:</strong> <code>return p * l</code>; hasil <code>Luas = 40</code>.</p>
-<p><strong>Aktivitas 9:</strong></p>
-<ol>
-<li><code>input()</code> menghasilkan teks, perlu <code>int(input(...))</code>.</li>
-<li>Baris <code>if</code> kurang tanda titik dua <code>:</code>.</li>
-<li>Baris <code>print("Lulus")</code> harus menjorok (indentasi) di bawah <code>if</code>.</li>
-</ol>
-<pre><code class="language-python hljs" data-highlighted="yes">nilai = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">"Nilai: "</span>))
-<span class="hljs-keyword">if</span> nilai &gt;= <span class="hljs-number">70</span>:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Lulus"</span>)
-<span class="hljs-keyword">else</span>:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Remedial"</span>)
-</code></pre>
-</div></details>
     </article>
-    <section class="response-card" aria-labelledby="extra-answer-heading">
-      <h2 id="extra-answer-heading">Jawaban tugas dan kode program</h2>
-      <label for="extra-answers">Untuk tugas yang meminta membuat program atau jawaban panjang, tulis jawabanmu di sini dan cantumkan nomor aktivitas.</label>
-      <textarea id="extra-answers" data-answer data-field-key="extra-answers" data-label="Jawaban tugas dan kode program" placeholder="Contoh: Aktivitas 2 — kode program ..."></textarea>
-      <p class="form-hint">Kolom isian pada bagian titik-titik di lembar juga dapat diisi langsung.</p>
+    <section class="response-card" aria-labelledby="open-answer-heading">
+      <h2 id="open-answer-heading">Jawaban Tugas dan Kode Program</h2>
+      <p class="rubric-note">Jawaban kode dinilai langsung berdasarkan kriteria dasar yang ditampilkan per tugas, bukan dengan menjalankan Python. Nilai parsial diberikan untuk kriteria yang terpenuhi. Solusi setara dapat perlu penyesuaian kriteria; refleksi tidak dinilai benar atau salah.</p>
+      <div class="open-answer-grid">
+        <div class="open-answer-card">
+          <label for="task-a1">Aktivitas 1 — Variabel dan tipe data</label>
+          <textarea id="task-a1" data-answer data-task-key="a1" data-field-key="task-a1" data-label="Aktivitas 1 — Variabel dan tipe data" placeholder="Tulis program variabel nama, umur, tinggi, dan sudah_makan."></textarea>
+          <p class="form-hint">Kriteria: empat variabel dibuat; nilai dan tipe datanya ditampilkan.</p>
+          <span class="grade-status" data-task-status="a1">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-a2">Aktivitas 2 — Mengolah list nilai</label>
+          <textarea id="task-a2" data-answer data-task-key="a2" data-field-key="task-a2" data-label="Aktivitas 2 — Mengolah list nilai" placeholder="Tulis program untuk lima nilai ujian."></textarea>
+          <p class="form-hint">Kriteria: list nilai, nilai terbesar dan terkecil, serta rata-rata.</p>
+          <span class="grade-status" data-task-status="a2">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-a3">Aktivitas 3 — Tuple hari</label>
+          <textarea id="task-a3" data-answer data-task-key="a3" data-field-key="task-a3" data-label="Aktivitas 3 — Tuple hari" placeholder="Buat tuple hari dan tampilkan elemen kedua serta jumlah elemennya."></textarea>
+          <p class="form-hint">Kriteria: tuple hari, elemen indeks kedua, dan jumlah elemen.</p>
+          <span class="grade-status" data-task-status="a3">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-a4">Aktivitas 4 — Dictionary buku</label>
+          <textarea id="task-a4" data-answer data-task-key="a4" data-field-key="task-a4" data-label="Aktivitas 4 — Dictionary buku" placeholder="Buat dictionary buku dan tunjukkan perubahan datanya."></textarea>
+          <p class="form-hint">Kriteria: kunci judul/penulis/tahun, perulangan items(), tambah harga, dan ubah tahun.</p>
+          <span class="grade-status" data-task-status="a4">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-a6">Aktivitas 6 — Perulangan</label>
+          <textarea id="task-a6" data-answer data-task-key="a6" data-field-key="task-a6" data-label="Aktivitas 6 — Perulangan" placeholder="Tulis solusi bilangan genap, tabel perkalian, dan pola bintang."></textarea>
+          <p class="form-hint">Kriteria: bilangan genap; tabel perkalian 1–10; pola bintang dengan perulangan.</p>
+          <span class="grade-status" data-task-status="a6">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-a7">Aktivitas 7 — Percabangan</label>
+          <textarea id="task-a7" data-answer data-task-key="a7" data-field-key="task-a7" data-label="Aktivitas 7 — Percabangan" placeholder="Tulis solusi predikat, genap/ganjil, dan syarat kelulusan."></textarea>
+          <p class="form-hint">Kriteria: rentang predikat; pemeriksaan genap/ganjil; nilai dan kehadiran memakai and.</p>
+          <span class="grade-status" data-task-status="a7">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-a8">Aktivitas 8 — Fungsi</label>
+          <textarea id="task-a8" data-answer data-task-key="a8" data-field-key="task-a8" data-label="Aktivitas 8 — Fungsi" placeholder="Buat fungsi kuadrat, predikat, rata-rata, lalu panggil."></textarea>
+          <p class="form-hint">Kriteria: fungsi kuadrat, predikat, rata-rata, dan pemanggilan fungsi.</p>
+          <span class="grade-status" data-task-status="a8">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-a9">Aktivitas 9 — Perbaiki program</label>
+          <textarea id="task-a9" data-answer data-task-key="a9" data-field-key="task-a9" data-label="Aktivitas 9 — Perbaiki program" placeholder="Tulis ulang seluruh program yang telah diperbaiki."></textarea>
+          <p class="form-hint">Kriteria: konversi input ke int, sintaks if lengkap, dan isi blok terindentasi.</p>
+          <span class="grade-status" data-task-status="a9">Belum dinilai</span>
+        </div>
+        <div class="open-answer-card">
+          <label for="task-project">Proyek Mini — Pengelola Nilai Siswa</label>
+          <textarea id="task-project" data-answer data-task-key="project" data-field-key="task-project" data-label="Proyek Mini — Pengelola Nilai Siswa" placeholder="Tulis program pengelola nilai siswa."></textarea>
+          <p class="form-hint">Kriteria: input dan perulangan siswa, dictionary, fungsi rata-rata/predikat, dan tampilan hasil.</p>
+          <span class="grade-status" data-task-status="project">Belum dinilai</span>
+        </div>
+      </div>
+      <p class="form-hint">Kolom titik-titik pada lembar tetap bisa diisi langsung. Jawaban refleksi tidak masuk ke nilai otomatis.</p>
+    </section>
+    <section class="response-card grade-summary" aria-labelledby="grade-heading">
+      <h2 id="grade-heading">Skor Otomatis</h2>
+      <strong id="grade-score">Nilai: 0 / 77 (0%)</strong>
+      <p id="grade-detail" role="status" aria-live="polite">Belum ada jawaban dinilai. Maksimal 77 poin; refleksi dan penilaian mandiri tidak masuk skor.</p>
     </section>
     <section class="submit-card" id="submit-panel" aria-labelledby="submit-heading">
       <h2 id="submit-heading">Simpan Jawaban</h2>
@@ -514,8 +560,7 @@ Rata-rata kelas = 73.33
       while (walker.nextNode()) if (/\.{5,}/.test(walker.currentNode.nodeValue)) textNodes.push(walker.currentNode);
       let answerNumber = 0;
       for (const node of textNodes) {
-        const text = node.nodeValue;
-        const parts = text.split(/(\.{5,})/g);
+        const parts = node.nodeValue.split(/(\.{5,})/g);
         if (parts.length < 2) continue;
         const fragment = document.createDocumentFragment();
         for (const part of parts) {
@@ -523,19 +568,131 @@ Rata-rata kelas = 73.33
           answerNumber += 1;
           const input = document.createElement('input');
           input.type = 'text'; input.className = 'inline-answer'; input.dataset.answer = '';
-          input.dataset.fieldKey = 'inline-' + answerNumber; input.dataset.label = 'Isian ' + answerNumber;
+          input.dataset.fieldKey = 'inline-' + answerNumber; input.dataset.gradeIndex = String(answerNumber - 1);
           input.placeholder = 'Jawaban'; input.setAttribute('aria-label', 'Jawaban isian ' + answerNumber);
-          fragment.appendChild(input);
+          const feedback = document.createElement('span');
+          feedback.className = 'grade-status'; feedback.dataset.inlineStatus = String(answerNumber - 1);
+          feedback.textContent = 'Belum dinilai';
+          fragment.append(input, feedback);
         }
         node.parentNode.replaceChild(fragment, node);
       }
       const checkboxes = [...articleRoot.querySelectorAll('input[type="checkbox"]')];
       checkboxes.forEach((box, index) => { box.disabled = false; box.dataset.answer = ''; box.dataset.fieldKey = 'self-check-' + (index + 1); box.dataset.label = 'Penilaian mandiri ' + (index + 1); box.setAttribute('aria-label', box.parentElement.textContent.trim()); });
       const fields = [...document.querySelectorAll('[data-answer]')];
-      const draftKey = 'aktivitas-python-session-v1';
+      const inlineFields = [...document.querySelectorAll('.inline-answer')];
+      const taskFields = [...document.querySelectorAll('textarea[data-task-key]')];
+      const draftKey = 'aktivitas-python-session-v2';
       const count = document.getElementById('progress-count');
       const bar = document.getElementById('progress-value');
       const status = document.getElementById('submission-status');
+      const gradeScore = document.getElementById('grade-score');
+      const gradeDetail = document.getElementById('grade-detail');
+
+      const shortRules = [
+        {label:'Tipe data bilangan bulat', test:v=>/^(int|integer)$/.test(v)},
+        {label:'Tipe data bilangan desimal', test:v=>/^(float|double)$/.test(v)},
+        {label:'Tipe data teks', test:v=>/^(str|string)$/.test(v)},
+        {label:'Tipe data boolean', test:v=>/^(bool|boolean)$/.test(v)},
+        {label:'Alasan konversi input()', test:v=>/input/.test(v)&&/(str|string|teks)/.test(v)&&/(int|integer|hitung|konversi|ubah)/.test(v)},
+        {label:'Prediksi buah[0]', test:v=>/^apel$/.test(v)},
+        {label:'Hasil program buah[0]', test:v=>/^apel$/.test(v)},
+        {label:'Prediksi buah[-1]', test:v=>/^mangga$/.test(v)},
+        {label:'Hasil program buah[-1]', test:v=>/^mangga$/.test(v)},
+        {label:'Prediksi buah[0:2]', test:v=>/apel/.test(v)&&/jeruk/.test(v)&&!(/mangga|pisang/.test(v))},
+        {label:'Hasil program buah[0:2]', test:v=>/apel/.test(v)&&/jeruk/.test(v)&&!(/mangga|pisang/.test(v))},
+        {label:'Prediksi list setelah append/remove', test:v=>/apel/.test(v)&&/mangga/.test(v)&&/pisang/.test(v)&&!(/jeruk/.test(v))},
+        {label:'Hasil list setelah append/remove', test:v=>/apel/.test(v)&&/mangga/.test(v)&&/pisang/.test(v)&&!(/jeruk/.test(v))},
+        {label:'Prediksi len(buah)', test:v=>/^(3|3 buah|3 elemen)$/.test(v)},
+        {label:'Hasil program len(buah)', test:v=>/^(3|3 buah|3 elemen)$/.test(v)},
+          {label:'Output print(x, y)', test:v=>/3/.test(v)&&/5/.test(v)&&/(3\s*[, ]\s*5|3\.5)/.test(v)},
+        {label:'Error saat mengubah tuple', test:v=>/typeerror/.test(v)},
+        {label:'Perbedaan list dan tuple', test:v=>/list/.test(v)&&/tuple/.test(v)&&/(mutable|dapat diubah|bisa diubah|dapat berubah|bisa berubah)/.test(v)&&/(immutable|tidak bisa diubah|tidak dapat diubah|tuple tidak)/.test(v)},
+        {label:'17 + 5', numeric:22},
+        {label:'Hasil program 17 + 5', numeric:22},
+        {label:'17 / 5', numeric:3.4},
+        {label:'Hasil program 17 / 5', numeric:3.4},
+        {label:'17 // 5', numeric:3},
+        {label:'Hasil program 17 // 5', numeric:3},
+        {label:'17 % 5', numeric:2},
+        {label:'Hasil program 17 % 5', numeric:2},
+        {label:'2 ** 5', numeric:32},
+        {label:'Hasil program 2 ** 5', numeric:32},
+        {label:'2 + 3 * 4', numeric:14},
+        {label:'Hasil program 2 + 3 * 4', numeric:14},
+        {label:'(2 + 3) * 4', numeric:20},
+        {label:'Hasil program (2 + 3) * 4', numeric:20},
+        {label:'Rumus luas lingkaran', test:(v,c)=>/(3\.14|pi)\*r(?:\*\*2|\*r)/.test(c)||/r\*\*2\*(3\.14|pi)/.test(c)},
+        {label:'Rumus keliling lingkaran', test:(v,c)=>/(2\*3\.14\*r|2\*pi\*r|3\.14\*2\*r|pi\*2\*r)/.test(c)},
+        {label:'Dampak menghapus pembaruan angka', test:v=>/(infinite|tak berhingga|tidak berhenti|tak berhenti|berulang terus|loop terus)/.test(v)&&/(angka|perulangan|loop|while)/.test(v)},
+        {label:'Hasil perulangan for', numeric:15},
+        {label:'Kondisi nilai minimal 70', test:v=>/nilai\s*>=\s*70/.test(v)||/nilai\s*>\s*69/.test(v)},
+        {label:'Output predikat B', test:v=>/print/.test(v)&&/predikat\s*b/.test(v)},
+        {label:'Nilai return luas persegi panjang', test:v=>/return/.test(v)&&/p\s*\*\s*l/.test(v)},
+        {label:'Kesalahan tipe data pada input nilai', test:v=>/input/.test(v)&&/(str|string|teks|string)/.test(v)},
+        {label:'Perbaikan input nilai', test:v=>/int\s*\(\s*input\s*\(/.test(v)},
+        {label:'Kesalahan tanda titik dua pada if', test:v=>/(titik dua|colon|kurang\s*:|tidak ada\s*:|tanpa\s*:)/.test(v)},
+        {label:'Perbaikan tanda titik dua', test:v=>/:/.test(v)||/titik dua/.test(v)},
+        {label:'Kesalahan indentasi print', test:v=>/(indent|menjorok|tidak sejajar)/.test(v)},
+        {label:'Perbaikan indentasi print', test:v=>/(indent|menjorok|di bawah if|di dalam if)/.test(v)}
+      ];
+      const taskRubrics = {
+        a1:[
+          {label:'Membuat variabel nama', test:t=>/\bnama\s*=/.test(t)},
+          {label:'Membuat variabel umur', test:t=>/\bumur\s*=/.test(t)},
+          {label:'Membuat variabel tinggi', test:t=>/\btinggi\s*=/.test(t)},
+          {label:'Membuat variabel sudah_makan', test:t=>/\bsudah_makan\s*=/.test(t)},
+          {label:'Menampilkan nilai dan tipe data', test:t=>/print\s*\(/.test(t)&&/type\s*\(/.test(t)}
+        ],
+        a2:[
+          {label:'Membuat list nilai ujian', test:t=>/\w+\s*=\s*\[[\s\S]*\]/.test(t)},
+          {label:'Menghitung nilai terbesar dan terkecil', test:t=>/max\s*\(/.test(t)&&/min\s*\(/.test(t)},
+          {label:'Menghitung rata-rata dengan sum dan len', test:t=>/sum\s*\(/.test(t)&&/len\s*\(/.test(t)}
+        ],
+        a3:[
+          {label:'Membuat tuple bernama hari', test:t=>/\bhari\s*=\s*\(/.test(t)},
+          {label:'Mengakses elemen kedua', test:t=>/hari\s*\[\s*1\s*\]/.test(t)},
+          {label:'Menghitung jumlah elemen', test:t=>/len\s*\(\s*hari\s*\)/.test(t)}
+        ],
+        a4:[
+          {label:'Dictionary buku memiliki judul, penulis, dan tahun', test:t=>/buku\s*=\s*\{/.test(t)&&/judul/.test(t)&&/penulis/.test(t)&&/tahun/.test(t)},
+          {label:'Melakukan perulangan dengan items()', test:t=>/for\b[\s\S]*\.items\s*\(\s*\)/.test(t)},
+          {label:'Menambahkan kunci harga', test:t=>/harga/.test(t)&&/buku\s*\[/.test(t)},
+          {label:'Mengubah nilai tahun', test:t=>/tahun/.test(t)&&/buku\s*\[/.test(t)}
+        ],
+        a6:[
+          {label:'Menampilkan bilangan genap 2 sampai 20', test:t=>/for\b/.test(t)&&/print\s*\(/.test(t)&&(/range\s*\(\s*2\s*,\s*2[01]\s*(?:,\s*2\s*)?\)/.test(t)||/%\s*2\s*==\s*0/.test(t))},
+          {label:'Membuat tabel perkalian 1 sampai 10', test:t=>/input\s*\(/.test(t)&&/for\b[\s\S]*range\s*\(/.test(t)&&/\*/.test(t)&&/print\s*\(/.test(t)},
+          {label:'Mencetak pola bintang dengan perulangan', test:t=>(t.match(/\bfor\b/g)||[]).length>=2&&/["']\*["']\s*\*/.test(t)&&/print\s*\(/.test(t)}
+        ],
+        a7:[
+          {label:'Membuat cabang predikat A, B, C, dan D', test:t=>/nilai\s*>=\s*85/.test(t)&&/nilai\s*>=\s*70/.test(t)&&/nilai\s*>=\s*55/.test(t)&&/else\s*:/.test(t)},
+          {label:'Memeriksa genap atau ganjil dengan modulo', test:t=>/%\s*2\s*==\s*0/.test(t)&&/else\s*:/.test(t)},
+          {label:'Memeriksa nilai dan kehadiran dengan and', test:t=>/nilai\s*>=\s*70/.test(t)&&/kehadiran\s*>=\s*75/.test(t)&&/\band\b/.test(t)}
+        ],
+        a8:[
+          {label:'Fungsi kuadrat mengembalikan x²', test:t=>/def\s+kuadrat\s*\(\s*x\s*\)/.test(t)&&/return/.test(t)&&(/x\s*\*\*\s*2/.test(t)||/x\s*\*\s*x/.test(t))},
+          {label:'Membuat fungsi predikat', test:t=>/def\s+predikat\s*\(/.test(t)},
+          {label:'Fungsi rata_rata memakai tiga bilangan', test:t=>/def\s+rata_rata\s*\(\s*a\s*,\s*b\s*,\s*c\s*\)/.test(t)&&/return/.test(t)&&/3/.test(t)},
+          {label:'Memanggil ketiga fungsi', test:t=>['kuadrat','predikat','rata_rata'].every(name=>(t.match(new RegExp('\\b'+name+'\\s*\\(','g'))||[]).length>=2)}
+        ],
+        a9:[
+          {label:'Mengubah input nilai menjadi int', test:t=>/int\s*\(\s*input\s*\(/.test(t)},
+          {label:'Menulis if nilai >= 70 dengan titik dua dan else', test:t=>/if\s+nilai\s*>=\s*70\s*:/.test(t)&&/else\s*:/.test(t)},
+          {label:'Menempatkan print Lulus di dalam blok if', test:t=>/^\s+print\s*\(\s*["']Lulus["']\s*\)/m.test(t)}
+        ],
+        project:[
+          {label:'Meminta jumlah siswa dan mengulang input siswa', test:t=>/input\s*\(/.test(t)&&/for\b/.test(t)&&/range\s*\(/.test(t)},
+          {label:'Menyimpan nilai siswa dalam dictionary', test:t=>/\w+\s*=\s*\{\}/.test(t)&&/\w+\s*\[[^\]]+\]\s*=/.test(t)},
+          {label:'Membuat fungsi rata-rata dan predikat', test:t=>/def\s+\w*rata_rata\s*\(/.test(t)&&/def\s+predikat\s*\(/.test(t)},
+          {label:'Menampilkan isi dictionary dan rata-rata kelas', test:t=>/\.items\s*\(\s*\)/.test(t)&&/rata/.test(t)&&/print\s*\(/.test(t)}
+        ]
+      };
+      const subjectiveIndexes = new Set([45,46,47]);
+      function clean(value) {
+        return value.toLocaleLowerCase('id-ID').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[“”‘’]/g,'"').replace(/\s+/g,' ').trim();
+      }
+      function compact(value) { return clean(value).replace(/\s+/g,'').replace(/["']/g,'').replace(/,/g,'.'); }
       function getValue(field) { return field.type === 'checkbox' ? field.checked : field.value; }
       function setValue(field, value) { if (field.type === 'checkbox') field.checked = value === true; else field.value = typeof value === 'string' ? value : ''; }
       function updateProgress() {
@@ -544,10 +701,64 @@ Rata-rata kelas = 73.33
         bar.style.width = (fields.length ? Math.round(filled / fields.length * 100) : 0) + '%';
         bar.parentElement.setAttribute('aria-valuemin','0'); bar.parentElement.setAttribute('aria-valuemax',String(fields.length)); bar.parentElement.setAttribute('aria-valuenow',String(filled));
       }
+      function setGradeState(input, feedback, state, message) {
+        input.classList.toggle('grade-correct', state === true);
+        input.classList.toggle('grade-incorrect', state === false);
+        if (input.matches('.inline-answer')) {
+          if (state === null) input.removeAttribute('aria-invalid');
+          else input.setAttribute('aria-invalid', state ? 'false' : 'true');
+        }
+        feedback.classList.toggle('grade-correct', state === true);
+        feedback.classList.toggle('grade-incorrect', state === false);
+        feedback.textContent = message;
+      }
+      function gradeInline(field) {
+        const index = Number(field.dataset.gradeIndex);
+        const feedback = document.querySelector('[data-inline-status="' + index + '"]');
+        if (subjectiveIndexes.has(index)) {
+          setGradeState(field, feedback, null, 'Refleksi · tidak dinilai');
+          return 0;
+        }
+        const rule = shortRules[index];
+        if (!rule) { setGradeState(field, feedback, null, 'Tidak dinilai'); return 0; }
+        const value = clean(field.value);
+        if (!value) { setGradeState(field, feedback, null, 'Belum diisi'); return 0; }
+        const correct = typeof rule.numeric === 'number'
+          ? Number.isFinite(Number(value.replace(',', '.'))) && Math.abs(Number(value.replace(',', '.')) - rule.numeric) < 0.0001
+          : rule.test(value, compact(field.value));
+        setGradeState(field, feedback, correct, correct ? 'Benar' : 'Belum benar');
+        return correct ? 1 : 0;
+      }
+      function gradeTask(field) {
+        const key = field.dataset.taskKey;
+        const feedback = document.querySelector('[data-task-status="' + key + '"]');
+        const rules = taskRubrics[key] || [];
+        const value = field.value;
+        const code = value.toLocaleLowerCase('id-ID').replace(/[“”‘’]/g,'"');
+        if (!value.trim()) {
+          setGradeState(field, feedback, null, 'Belum diisi · 0/' + rules.length + ' kriteria');
+          return {score:0, max:rules.length};
+        }
+        const achieved = rules.filter(rule=>rule.test(code)).length;
+        const complete = achieved === rules.length;
+        setGradeState(field, feedback, complete, 'Memenuhi ' + achieved + '/' + rules.length + ' kriteria');
+        return {score:achieved, max:rules.length};
+      }
+      function updateGrades() {
+        let shortScore = 0;
+        inlineFields.forEach(field=>{ shortScore += gradeInline(field); });
+        let taskScore = 0, taskMax = 0;
+        taskFields.forEach(field=>{ const result=gradeTask(field); taskScore+=result.score; taskMax+=result.max; });
+        const maximum = shortRules.length + taskMax;
+        const score = shortScore + taskScore;
+        gradeScore.textContent = 'Nilai: ' + score + ' / ' + maximum + ' (' + (maximum ? Math.round(score / maximum * 100) : 0) + '%)';
+        gradeDetail.textContent = 'Isian singkat: ' + shortScore + '/' + shortRules.length + ' benar · Jawaban kode: ' + taskScore + '/' + taskMax + ' kriteria terpenuhi · refleksi dan penilaian mandiri tidak dihitung.';
+      }
       function saveDraft() {
         const draft = {}; fields.forEach(field => { draft[field.dataset.fieldKey] = getValue(field); });
         try { sessionStorage.setItem(draftKey, JSON.stringify(draft)); } catch (error) { status.textContent = 'Penyimpanan sementara browser tidak tersedia; gunakan tombol unduh untuk menyimpan jawaban.'; }
         updateProgress();
+        updateGrades();
       }
       try {
         const draft = JSON.parse(sessionStorage.getItem(draftKey) || '{}');
@@ -555,6 +766,7 @@ Rata-rata kelas = 73.33
       } catch (error) { /* draft browser tidak tersedia */ }
       fields.forEach(field => { field.addEventListener('input', saveDraft); field.addEventListener('change', saveDraft); });
       updateProgress();
+      updateGrades();
       function slug(value) { return (value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40); }
       function createSubmissionHtml() {
         const clone = document.documentElement.cloneNode(true);
@@ -587,7 +799,7 @@ Rata-rata kelas = 73.33
         if (!window.confirm('Kosongkan semua jawaban pada lembar ini?')) return;
         fields.forEach(field => { if (field.type === 'checkbox') field.checked = false; else field.value = ''; });
         try { sessionStorage.removeItem(draftKey); } catch (error) { /* abaikan jika penyimpanan tidak tersedia */ }
-        status.textContent = 'Semua jawaban telah dikosongkan.'; updateProgress();
+        status.textContent = 'Semua jawaban telah dikosongkan.'; updateProgress(); updateGrades();
       });
     })();
   </script>
